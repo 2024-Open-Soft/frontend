@@ -1,23 +1,12 @@
-// const counterReducer = (state = 0, action) => {
-//     switch (action.type) {
-//       case "INCREMENT":
-//         return state + 1;
-//       case "DECREMENT":
-//         return state - 1;
-//       default:
-//         return state;
-//     }
-//   };
-  
-//   export default counterReducer;
-
-import React from 'react'
+import React, {useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment } from './counterSlice'
+import { decrement, increment, incrementByAmount } from './counterSlice'
 
 export function Counter() {
   const count = useSelector((state) => state.counter.value)
   const dispatch = useDispatch()
+
+  const [amount, setAmount] = useState(0); // State for user input
 
   return (
     <div>
@@ -34,6 +23,19 @@ export function Counter() {
           onClick={() => dispatch(decrement())}
         >
           Decrement
+        </button>
+      </div>
+      <div>
+        <input 
+        type='number' 
+        value={amount}
+        onChange={(e) => setAmount(e.target.value)}
+        placeholder='Enter Amount'
+        />
+        <button 
+        onClick={() => dispatch(incrementByAmount(amount))}
+        >
+        Increment By Amount
         </button>
       </div>
     </div>
