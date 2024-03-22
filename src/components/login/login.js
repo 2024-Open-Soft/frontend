@@ -1,41 +1,115 @@
-import React, { useState } from 'react';
-// import TextField from '@material-ui/core/TextField';
-// import MuiPhoneNumber from 'material-ui-phone-number';
-
+import React, { useState } from "react";
+import Button from "@mui/material/Button";
+import { MuiOtpInput } from "mui-one-time-password-input";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
 
 const LoginPage = () => {
-    // const [phoneNumber, setPhoneNumber] = useState('');
-    // const [otp, setOtp] = useState('');
+  const [countryCode, setCountryCode] = useState("+91");
 
-    // const handleLogin = (event) => {
-    //     event.preventDefault();
-    //     // Handle login logic here
-    // };
+  const countryCodes = [
+    { code: "+91", country: "India" },
+    { code: "+1", country: "USA" },
+    { code: "+44", country: "UK" },
+    { code: "+61", country: "Australia" },
+    { code: "+81", country: "Japan" },
+  ];
 
-    return (
-        <section className="flex font-sans items-center justify-center h-screen bg-cover bg-center" style={{backgroundImage: 'url(\'/bg.jpeg\')'}}>
-            <div className="bg-black bg-opacity-40 w-1/2 h-1/2 rounded-3xl filter backdrop-filter backdrop-blur-md flex flex-row overflow-hidden">
-                    <div className='flex items-start bg-cover h-full w-2/5' style={{backgroundImage: 'url(\'/bg1.jpg\')'}}></div>
-                <div className="w-3/5 p-4">
-                    <h1 className="text-2xl ml-10 mt-10 font-semibold text-white">Enter Phone Number</h1>
-                    <form className="flex flex-col items-center justify-center mt-10">
-                        <input type="text" placeholder="Phone Number" className="w-3/4 p-2 rounded-lg border-none bg-gray-200" />
-                        {/* <TextField id="outlined-basic" label="Outlined" variant="outlined" /> */}
-                        {/* <MuiPhoneNumber defaultCountry={'in'} onChange={handleOnChange}/> */}
-                        <button type="submit" className="w-3/4 p-2 mt-4 rounded-lg bg-blue-500 text-white font-bold">Send OTP</button>
-                    </form>
-                    <h1 className="text-2xl ml-10 mt-10 font-semibold text-white">Enter OTP</h1>
-                    <form className="flex flex-col items-center justify-center mt-10">
-                        <input type="text" placeholder="OTP" className="w-3/4 p-2 rounded-lg border-none bg-gray-200" />
-                        <button type="submit" className="w-3/4 p-2 mt-4 rounded-lg bg-blue-500 text-white font-bold">Login</button>
-                    </form>
-                    <div className='text-m italic mt-5 ml-10 text-white'>Having trouble logging in? <a href="#" className="text-blue-500">Get Help</a></div>
-                </div>
-            </div>
-        </section>
-    );
+  const handleChange = (event) => {
+    setCountryCode(event.target.value);
+  };
+
+  const [value, setValue] = React.useState("");
+
+  const handleValueChange = (newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+    <section
+      className="flex font-sans items-center justify-center h-screen bg-cover bg-center"
+      style={{ backgroundImage: "url('/bg.jpg')" }}
+    >
+      <div className="bg-black bg-opacity-40 w-1/2 h-3/5 rounded-3xl filter backdrop-filter backdrop-blur-md flex flex-row overflow-hidden">
+        <div
+          className="flex items-start bg-cover h-full w-2/5"
+          style={{ backgroundImage: "url('/bg1.jpg')" }}
+        ></div>
+        <div className="w-3/5 p-4 h-full">
+          <h1 className="text-2xl ml-10 mt-10 font-semibold text-white">
+            Enter Phone Number
+          </h1>
+          <form className="flex flex-row items-center justify-center mt-8">
+            <Autocomplete
+              id="combo-box-demo"
+              options={countryCodes}
+              getOptionLabel={(option) => option.code}
+              renderInput={(params) => (
+                <TextField {...params} variant="outlined" />
+              )}
+              onChange={(event, newValue) => {
+                setCountryCode(newValue);
+              }}
+              className="mr-4 w-auto h-11 rounded-lg border-white bg-transparent opacity-80 border-[1px]"
+              style={{ color: "white", fontSize: "20px" }}
+            />
+            <input
+              className="mr-8 w-1/2 h-11 rounded-lg border-white bg-transparent opacity-80 border-[1px]"
+              placeholder="000 000 0000"
+              style={{ color: "white", fontSize: "20px", padding: "1rem" }}
+            />
+            <Button
+              sx={{
+                borderRadius: "10rem",
+                opacity: "90%",
+                width: "6rem",
+                height: "3rem",
+                boxShadow: "0",
+              }}
+              size="large"
+              variant="contained"
+            >
+              Send
+            </Button>
+          </form>
+          <h1 className="text-2xl ml-10 mt-10 font-semibold text-white">
+            Enter OTP
+          </h1>
+          <form className="flex flex-row items-center justify-center mt-8">
+            <MuiOtpInput
+                className="mr-8"
+                sx={{borderRadius: "10rem", opacity: "90%", width: "70%", height: "3rem", boxShadow: "0"
+                  }}
+                  length={6}
+                  value={value}
+                  onChange={handleValueChange}
+                
+            />
+            <Button
+              sx={{
+                borderRadius: "10rem",
+                opacity: "90%",
+                width: "6rem",
+                height: "3rem",
+                boxShadow: "0",
+              }}
+              size="large"
+              color="success"
+              variant="contained"
+            >
+              Verify
+            </Button>
+          </form>
+          <div className="mt-[12rem] ml-10 italic opacity-80 text-xl text-white">
+            Having trouble logging in?{" "}
+            <a href="#" className="decoration-[none]">
+              Get Help
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default LoginPage;
-// Remove the unnecessary closing </label> tag
-// </label>
