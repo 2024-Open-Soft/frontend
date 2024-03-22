@@ -21,8 +21,8 @@ const theme = createTheme({
     palette: {
         mode: 'dark',
         background: {
-            default: '#000',
-            paper: '#000',
+            default: '#000000b3',
+            paper: '#000000b3',
         },
         text: {
             primary: '#ffffffb3',
@@ -44,14 +44,18 @@ const theme = createTheme({
         MuiOutlinedInput: {
             styleOverrides: {
                 root: {
-                    borderRadius: "15px"
+                    borderRadius: "15px",
+                    '& fieldset': {
+                        borderColor: '#ffffff83',
+                    }
                 },
                 input: {
                     backgroundColor: "#FFFFFF00",
                     color: "#ffffffb3",
                     "&:-webkit-autofill": {
-                        WebkitBoxShadow: '0 0 0 1000px rgba(0, 0, 0, 1) inset',
-                        WebkitTextFillColor: "#ffffffb3"
+                        WebkitBoxShadow: '0 0 0 200px #0000009e inset',
+                        WebkitTextFillColor: "#ffffffb3",
+                        caretColor: '#ffffff'
                     }
                 }
             }
@@ -125,7 +129,8 @@ const SignUp = () => {
                                 borderRadius: {
                                     xs: '50px',
                                     md: '0 50px 50px 0',
-                                }
+                                },
+                                backdropFilter: "blur(15px)",
                             }}
                         >
                             <Box
