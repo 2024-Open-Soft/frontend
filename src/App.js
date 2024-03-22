@@ -1,14 +1,15 @@
 import './index.css';
-// import { Counter } from './features/counter/counter';
 
-// import Button from '@mui/material/Button';
-import SignUp from './components/SignUp';
+import { Counter } from './features/counter/counter';
+import BackgroundPlayer from './components/BackgroundPlayer';
+import Button from '@mui/material/Button';
 
 function App() {
   return (
-    <main>
-      <SignUp />
-    </main>
+    <>
+    <div className="App">
+    </div>
+    </>
   );
 }
 
