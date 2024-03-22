@@ -4,19 +4,6 @@ import { Box, Button, CssBaseline, Grid, Link, Paper, TextField, Typography } fr
 // import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-function Copyright(props) {
-    return (
-        <Typography variant="body2" color="text.secondary" align="center" {...props}>
-            {'Copyright © '}
-            <Link color="inherit" href="https://mui.com/">
-                Your Website
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
-
 const theme = createTheme({
     palette: {
         mode: 'dark',
@@ -70,6 +57,7 @@ const theme = createTheme({
                         backgroundColor: "#ff0000",
                         color: 'white'
                     },
+                    boxShadow: 'none',
                 }
             }
         }
@@ -93,14 +81,23 @@ const SignUp = () => {
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             minHeight: '100vh',
-            padding: '5vh 5vw'
         }}>
-            <div style={{
-                maxWidth: '70rem',
-                // borderRadius: '50px'
-            }}>
+            <div>
                 <ThemeProvider theme={theme} >
-                    <Grid container component="main" sx={{ /*borderRadius: '100px'*/ }}>
+                    <Grid
+                        container
+                        component="main"
+                        sx={{
+                            px: {
+                                xs: '5vw',
+                                md: '15vw'
+                            },
+                            py: {
+                                xs: '1vh',
+                                md: '5vh'
+                            }
+                        }}
+                    >
                         <CssBaseline />
                         <Grid
                             item
@@ -127,7 +124,7 @@ const SignUp = () => {
                             square
                             sx={{
                                 borderRadius: {
-                                    xs: '50px',
+                                    xs: '25px',
                                     md: '0 50px 50px 0',
                                 },
                                 backdropFilter: "blur(15px)",
@@ -135,11 +132,19 @@ const SignUp = () => {
                         >
                             <Box
                                 sx={{
-                                    my: 8,
-                                    mx: 4,
                                     display: 'flex',
                                     flexDirection: 'column',
                                     alignItems: 'center',
+                                    my: {
+                                        xs: 4,
+                                        sm: 6,
+                                        md: 8
+                                    },
+                                    mx: {
+                                        xs: 0,
+                                        sm: 2,
+                                        md: 3
+                                    },
                                 }}
                             >
                                 {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
@@ -193,18 +198,17 @@ const SignUp = () => {
                                     >
                                         Create Account
                                     </Button>
-                                    <Typography align='right'>
+                                    <Typography align='left'>
                                         <Link href="#" variant="body2">
                                             {"Already have an account? Sign In"}
                                         </Link>
                                     </Typography>
-                                    <Typography align='center' sx={{ mt: 2 }}>
+                                    <Typography align='left' sx={{ mt: 2 }}>
                                         {"Having trouble logging in? "}
                                         <Link href="#" variant="body1">
                                             {"Get Help"}
                                         </Link>
                                     </Typography>
-                                    <Copyright sx={{ mt: 3 }} />
                                 </Box>
                             </Box>
                         </Grid>
