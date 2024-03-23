@@ -1,11 +1,12 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-const LandingPage = () => {
+
+const Home = () => {
   return (
     <div>
-      <h1>Landing page</h1>
+      <Outlet />
     </div>
   );
 };
 
-export default LandingPage;
+export default Home;
