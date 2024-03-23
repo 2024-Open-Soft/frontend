@@ -1,22 +1,17 @@
-import './index.css';
-import { Counter } from './features/counter/counter';
+import React from "react";
+import "./index.css";
+import { SideBar } from "./components/SideBar";
+import MenuPopupState from "./components/HamBurger";
 
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
+import { Grid } from "@mui/material";
 
 function App() {
   return (
     <>
-    <div className="App">
-      <header className="App-header text-center ">
-      <h1 className='text-2xlg font-sans'>Redux Store has been set up</h1>
-        <Counter />
-        <p className='text-lg font-mono'>tailwindcss set up done</p>
-      <div>
-        <br />
-        <Button variant="contained">Material UI set up done</Button>
+      <div className="App">
+        <SideBar />
       </div>
-      </header>
-    </div>
     </>
   );
 }
