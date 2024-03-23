@@ -1,0 +1,20 @@
+.MuiOutlinedInput-notchedOutline{
+    border-color: #FFFFFF !important;
+    opacity: 80%;
+    gap: 0px !important;
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+
+.otp-input .css-ekzmh6-MuiInputBase-input-MuiOutlinedInput-input{
+    padding: 1rem !important;
+    width: 1.5rem;
+}
+
+@media screen and (max-width: 600px){
+    .otp-input .css-ekzmh6-MuiInputBase-input-MuiOutlinedInput-input{
+        padding: 0.5rem !important;
+        width: 2rem;
+    }
+}
