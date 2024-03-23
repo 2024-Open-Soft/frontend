@@ -1,11 +1,21 @@
 import React, { Suspense, lazy } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
-import RequireAuth from "./utility/RequireAuth";
+import RequireAuth from "../components/RequireAuth";
+import Error from "../components/Error";
+import { fetchUserData } from "../components/fetchUser";
+import LandingPage from "./LandingPage";
+import Home from "./Home";
 
-const LazySignUp = lazy(() => import("./signup/SignUp"));
-
-export const Navigation = () => {
+const LazySignUp = lazy(() => import("./SignUp"));
+const LazyLogin = lazy(() => import("./Login"));
+// const LazyHome = lazy(() => import("./LandingPage"));
+const LazyMovie = lazy(() => import("./MoviePage"));
+const LazySearch = lazy(() => import("./SearchPage"));
+const LazySubscriptions = lazy(() => import("./SubscriptionPage"));
+const LazyUser = lazy(() => import("./UserInfo"));
+const LazyWatchlist = lazy(() => import("./WatchList"));
+const Navigation = () => {
   const dispatch = useDispatch();
 
   const navItems = [
@@ -17,6 +27,73 @@ export const Navigation = () => {
         </Suspense>
       ),
       protected: false,
+      errorElement: <Error />,
+    },
+    {
+      path: "/login",
+      element: (
+        <Suspense fallback={<h1>Loading</h1>}>
+          <LazyLogin />
+        </Suspense>
+      ),
+      protected: false,
+      errorElement: <Error />,
+    },
+    {
+      path: "/",
+      element: <LandingPage />,
+      protected: false,
+      errorElement: <Error />,
+    },
+    {
+      path: "/movie/:id",
+      element: (
+        <Suspense fallback={<h1>Loading</h1>}>
+          <LazyMovie />
+        </Suspense>
+      ),
+      protected: false,
+      errorElement: <Error />,
+    },
+    {
+      path: "/search",
+      element: (
+        <Suspense fallback={<h1>Loading</h1>}>
+          <LazySearch />
+        </Suspense>
+      ),
+      protected: false,
+      errorElement: <Error />,
+    },
+    {
+      path: "/subscriptions",
+      element: (
+        <Suspense fallback={<h1>Loading</h1>}>
+          <LazySubscriptions />
+        </Suspense>
+      ),
+      protected: true,
+      errorElement: <Error />,
+    },
+    {
+      path: "/profile",
+      element: (
+        <Suspense fallback={<h1>Loading</h1>}>
+          <LazyUser />
+        </Suspense>
+      ),
+      protected: true,
+      errorElement: <Error />,
+    },
+    {
+      path: "/watchlist",
+      element: (
+        <Suspense fallback={<h1>Loading</h1>}>
+          <LazyWatchlist />
+        </Suspense>
+      ),
+      protected: true,
+      errorElement: <Error />,
     },
   ];
 
@@ -38,13 +115,10 @@ export const Navigation = () => {
             .map((ele, i) => (
               <Route key={i} element={ele.element} path={ele.path} />
             ))}
-          <Route element={<HomeAccount />} path="/account">
-            {accounts.map((ele, i) => (
-              <Route key={i} element={ele.element} path={ele.path} />
-            ))}
-          </Route>
         </Route>
       </Route>
     </Routes>
   );
 };
+
+export default Navigation;
