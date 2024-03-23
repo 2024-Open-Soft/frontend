@@ -1,14 +1,19 @@
-import './index.css';
-
-import { Counter } from './features/counter/counter';
-import BackgroundPlayer from './components/BackgroundPlayer';
-import Button from '@mui/material/Button';
+import "./index.css";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+import Navigation from "./Navigation";
 
 function App() {
   return (
     <>
-    <div className="App">
-    </div>
+      <div className="App">
+        <BrowserRouter>
+          <Provider store={store}>
+            <Navigation />
+          </Provider>
+        </BrowserRouter>
+      </div>
     </>
   );
 }
