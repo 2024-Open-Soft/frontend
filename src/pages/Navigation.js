@@ -28,6 +28,7 @@ const Navigation = () => {
       ),
       protected: false,
       errorElement: <Error />,
+      isBgVideo: true,
     },
     {
       path: "/login",
@@ -38,12 +39,14 @@ const Navigation = () => {
       ),
       protected: false,
       errorElement: <Error />,
+      isBgVideo: true,
     },
     {
       path: "/",
       element: <LandingPage />,
       protected: false,
       errorElement: <Error />,
+      isBgVideo: true,
     },
     {
       path: "/movie/:id",
@@ -54,6 +57,7 @@ const Navigation = () => {
       ),
       protected: false,
       errorElement: <Error />,
+      isBgVideo: true,
     },
     {
       path: "/search",
@@ -64,6 +68,7 @@ const Navigation = () => {
       ),
       protected: false,
       errorElement: <Error />,
+      isBgVideo: false,
     },
     {
       path: "/subscriptions",
@@ -74,6 +79,7 @@ const Navigation = () => {
       ),
       protected: true,
       errorElement: <Error />,
+      isBgVideo: true,
     },
     {
       path: "/profile",
@@ -84,6 +90,7 @@ const Navigation = () => {
       ),
       protected: true,
       errorElement: <Error />,
+      isBgVideo: true,
     },
     {
       path: "/watchlist",
@@ -94,6 +101,7 @@ const Navigation = () => {
       ),
       protected: true,
       errorElement: <Error />,
+      isBgVideo: false,
     },
   ];
 
