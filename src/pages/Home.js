@@ -3,15 +3,40 @@ import BackgroundPlayer from "../components/BackgroundPlayer";
 import { SideBar } from "../components/SideBar";
 import Cars from "../assets/Cars.mp4";
 import { Outlet } from "react-router-dom";
+import { useMediaQuery } from "@mui/system";
+import MenuIcon from "@mui/icons-material/Menu";
+import { IconButton, Modal } from "@mui/material";
 
 const Home = ({ isBgVideo }) => {
+  const isMobile = useMediaQuery("(max-width:600px)");
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
+
+  const handleOpen = () => setDrawerOpen(true);
+  const handleClose = () => setDrawerOpen(false);
+
   return (
     <div className="bg-black">
       <div className={`w-full relative z-[1] ${isBgVideo && "bg-black"}`}>
-        <a href="/" className="flex fixed mt-3 left-[1%]">
+        <a href="/" className="hidden fixed mt-3 sm:flex left-[1%]">
           <img src="/Logo.svg" alt="WHO" className="w-36 " />
         </a>
-        <SideBar />
+        {!isMobile && <SideBar />}
+        {isMobile && (
+          <>
+            <IconButton
+              className="fixed top-3 left-3 cursor-pointer"
+              aria-label="menu"
+              onClick={handleOpen}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Modal open={drawerOpen} onClose={handleClose}>
+              <div>
+                <SideBar />
+              </div>
+            </Modal>
+          </>
+        )}
         <Outlet />
       </div>
 
@@ -26,14 +51,7 @@ const Home = ({ isBgVideo }) => {
           />
         </div>
         <div className="sm:bg-gradient-to-t sm:from-black sm:via-transparent to-red-00 absolute top-0 text-3xl flex flex-row justify-center items-center w-full h-screen text-white"></div>
-        <div class="absolute left-0 top-0 h-screen w-full sm:bg-gradient-to-l sm:from-transparent sm:to-black"></div>
-        {/* <div
-          className="absolute left-0 top-0 h-screen w-full"
-          style={{
-            background:
-              "linear-gradient(to left, rgba(255, 0, 0, 0), rgba(0, 0, 0, 1))",
-          }}
-        ></div> */}
+        <div className="absolute left-0 top-0 h-screen w-full sm:bg-gradient-to-l sm:from-transparent sm:to-black"></div>
       </div>
     </div>
   );
