@@ -1,9 +1,9 @@
 import React, {useState} from "react";
-import { Autocomplete, Box, TextField } from "@mui/material";
+import { Autocomplete, Box, Button, Container, TextField } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import StarIcon from '@mui/icons-material/Star';
-import Stack from '@mui/material/Stack';
+import SavedSearchIcon from '@mui/icons-material/SavedSearch';
 
 const states = [
     "Andhra Pradesh",
@@ -51,9 +51,14 @@ const SearchBar = () => {
       setIsSemantic(!isSemantic);
     };
 
-    return <Stack direction="row" spacing={2} sx={{ width: 1000 }}>
-        <SearchIcon />
+    return <Container className="flex flex-row hover:bg-slate-500/65 bg-slate-300/45 rounded-full px-2 mt-12 mb-2 items-center">
+        {isSemantic?
+        <SavedSearchIcon className="m-2 size-8 fill-yellow-500"/>
+        :
+        <SearchIcon className="m-2 size-8"/>
+        }
         <Autocomplete 
+        className="border-0 rounded-none"
         freeSolo
         options={states}
         renderInput={(params)=> <TextField {...params} label="Search for a Movie" />}
@@ -62,12 +67,12 @@ const SearchBar = () => {
         fullWidth
         />
         {
-            <div onClick={handleClick}>
-                {isSemantic ? <StarIcon /> : <StarOutlineIcon />}
-            </div>
+            <Button onClick={handleClick} className="rounded-full">
+                {isSemantic ? <StarIcon className="m-2 size-10 fill-yellow-500 border-2 border-solid border-yellow-500 rounded-full p-1.5 "/> : <StarOutlineIcon className="m-2 size-10"/>}
+            </Button>
         }
         
-    </Stack>;
+    </Container>;
 }
 
 export default SearchBar;

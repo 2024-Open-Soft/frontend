@@ -1,17 +1,5 @@
 import React from "react";
-import { Box, Button, Container, Divider, Grid, Stack, TextField, Typography } from "@mui/material";
-// import Divider from "@mui/material";
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
-import { data } from "autoprefixer";
-
-// const Item = styled(Paper)(({ theme }) => ({
-//     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-//     ...theme.typography.body2,
-//     padding: theme.spacing(1),
-//     textAlign: 'center',
-//     color: theme.palette.text.secondary,
-//   }));
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
 
 const genres = [
     "Romance",
@@ -42,12 +30,12 @@ const SearchTags = () => {
     return <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2} columns={16}>
             
-            <Grid item xs={8}>
+            <Grid item xs={8} className="px-0">
                 <Container className="flex flex-col">
                     <Container className="flex justify-center">
                         <Typography className="mx-6 my-4">Genre</Typography>
                     </Container>
-                    <Container className="flex flex-row overflow-scroll my-3 py-2">
+                    <Container className="flex flex-row overflow-scroll my-3 pb-2">
                         {genres.map(function(genres)
                         {
                             return(
@@ -66,7 +54,7 @@ const SearchTags = () => {
                     <Container className="flex justify-center">
                         <Typography className="mx-6 my-4 ">Language</Typography>
                     </Container>
-                    <Container className="flex flex-row overflow-scroll my-3 py-2">
+                    <Container className="flex flex-row overflow-scroll my-3 pb-2">
                         {languages.map(function(languages)
                         {
                             return(
