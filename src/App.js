@@ -1,16 +1,18 @@
-import React from "react";
-import "./index.css";
-import { SideBar } from "./components/SideBar";
-import MenuPopupState from "./components/HamBurger";
-
-import Button from "@mui/material/Button";
-import { Grid } from "@mui/material";
+import './index.css';
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+import Navigation from "./pages/Navigation";
 
 function App() {
   return (
     <>
       <div className="App">
-        <SideBar />
+        <BrowserRouter>
+          <Provider store={store}>
+            <Navigation />
+          </Provider>
+        </BrowserRouter>
       </div>
     </>
   );
