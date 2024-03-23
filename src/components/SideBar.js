@@ -1,0 +1,81 @@
+import React, { useState } from "react";
+import { Box, Button } from "@mui/material";
+
+import HomeIcon from "@mui/icons-material/Home";
+import SearchIcon from "@mui/icons-material/Search";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import TrendingUpRoundedIcon from '@mui/icons-material/TrendingUpRounded';
+import PersonOutlineRoundedIcon from '@mui/icons-material/PersonOutlineRounded';
+import PendingOutlinedIcon from '@mui/icons-material/PendingOutlined';
+import { Link } from "react-router-dom";
+
+export const SideBar = () => {
+  const boxStyle = {
+    display: "flex",
+    flexDirection: "column",
+    borderRadius: "50px",
+    backgroundColor: "rgba(171, 171, 171, 0.2)",
+    position: "fixed",
+    top: "20%",
+    left: "2%",
+    width: "70px",
+    height: "392px",
+    alignItems: "center",
+    justifyContent: "center",
+    backdropFilter: "blur(15px)",
+  };
+
+  const buttonStyle = {
+    backgroundColor: "transparent",
+    padding: "10px",
+    margin: "5px",
+    borderRadius: "100%",
+    minWidth: "0px",
+    width: "50px",
+    height: "50px",
+    boxShadow: "none",
+    "&:hover": { background: "rgba(255, 255, 255, 0.2)", boxShadow: "none", }
+  };
+
+  const linkStyle = {
+    textDecoration: 'none',
+    lineHeight: '0px',
+  }
+
+  return (
+    <>
+      <Box sx={boxStyle}>
+        <Button variant="contained" sx={{ ...buttonStyle }}>
+          <Link to="/" style={linkStyle}>
+            <HomeIcon />
+          </Link>
+        </Button>
+        <Button variant="contained" sx={buttonStyle}>
+          <Link to="/search" style={linkStyle}>
+            <SearchIcon />
+          </Link>
+        </Button>
+        <Button variant="contained" sx={buttonStyle}>
+          <Link to="/watchlist" style={linkStyle}>
+            <BookmarkBorderIcon />
+          </Link>
+        </Button>
+        <Button variant="contained" sx={buttonStyle}>
+          <Link to="/trending" style={linkStyle}>
+            <TrendingUpRoundedIcon />
+          </Link>
+        </Button>
+        <Button variant="contained" sx={buttonStyle}>
+          <Link to="/profile" style={linkStyle}>
+            <PersonOutlineRoundedIcon />
+          </Link>
+        </Button>
+        <Button variant="contained" sx={buttonStyle}>
+          <Link to="/logout" style={linkStyle}>
+            <PendingOutlinedIcon />
+          </Link>
+        </Button>
+      </Box>
+    </>
+  );
+};
