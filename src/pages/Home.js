@@ -1,11 +1,10 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import BackgroundPlayer from "../components/BackgroundPlayer";
 
 const Home = () => {
   return (
-    <div>
-      
-      <Outlet />
+    <div className="">
+      <BackgroundPlayer />
     </div>
   );
 };
