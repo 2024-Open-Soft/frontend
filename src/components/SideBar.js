@@ -1,46 +1,5 @@
 import React, { useState } from "react";
-// import { Paper, Drawer } from '@mui/material';
-// import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
-// import IconButton from '@mui/material';
-
 import { Box, Button } from "@mui/material";
-
-// const styles = {
-//   drawer: {
-//     borderRadius: '16px', // Set border radius for the drawer
-//     backgroundColor: '#fff', // Set background color
-//     boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.1)', // Optional shadow
-//   },
-// };
-
-// const MyDrawer = () => {
-//   const [isOpen, setIsOpen] = useState(false);
-
-//   const toggleDrawer = (open) => {
-//     setIsOpen(open);
-//   };
-
-//   return (
-//     <>
-//       <button onClick={() => toggleDrawer(true)} >
-//         <MenuRoundedIcon />
-//       </button>
-//       <Drawer
-//         anchor="top"
-//         open={isOpen}
-//         onClose={() => toggleDrawer(false)}
-//         PaperProps={{ style: { borderRadius: 16 } }} // Set border radius for rounded box
-//       >
-//         <Paper sx={{ padding: '16px' }}>
-//           {/* Drawer content */}
-//           Your drawer content goes here
-//         </Paper>
-//       </Drawer>
-//     </>
-//   );
-// };
-
-// export default MyDrawer;
 
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
@@ -48,6 +7,7 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import TrendingUpRoundedIcon from '@mui/icons-material/TrendingUpRounded';
 import PersonOutlineRoundedIcon from '@mui/icons-material/PersonOutlineRounded';
 import PendingOutlinedIcon from '@mui/icons-material/PendingOutlined';
+import { Link } from "react-router-dom";
 
 export const SideBar = () => {
   const boxStyle = {
@@ -55,14 +15,14 @@ export const SideBar = () => {
     flexDirection: "column",
     borderRadius: "50px",
     backgroundColor: "rgba(171, 171, 171, 0.2)",
-    // opacity:"100%",
     position: "fixed",
     top: "20%",
     left: "2%",
-    width: "80px",
+    width: "70px",
     height: "392px",
     alignItems: "center",
     justifyContent: "center",
+    backdropFilter: "blur(15px)",
   };
 
   const buttonStyle = {
@@ -74,29 +34,46 @@ export const SideBar = () => {
     width: "50px",
     height: "50px",
     boxShadow: "none",
-    "&:hover": { background: "rgba(255, 255, 255, 0.2)"}
+    "&:hover": { background: "rgba(255, 255, 255, 0.2)", boxShadow: "none", }
   };
+
+  const linkStyle = {
+    textDecoration: 'none',
+    lineHeight: '0px',
+  }
 
   return (
     <>
       <Box sx={boxStyle}>
-        <Button variant="contained" sx={{...buttonStyle}}>
-          <HomeIcon />
+        <Button variant="contained" sx={{ ...buttonStyle }}>
+          <Link to="/" style={linkStyle}>
+            <HomeIcon />
+          </Link>
         </Button>
         <Button variant="contained" sx={buttonStyle}>
-          <SearchIcon />
+          <Link to="/search" style={linkStyle}>
+            <SearchIcon />
+          </Link>
         </Button>
         <Button variant="contained" sx={buttonStyle}>
-          <BookmarkBorderIcon />
+          <Link to="/watchlist" style={linkStyle}>
+            <BookmarkBorderIcon />
+          </Link>
         </Button>
         <Button variant="contained" sx={buttonStyle}>
-          <TrendingUpRoundedIcon />
+          <Link to="/trending" style={linkStyle}>
+            <TrendingUpRoundedIcon />
+          </Link>
         </Button>
         <Button variant="contained" sx={buttonStyle}>
-          <PersonOutlineRoundedIcon />
+          <Link to="/profile" style={linkStyle}>
+            <PersonOutlineRoundedIcon />
+          </Link>
         </Button>
         <Button variant="contained" sx={buttonStyle}>
-          <PendingOutlinedIcon />
+          <Link to="/logout" style={linkStyle}>
+            <PendingOutlinedIcon />
+          </Link>
         </Button>
       </Box>
     </>
