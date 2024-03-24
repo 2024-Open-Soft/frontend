@@ -7,6 +7,9 @@ import { ThemeProvider } from "@mui/system";
 import { createTheme } from "@mui/material";
 
 const theme = createTheme({
+  palette: {
+    mode: "dark",
+  },
   typography: {
     fontFamily: "Arial",
   },
@@ -17,6 +20,10 @@ const theme = createTheme({
           borderRadius: "15px",
           "& fieldset": {
             borderColor: "#ffffff83",
+          },
+          "&:hover fieldset": {
+            borderWidth: "1px",
+            borderColor: "#1976D2",
           },
         },
         input: {
@@ -41,6 +48,10 @@ const theme = createTheme({
             color: "white",
           },
           boxShadow: "none",
+          px: {
+            md: "20px",
+            sm: "10px",
+          },
         },
       },
     },
