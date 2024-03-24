@@ -42,10 +42,6 @@ const LandingPage = () => {
               xs: "60vh",
               md: "50vh",
             },
-            mt: {
-              xs: "1rem",
-              md: "20vh",
-            },
             width: {
               xs: "80%",
               md: "25%",
