@@ -7,7 +7,7 @@ import SearchRelevantResult from "../components/search-components/searchRelevant
 
 function SearchPage() {
     return(
-      <Container className="mb-12" >
+      <Container className="pb-12" >
         <SearchBar />
         <SearchTags />
         <SearchTopResult />

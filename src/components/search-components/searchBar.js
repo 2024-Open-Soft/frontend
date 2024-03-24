@@ -67,7 +67,7 @@ const SearchBar = () => {
         fullWidth
         />
         {
-            <Button onClick={handleClick} className="rounded-full">
+            <Button onClick={handleClick} className="rounded-full transition-all">
                 {isSemantic ? 
                 <Box className="flex items-center mx-3 bg-slate-400/65 rounded-full">
                     <Typography className="text-xl text-yellow-500 capitalize rounded-full p-1.5 ml-4">Semantic</Typography>

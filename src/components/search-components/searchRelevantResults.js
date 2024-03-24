@@ -45,7 +45,7 @@ const SearchRelevantResult = () => {
 
             <Grid container spacing={4}>
                 {MovieInfo.map((MovieData, index) => (
-                <Grid item xs={2} sm={4} md={2.4} key={index} p-3 m-2>
+                <Grid item xs={2} sm={4} md={2.4} key={index} p-3 m-2 minWidth={60} className="flex">
                     <Box>
                         <img src={MovieData.src} alt={MovieData.title}></img>
                         <Typography className="text-gray-200 font-semibold text-sm mb-2 mx-2">{MovieData.title}</Typography>
