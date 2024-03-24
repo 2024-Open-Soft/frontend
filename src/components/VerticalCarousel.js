@@ -16,8 +16,8 @@ function VerticalCarousel({ suggestedMovies }) {
     swipeToSlide: true,
     pauseOnHover: true,
     touchMove: true,
-    // autoplay: true,
-    // autoplaySpeed: 2000,
+    autoplay: true,
+    autoplaySpeed: 2000,
     focusOnSelect: true,
     arrows: false,
     beforeChange: function (currentSlide, nextSlide) {
