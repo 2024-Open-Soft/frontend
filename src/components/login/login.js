@@ -222,7 +222,7 @@ const LoginPage = () => {
                         borderRadius: "10rem",
                         opacity: "90%",
                         width: {xs: "100%", md: "15rem"},
-                        height: "3.5rem",
+                        height: {xs: "3rem", md: "3.5rem"},
                         backgroundColor: "#3076A8",
                         boxShadow: "0",
                         mb: 2
@@ -279,7 +279,7 @@ const LoginPage = () => {
                     sx={{
                         borderRadius: "10rem",
                         width: {xs: "100%", md: "15rem"},
-                        height: "3.5rem",
+                        height: {xs: "3rem", md: "3.5rem"},
                         opacity: "90%",
                         boxShadow: "0",
                         backgroundColor: "#BB4D4D",
