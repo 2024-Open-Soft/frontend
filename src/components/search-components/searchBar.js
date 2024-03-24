@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Autocomplete, Box, Button, Container, TextField } from "@mui/material";
+import { Autocomplete, Box, Button, Container, TextField, Typography } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import StarIcon from '@mui/icons-material/Star';
@@ -68,7 +68,13 @@ const SearchBar = () => {
         />
         {
             <Button onClick={handleClick} className="rounded-full">
-                {isSemantic ? <StarIcon className="m-2 size-10 fill-yellow-500 border-2 border-solid border-yellow-500 rounded-full p-1.5 "/> : <StarOutlineIcon className="m-2 size-10"/>}
+                {isSemantic ? 
+                <Box className="flex items-center mx-3 bg-slate-400/65 rounded-full">
+                    <Typography className="text-xl text-yellow-500 capitalize rounded-full p-1.5 ml-4">Semantic</Typography>
+                    <StarIcon className="m-2 size-10 fill-yellow-500 border-2 border-solid border-yellow-500 rounded-full p-1.5 bg-slate-200/50"/> 
+                </Box>
+                : 
+                <StarOutlineIcon className="m-2 size-10"/>}
             </Button>
         }
         

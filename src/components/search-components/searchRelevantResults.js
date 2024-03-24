@@ -1,36 +1,58 @@
 import React from "react";
-import { Button, Container, Grid, Typography } from "@mui/material";
-import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import { Box, Container, Grid, Typography } from "@mui/material";
 
 const SearchRelevantResult = () => {
 
+    const MovieInfo = [
+        {
+            "src": "./12thfail.jpeg",
+            "title": "12th Fail"
+        },
+        {
+            "src": "./12thfail.jpeg",
+            "title": "12th Fail"
+        },{
+            "src": "./12thfail.jpeg",
+            "title": "12th Fail"
+        },{
+            "src": "./12thfail.jpeg",
+            "title": "12th Fail"
+        },{
+            "src": "./12thfail.jpeg",
+            "title": "12th Fail"
+        },{
+            "src": "./12thfail.jpeg",
+            "title": "12th Fail"
+        },{
+            "src": "./12thfail.jpeg",
+            "title": "12th Fail"
+        },{
+            "src": "./12thfail.jpeg",
+            "title": "12th Fail"
+        },{
+            "src": "./12thfail.jpeg",
+            "title": "12th Fail"
+        },{
+            "src": "./12thfail.jpeg",
+            "title": "12th Fail"
+        },
+        
+    ]
+
     return(
         <Container className="mx-8 my-4">
-            <Typography className="uppercase font-extrabold text-xl m-3"> RElevant result </Typography>
-            {/* <Grid container>
-                <Grid item xs={3}>
-                    <img src="./12thfail.jpeg" className="m-5"></img>
-                </Grid>
-                <Grid item xs={9}>
-                    <Container>
-                        <Typography className="font-extrabold text-3xl mx-8 my-3">12th Fail</Typography>
-                        <Container className="p-2 m-4">
-                            <Button className="bg-red-600 rounded-full px-6 py-3">
-                                <PlayCircleOutlineIcon className="mr-2"/>
-                                <Typography className="text-gray-200 font-medium">Watch</Typography>
-                            </Button>
-                            <Button className="bg-slate-700/50 rounded-full px-6 py-3 mx-3 hover:bg-slate-300/75">
-                                <Typography className="text-gray-200 font-medium">
-                                    Trailer
-                                </Typography>
-                            </Button>
-                        </Container>
-                        <Typography className="p-2 m-2 text-gray-100">
-                        Based on the true story of IPS officer Manoj Kumar Sharma, 12th Fail sheds limelight on fearlessly embracing the idea of restarting the academic journey despite the setbacks and challenges and reclaiming one's destiny at a place where millions of students attempt the world's toughest competitive exam: UPSC. 
-                        </Typography>
-                    </Container>
-                </Grid>
-            </Grid> */}
+            <Typography className="uppercase font-extrabold text-xl mx-4 my-8"> RElevant result </Typography>
+
+            <Grid container spacing={4}>
+                {MovieInfo.map((MovieData, index) => (
+                <Grid item xs={2} sm={4} md={2.4} key={index} p-3 m-2>
+                    <Box>
+                        <img src={MovieData.src} alt={MovieData.title}></img>
+                        <Typography className="text-gray-200 font-semibold text-sm mb-2 mx-2">{MovieData.title}</Typography>
+                    </Box>
+                </Grid> 
+                ))}
+            </Grid>
         </Container>
     );
 }
