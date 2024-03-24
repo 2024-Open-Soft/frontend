@@ -75,7 +75,7 @@ function VerticalCarousel({ suggestedMovies }) {
     ),
   };
   return (
-    <div className="slider-container w-[85%] flex items-center justify-center">
+    <div className="horizontal slider-container w-[85%] flex items-center justify-center">
       <Slider className="landing-carousel" {...settings}>
         {suggestedMovies.map((movie, index) => (
           <div className="image-box" key={index}>

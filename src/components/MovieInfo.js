@@ -31,7 +31,7 @@ const MovieInfo = () => {
 
   return (
     <div className="w-3/4">
-      <div className="p-[2rem] lg:p-[3.5rem] md:p-[3rem] text-[white] flex flex-col font-[Arial,_Helvetica,_sans-serif]  w-full">
+      <div className="text-[white] flex flex-col font-[Arial,_Helvetica,_sans-serif]  w-full">
         <div className="text-[2rem] lg:text-[3rem] md:text-[2.5rem] font-black lg:mb-[1.5rem] md:mb-[1.1rem] mb-[0.8rem]">
           {movieInfo.movieTitle}
         </div>

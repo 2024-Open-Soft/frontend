@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import MovieInfo from "../components/MovieInfo";
-import { Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import VerticalCarousel from "../components/VerticalCarousel";
+import HorizontalCarousel from "../components/HorizontalCarousel";
 
 const LandingPage = () => {
   const [suggestedMovies, setSuggestedMovies] = useState([
@@ -13,20 +14,27 @@ const LandingPage = () => {
     { img: "/frame.png" },
   ]);
   return (
-    <Box
+    <Grid
+      container
+      spacing={2}
       sx={{
         pl: {
           xs: "5vw",
           md: "10vw",
         },
-
+        pr: {
+          xs: "5vw",
+          md: "5vw",
+        },
         pt: {
           xs: "1vh",
-          md: "7vh",
+          md: "15vh",
         },
+        m: 0,
+        width: "100%",
       }}
     >
-      <div className="sm:flex w-full">
+      <Grid item xs={12} sx={{ display: "flex", width: "85%" }}>
         <MovieInfo />
         <Box
           sx={{
@@ -48,8 +56,11 @@ const LandingPage = () => {
         >
           <VerticalCarousel suggestedMovies={suggestedMovies} />
         </Box>
-      </div>
-    </Box>
+      </Grid>
+      <Grid item xs={12} sx={{ width: "95%", m: 0, mt: 10 }}>
+        <HorizontalCarousel />
+      </Grid>
+    </Grid>
   );
 };
 
