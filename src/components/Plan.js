@@ -35,14 +35,14 @@ const Plan = () => {
                 </Grid>
                 <Grid item xs={12} md={7}>
                     <Grid container spacing={2} sx={{ pl: 4 }}>
-                        <Grid item xs={6} sm={6} md={12}>
+                        <Grid item xs={12} sm={6} md={12}>
                             <Button variant="contained" sx={{ background: "#3D548E", color: "#FFFFFF" }}>UPGRADE PLAN</Button>
                         </Grid>
-                        <Grid item xs={6} sm={6} md={12}>
+                        <Grid item xs={12} sm={6} md={12}>
                             <Button variant="contained" sx={{ background: "#B23737", color: "#FFFFFF" }}>CANCEL PLAN</Button>
                         </Grid>
                         <Grid item xs={12} sx={{ pt: 2 }}>
-                            <Typography><Link to="/subscriptions" sx={linkStyle}>Click Here</Link>, to know more about plans</Typography>
+                            <Typography><Link href="/subscriptions" sx={linkStyle}>Click Here,</Link> to know more about plans</Typography>
                         </Grid>
                     </Grid>
                 </Grid>

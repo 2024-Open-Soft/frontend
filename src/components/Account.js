@@ -21,9 +21,9 @@ const Account = () => {
     }
 
     const boxStyle = { display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", width: "100%", height: "100%" }
-    const inputStyle = { border: "none", backgroundColor: "transparent", width: "400px", ":focus": { outline: "none" } }
+    const inputStyle = { border: "none", backgroundColor: "transparent" }
     const editButtonStyle = { backgroundColor: "#747474", color: "white", ":hover": { backgroundColor: "transparent" }, borderRadius: "50%", height: "40px", width: "40px", minWidth: 0}
-    const inputBoxStyle = { border: "1px solid #747474", p: 1, pl: 2, borderRadius: "30px", display: "flex", width: "fit-content", mb: 2}
+    const inputBoxStyle = { border: "1px solid #747474", p: 1, pl: 2, borderRadius: "30px", display: "flex", width: "100%", mb: 2, justifyContent: "space-between"}
     
     return (
         <>
@@ -41,7 +41,7 @@ const Account = () => {
                     <Box sx={inputBoxStyle}>
                         <input
                             type="text"
-                            style={inputStyle}
+                            style={{ ...inputStyle, width: "90%" }}
                             className='account-field'
                             value={name}
                             disabled={disabled[0]}
@@ -54,7 +54,7 @@ const Account = () => {
                     <Box sx={inputBoxStyle}>
                         <input
                             type="email"
-                            style={inputStyle}
+                            style={{ ...inputStyle, width: "90%" }}
                             className='account-field'
                             value={email}
                             disabled={disabled[1]}
@@ -65,9 +65,18 @@ const Account = () => {
                         </Button>
                     </Box>
                     <Box sx={inputBoxStyle}>
+                        <select 
+                            className="account-field" 
+                            style={inputStyle}
+                            value={countryCode}
+                            disabled={disabled[2]}
+                            onChange={(e) => setCountryCode(e.target.value)}
+                        >
+                            <option value="+91">+91</option>
+                        </select>
                         <input
                             type="number"
-                            style={inputStyle}
+                            style={{ ...inputStyle, width: "80%", paddingLeft: "10px", borderLeft: "1px solid #747474" }}
                             className='account-field'
                             value={phone}
                             disabled={disabled[2]}
@@ -80,7 +89,7 @@ const Account = () => {
                     <Box sx={inputBoxStyle}>
                         <input
                             type="password"
-                            style={inputStyle}
+                            style={{ ...inputStyle, width: "90%" }}
                             className='account-field'
                             value={password}
                             disabled={disabled[3]}
