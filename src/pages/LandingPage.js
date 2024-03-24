@@ -3,6 +3,7 @@ import MovieInfo from "../components/MovieInfo";
 import { Box, Grid } from "@mui/material";
 import VerticalCarousel from "../components/VerticalCarousel";
 import HorizontalCarousel from "../components/HorizontalCarousel";
+import Footer from "../components/Footer";
 
 const LandingPage = () => {
   return (
@@ -50,6 +51,9 @@ const LandingPage = () => {
       </Grid>
       <Grid item xs={12} sx={{ width: "95%", m: 0, mt: 10 }}>
         <HorizontalCarousel title={"RECENTLY RELEASED"} />
+      </Grid>
+      <Grid item xs={12} sx={{ width: "95%", m: 0, mt: 10 }}>
+        <Footer />
       </Grid>
     </Grid>
   );
