@@ -1,16 +1,16 @@
-import './index.css';
-
-import { Counter } from './features/counter/counter';
-import BackgroundPlayer from './components/BackgroundPlayer';
-import Button from '@mui/material/Button';
+import "./index.css";
+import { Counter } from "./features/counter/counter";
+import Button from "@mui/material/Button";
+import CommentBox from "./components/CommentBox";
 
 function App() {
-  return (
-    <>
-    <div className="App">
-    </div>
-    </>
-  );
+	return (
+		<>
+			<div className="App">
+				<CommentBox />
+			</div>
+		</>
+	);
 }
 
 export default App;
