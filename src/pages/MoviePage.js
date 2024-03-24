@@ -5,6 +5,8 @@ import VerticalCarousel from "../components/VerticalCarousel";
 import HorizontalCarousel from "../components/HorizontalCarousel";
 import CastCarousel from "../components/CastCarousel";
 import PostComment from "../components/PostComment";
+import CommentsBox from "../components/CommentsContainer";
+import CommentsContaier from "../components/CommentsContainer";
 
 const MoviePage = () => {
   return (
@@ -21,21 +23,28 @@ const MoviePage = () => {
           md: "5vw",
         },
         pt: {
-          xs: "1vh",
+          xs: "3vh",
           md: "15vh",
         },
         m: 0,
         width: "100%",
       }}
     >
-      <Grid item xs={12} sx={{ display: "flex", width: "85%" }}>
+      <Grid
+        item
+        xs={12}
+        sx={{ display: "flex", width: "85%", p: { xs: "3vw" } }}
+      >
         <MovieInfo />
       </Grid>
-      <Grid item xs={12} sx={{ width: "95%", m: 0, mt: 10 }}>
+      <Grid item xs={12} sx={{ width: "95%", m: 0, mt: 10, p: { xs: "3vw" } }}>
         <CastCarousel title={"CAST"} />
       </Grid>
-      <Grid item xs={12} sx={{ width: "95%", m: 0, mt: 10 }}>
+      <Grid item xs={12} sx={{ width: "95%", m: 0, mt: 10, p: { xs: "3vw" } }}>
         <PostComment />
+      </Grid>
+      <Grid item xs={12} sx={{ width: "95%", m: 0, mt: 10, p: { xs: "3vw" } }}>
+        <CommentsContaier />
       </Grid>
     </Grid>
   );
