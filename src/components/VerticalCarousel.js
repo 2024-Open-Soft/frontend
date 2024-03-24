@@ -29,13 +29,13 @@ function VerticalCarousel() {
     focusOnSelect: true,
     arrows: false,
     beforeChange: function (currentSlide, nextSlide) {
-      console.log("before change", currentSlide, nextSlide);
+      // console.log("before change", currentSlide, nextSlide);
     },
     afterChange: function (currentSlide) {
-      console.log("after change", currentSlide);
+      // console.log("after change", currentSlide);
     },
     appendDots: (dots) => {
-      console.log(dots);
+      // console.log(dots);
       return (
         <div
           style={{
@@ -56,10 +56,6 @@ function VerticalCarousel() {
               width: "fit-content",
               display: "flex",
               flexDirection: "column",
-              // below style is not working gpt please check
-              "&li .slick-active div": {
-                background: "red",
-              },
               alignItems: "center",
             }}
           >
