@@ -149,6 +149,7 @@ const HorizontalCarousel = () => {
         slidesToScroll: 1,
         slidesToShow: (window.innerWidth - 190) / 200,
         arrows: true,
+        swipeToSlide: true,
         nextArrow: <CustomNextArrow />,
         prevArrow: <CustomBackArrow />
     }
