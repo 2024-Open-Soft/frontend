@@ -5,14 +5,6 @@ import VerticalCarousel from "../components/VerticalCarousel";
 import HorizontalCarousel from "../components/HorizontalCarousel";
 
 const LandingPage = () => {
-  const [suggestedMovies, setSuggestedMovies] = useState([
-    { img: "/frame.png" },
-    { img: "/frame.png" },
-    { img: "/frame.png" },
-    { img: "/frame.png" },
-    { img: "/frame.png" },
-    { img: "/frame.png" },
-  ]);
   return (
     <Grid
       container
@@ -50,11 +42,14 @@ const LandingPage = () => {
             justifyContent: "center",
           }}
         >
-          <VerticalCarousel suggestedMovies={suggestedMovies} />
+          <VerticalCarousel />
         </Box>
       </Grid>
       <Grid item xs={12} sx={{ width: "95%", m: 0, mt: 10 }}>
-        <HorizontalCarousel />
+        <HorizontalCarousel title={"TRENDING"} />
+      </Grid>
+      <Grid item xs={12} sx={{ width: "95%", m: 0, mt: 10 }}>
+        <HorizontalCarousel title={"RECENTLY RELEASED"} />
       </Grid>
     </Grid>
   );

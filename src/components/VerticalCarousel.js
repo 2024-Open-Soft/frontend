@@ -4,7 +4,15 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./style.css";
 
-function VerticalCarousel({ suggestedMovies }) {
+function VerticalCarousel() {
+  const [suggestedMovies, setSuggestedMovies] = useState([
+    { img: "/frame.png" },
+    { img: "/frame.png" },
+    { img: "/frame.png" },
+    { img: "/frame.png" },
+    { img: "/frame.png" },
+    { img: "/frame.png" },
+  ]);
   const settings = {
     dots: true,
     infinite: true,
