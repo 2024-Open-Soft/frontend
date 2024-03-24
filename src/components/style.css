@@ -23,3 +23,7 @@
   padding: 4px;
   border-radius: 1rem;
 }
+
+.account-field:focus {
+  outline: none;
+}
