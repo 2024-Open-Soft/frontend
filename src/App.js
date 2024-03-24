@@ -2,6 +2,7 @@ import './index.css';
 import { Counter } from './features/counter/counter';
 import BackgroundPlayer from './components/BackgroundPlayer';
 import Button from '@mui/material/Button';
+import CastSlider from './components/CastSlider';
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
         <Button variant="contained">Material UI set up done</Button>
       </div>
       </header> */}
-      <BackgroundPlayer />
+      {/* <BackgroundPlayer /> */}
+      <CastSlider />
     </div>
     </>
   );
