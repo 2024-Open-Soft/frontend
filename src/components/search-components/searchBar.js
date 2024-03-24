@@ -74,7 +74,7 @@ const SearchBar = () => {
                     <StarIcon className="m-2 size-10 fill-yellow-500 border-2 border-solid border-yellow-500 rounded-full p-1.5 bg-slate-200/50"/> 
                 </Box>
                 : 
-                <StarOutlineIcon className="m-2 size-10"/>}
+                <StarIcon className="m-2 size-10 rounded-full bg-slate-200/50 p-1.5 fill-white"/>}
             </Button>
         }
         
