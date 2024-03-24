@@ -64,12 +64,11 @@ const theme = createTheme({
     }
 });
 
-const SignUp = () => {
+const Login = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         console.log({
-            name: data.get('name'),
             email: data.get('email'),
             password: data.get('password'),
         });
@@ -154,25 +153,12 @@ const SignUp = () => {
                                     Sign up
                                 </Typography> */}
                                 <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-                                    <Typography variant="" sx={{ fontSize: 'large' }}>Enter Name</Typography>
-                                    <TextField
-                                        margin="normal"
-                                        required
-                                        fullWidth
-                                        id="name"
-                                        // label="Enter name"
-                                        name="name"
-                                        autoComplete="name"
-                                        autoFocus
-                                        sx={{ mt: 1, mb: 2 }}
-                                    />
                                     <Typography variant="" sx={{ fontSize: 'large' }}>Enter Email</Typography>
                                     <TextField
                                         margin="normal"
                                         required
                                         fullWidth
                                         id="email"
-                                        // label="Enter email"
                                         name="email"
                                         autoComplete="email"
                                         autoFocus
@@ -184,7 +170,6 @@ const SignUp = () => {
                                         required
                                         fullWidth
                                         name="password"
-                                        // label="Password"
                                         type="password"
                                         id="password"
                                         autoComplete="current-password"
@@ -192,15 +177,14 @@ const SignUp = () => {
                                     />
                                     <Button
                                         type="submit"
-                                        // fullWidth
                                         variant="contained"
                                         sx={{ mt: 3, mb: 2 }}
                                     >
-                                        Create Account
+                                        Login
                                     </Button>
                                     <Typography align='left'>
                                         <Link href="#" variant="body2">
-                                            {"Already have an account? Sign In"}
+                                            {"Don't have an account? Sign Up"}
                                         </Link>
                                     </Typography>
                                     <Typography align='left' sx={{ mt: 2 }}>
@@ -219,4 +203,4 @@ const SignUp = () => {
     )
 }
 
-export default SignUp
+export default Login

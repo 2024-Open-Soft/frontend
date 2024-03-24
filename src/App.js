@@ -1,16 +1,21 @@
 import "./index.css";
-import { Counter } from "./features/counter/counter";
-import Button from "@mui/material/Button";
-import CommentBox from "./components/CommentBox";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+import Navigation from "./pages/Navigation";
 
 function App() {
-	return (
-		<>
-			<div className="App">
-				<CommentBox />
-			</div>
-		</>
-	);
+  return (
+    <>
+      <div className="App">
+        <BrowserRouter>
+          <Provider store={store}>
+            <Navigation />
+          </Provider>
+        </BrowserRouter>
+      </div>
+    </>
+  );
 }
 
 export default App;
