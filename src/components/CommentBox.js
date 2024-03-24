@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
-import "./comment.css";
 
 const CommentBox = () => {
 	const [comment, setComment] = useState(
