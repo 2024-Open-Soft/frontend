@@ -7,7 +7,7 @@ import { Box, Button, Typography } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
-const HorizontalCarousel = ({ title }) => {
+const CastCarousel = ({ title }) => {
   const [data, setData] = useState([
     {
       movieId: 1,
@@ -74,7 +74,11 @@ const HorizontalCarousel = ({ title }) => {
   const ref = useRef(null);
 
   const imageStyle = {
-    width: "180px",
+    width: "140px",
+    height: "140px", // You missed the unit "px" here
+    borderRadius: "50%",
+    objectFit: "cover", // This will prevent the image from being compressed and overflow hidden
+    objectPosition: "center", // This will center the image within the container
   };
 
   const buttonStyle = {
@@ -83,7 +87,7 @@ const HorizontalCarousel = ({ title }) => {
     background: "#00000061",
     border: "none",
     borderRadius: 0,
-    top: "35%",
+    top: "27%",
     borderRadius: "50%",
     height: "50px",
     width: "50px",
@@ -91,15 +95,13 @@ const HorizontalCarousel = ({ title }) => {
   };
 
   const boxStyle = {
-    "&:hover": {
-      border: "2px solid #FFFFFF",
-    },
     width: "fit-content",
     transition: "all 0.3s ease-in-out",
   };
 
   const headingStyle = {
     pb: 4,
+    fontWeight: "bold",
     "&::after": {
       content: '""',
       display: "block",
@@ -157,10 +159,28 @@ const HorizontalCarousel = ({ title }) => {
   return (
     <>
       <Typography sx={headingStyle}>{title}</Typography>
-      <div className="slider-container" style={{ position: "relative" }}>
+      <div
+        className="slider-container"
+        style={{
+          position: "relative",
+        }}
+      >
+        <div
+          className="slider-gradient"
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            zIndex: 10,
+            background: "linear-gradient(to right, #19161620, #09090fcf)",
+            height: "100%",
+            width: "105%",
+            boxShadow: "10px 4px 10px 10px rgba(0, 0, 0, 0.2)",
+          }}
+        ></div>
         <Slider {...settings}>
           {data?.map((item, index) => (
-            <div key={index}>
+            <div key={index} style={{ width: "80%" }}>
               <Box sx={boxStyle}>
                 <img
                   src={item.poster ? item.poster : MoviePoster}
@@ -169,7 +189,15 @@ const HorizontalCarousel = ({ title }) => {
                   ref={ref}
                 />
               </Box>
-              <Typography sx={{ py: 1 }}>{item.title}</Typography>
+              <Typography
+                sx={{
+                  py: 1,
+                  width: "8.75rem",
+                  textAlign: "center",
+                }}
+              >
+                {item.title}
+              </Typography>
             </div>
           ))}
         </Slider>
@@ -178,4 +206,4 @@ const HorizontalCarousel = ({ title }) => {
   );
 };
 
-export default HorizontalCarousel;
+export default CastCarousel;

@@ -77,7 +77,7 @@ const Navigation = () => {
           <LazySubscriptions />
         </Suspense>
       ),
-      protected: true,
+      protected: false,
       errorElement: <Error />,
       isBgVideo: true,
     },
