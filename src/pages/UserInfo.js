@@ -1,30 +1,31 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, useMediaQuery } from "@mui/material";
 import React from "react";
 import Account from "../components/Account";
 import Plan from "../components/Plan";
 import PaymentHistory from "../components/PaymentHistory";
 
 const UserInfo = () => {
-
+  const isMobile = useMediaQuery("(max-width:600px)");
   const gridStyle = {
-    minWidth: "300px",
-    maxWidth: "1000px",
+    minWidth: "18.75rem",
+    maxWidth: "56.25rem",
     borderRadius: "20px",
     background: "linear-gradient(60deg, #1d1d1d, #ffffff1f)",
     backdropFilter: "blur(15px)",
     margin: "auto",
-    p: 4
-  }
+    p: 4,
+  };
 
   const boxStyle = {
     pt: {
       lg: "100px",
       md: "80px",
       sm: "60px",
-      xs: "40px"
+      xs: "40px",
     },
-    width: "100%",
-  }
+    margin: "auto",
+    width: isMobile ? "80%" : "90%",
+  };
 
   return (
     <>
@@ -41,7 +42,8 @@ const UserInfo = () => {
           </Grid>
         </Grid>
       </Box>
-    </>)
+    </>
+  );
 };
 
 export default UserInfo;

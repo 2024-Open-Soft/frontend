@@ -49,76 +49,76 @@ export const SideBar = () => {
   return (
     <>
       <Box sx={boxStyle}>
-        <Button
-          variant="contained"
-          sx={{
-            ...buttonStyle,
-            background:
-              location?.pathname === "/"
-                ? "rgba(255,255,255,0.2)"
-                : "transparent",
-          }}
-        >
-          <Link to="/" style={{ ...linkStyle }}>
+        <Link to="/" style={{ ...linkStyle }}>
+          <Button
+            variant="contained"
+            sx={{
+              ...buttonStyle,
+              background:
+                location?.pathname === "/"
+                  ? "rgba(255,255,255,0.2)"
+                  : "transparent",
+            }}
+          >
             <HomeIcon />
-          </Link>
-        </Button>
-        <Button
-          variant="contained"
-          sx={{
-            ...buttonStyle,
-            background:
-              location?.pathname === "/search"
-                ? "rgba(255,255,255,0.2)"
-                : "transparent",
-          }}
-        >
-          <Link to="/search" style={linkStyle}>
+          </Button>
+        </Link>
+        <Link to="/search" style={linkStyle}>
+          <Button
+            variant="contained"
+            sx={{
+              ...buttonStyle,
+              background:
+                location?.pathname === "/search"
+                  ? "rgba(255,255,255,0.2)"
+                  : "transparent",
+            }}
+          >
             <SearchIcon />
-          </Link>
-        </Button>
-        <Button
-          variant="contained"
-          sx={{
-            ...buttonStyle,
-            background:
-              location?.pathname === "/watchlist"
-                ? "rgba(255,255,255,0.2)"
-                : "transparent",
-          }}
-        >
-          <Link to="/watchlist" style={linkStyle}>
+          </Button>
+        </Link>
+        <Link to="/watchlist" style={linkStyle}>
+          <Button
+            variant="contained"
+            sx={{
+              ...buttonStyle,
+              background:
+                location?.pathname === "/watchlist"
+                  ? "rgba(255,255,255,0.2)"
+                  : "transparent",
+            }}
+          >
             <BookmarkBorderIcon />
-          </Link>
-        </Button>
-        <Button
-          variant="contained"
-          sx={{
-            ...buttonStyle,
-            background:
-              location?.pathname === "/subscriptions"
-                ? "rgba(255,255,255,0.2)"
-                : "transparent",
-          }}
-        >
-          <Link to="/subscriptions" style={linkStyle}>
+          </Button>
+        </Link>
+        <Link to="/subscriptions" style={linkStyle}>
+          <Button
+            variant="contained"
+            sx={{
+              ...buttonStyle,
+              background:
+                location?.pathname === "/subscriptions"
+                  ? "rgba(255,255,255,0.2)"
+                  : "transparent",
+            }}
+          >
             <ShopOutlinedIcon />
-          </Link>
-        </Button>
-        <Button
-          variant="contained"
-          sx={{
-            ...buttonStyle,
-            background:
-              location?.pathname === "/profile"
-                ? "rgba(255,255,255,0.2)"
-                : "transparent",
-          }}
-        >
-          <Link to="/profile" style={linkStyle}>
+          </Button>
+        </Link>
+        <Link to="/profile" style={linkStyle}>
+          <Button
+            variant="contained"
+            sx={{
+              ...buttonStyle,
+              background:
+                location?.pathname === "/profile"
+                  ? "rgba(255,255,255,0.2)"
+                  : "transparent",
+            }}
+          >
             <PersonOutlineRoundedIcon />
-          </Link>
-        </Button>
+          </Button>
+        </Link>
         <Button
           variant="contained"
           sx={{

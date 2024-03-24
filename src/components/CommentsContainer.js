@@ -78,7 +78,7 @@ function CommentsContaier() {
           </Box>
         ))}
       </Box>
-      <Typography component={Button}>Read More...</Typography>
+      <Typography sx={{ cursor: "pointer" }}>Read More...</Typography>
     </div>
   );
 }
