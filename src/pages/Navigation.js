@@ -57,7 +57,7 @@ const Navigation = () => {
       ),
       protected: false,
       errorElement: <Error />,
-      isBgVideo: true,
+      isBgVideo: false,
     },
     {
       path: "/search",

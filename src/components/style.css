@@ -27,3 +27,19 @@
 .account-field:focus {
   outline: none;
 }
+
+.MuiAutocomplete-listbox{
+  padding: 0 !important;
+  color: white;
+  background: #272828;
+  border-radius: 0 0 30px 30px;
+}
+
+.MuiAutocomplete-paper{
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.MuiAutocomplete-root{
+  padding: 0 !important;
+}
