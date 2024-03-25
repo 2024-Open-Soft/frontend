@@ -1,4 +1,5 @@
-import { React } from "react";
+import { React, useState } from "react";
+import axios from 'axios';
 import {
   Box,
   Button,
@@ -9,17 +10,28 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { LocalGasStationRounded } from "@mui/icons-material";
 
 const Login = () => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      name: data.get("name"),
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post('http://localhost:3001/user/login', {
+        email,
+        password
+      });
+      console.log(response.data.data);
+
+      localStorage.setItem('token', response.data.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.data.user));
+    }
+    catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <div style={{ paddingTop: "100px" }}>
@@ -68,6 +80,8 @@ const Login = () => {
             autoComplete="email"
             autoFocus
             sx={{ mt: 1, mb: 2 }}
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
           />
           <Typography variant="" sx={{ fontSize: "large" }}>
             Enter Password
@@ -82,12 +96,15 @@ const Login = () => {
             id="password"
             autoComplete="current-password"
             sx={{ mt: 1, mb: 2 }}
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
           />
           <Button
             type="submit"
             // fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            onClick={handleSubmit}
           >
             LOGIN
           </Button>

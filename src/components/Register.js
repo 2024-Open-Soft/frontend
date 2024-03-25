@@ -1,7 +1,35 @@
-import { React } from "react";
+import { React, useState } from "react";
 import { Box, Button, Grid, Link, TextField, Typography } from "@mui/material";
 
+import axios from 'axios';
+
 const Register = ({ setStep }) => {
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:3001/user/register', {
+        name,
+        password,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          "Authorization": `Bearer ${localStorage.getItem('token')}`
+        },
+      });
+      console.log(response.data.data);
+
+      localStorage.setItem('token', response.data.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.data.user));
+    }
+    catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <Grid
       item
@@ -29,6 +57,8 @@ const Register = ({ setStep }) => {
         autoComplete="text"
         autoFocus
         sx={{ mt: 1, mb: 2 }}
+        value={name}
+        onChange={(e) => setName(e.target.value)}
       />
       <Typography variant="" sx={{ fontSize: "large" }}>
         Enter Password
@@ -43,12 +73,15 @@ const Register = ({ setStep }) => {
         id="password"
         autoComplete="current-password"
         sx={{ mt: 1, mb: 2 }}
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
       />
       <Button
         type="submit"
         // fullWidth
         variant="contained"
         sx={{ mt: 3, mb: 2 }}
+        onClick={handleSubmit}
       >
         REGISTER
       </Button>
