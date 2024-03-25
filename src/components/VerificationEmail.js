@@ -24,7 +24,6 @@ const countryCodes = [
 ];
 
 const VerificationEmail = ({ setStep }) => {
-
   const [email, setEmail] = useState("");
 
   const [value, setValue] = React.useState("");
@@ -36,47 +35,50 @@ const VerificationEmail = ({ setStep }) => {
   const handleSendOTP = async (event) => {
     event.preventDefault();
 
-    try{
-      const response = await axios.post("http://localhost:3001/otp/generate", {
-        email
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + localStorage.getItem("token"),
+    try {
+      const response = await axios.post(
+        "/otp/generate",
+        {
+          email,
         },
-      });
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      );
       console.log(response);
       localStorage.setItem("token", response.data.data.token);
-    }
-    catch(err){
+    } catch (err) {
       console.log(err);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try{
-      const response = await axios.post("http://localhost:3001/otp/verify", {
-        otp: value,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + localStorage.getItem("token"),
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/otp/verify",
+        {
+          otp: value,
         },
-      });
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      );
 
       console.log(response);
       localStorage.setItem("token", response.data.data.token);
 
       setStep(3);
-    }
-    catch(err){
+    } catch (err) {
       console.log(err);
     }
-
-  }
+  };
 
   return (
     <Grid

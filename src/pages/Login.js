@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import {
   Box,
   Button,
@@ -13,25 +13,23 @@ import {
 import { LocalGasStationRounded } from "@mui/icons-material";
 
 const Login = () => {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('http://localhost:3001/user/login', {
+      const response = await axios.post("/user/login", {
         email,
-        password
+        password,
       });
       console.log(response.data.data);
 
-      localStorage.setItem('token', response.data.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.data.user));
-    }
-    catch (error) {
+      localStorage.setItem("token", response.data.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data.data.user));
+    } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   return (
     <div style={{ paddingTop: "100px" }}>

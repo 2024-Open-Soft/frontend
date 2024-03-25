@@ -39,40 +39,39 @@ const VerificationPhone = ({ setStep }) => {
     console.log(phone, countryCode.code);
     console.log(countryCode.code + phone);
 
-    try{
-      const response = await axios.post("http://localhost:3001/otp/generate", {
+    try {
+      const response = await axios.post("/otp/generate", {
         phoneNumber: countryCode.code + phone,
       });
       console.log(response);
       localStorage.setItem("token", response.data.data.token);
-    }
-    catch(err){
+    } catch (err) {
       console.log(err);
     }
   };
 
-
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try{
-        const response = await axios.post("http://localhost:3001/otp/verify", {
+    try {
+      const response = await axios.post(
+        "/otp/verify",
+        {
           otp: value,
         },
         {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + localStorage.getItem("token"),
+            Authorization: "Bearer " + localStorage.getItem("token"),
           },
-        });
+        }
+      );
 
       console.log(response);
       localStorage.setItem("token", response.data.data.token);
-    }
-    catch(err){
+    } catch (err) {
       console.log(err);
     }
-    
+
     setStep(2);
   };
 

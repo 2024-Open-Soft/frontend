@@ -12,7 +12,7 @@ export async function fetchUserData(dispatch) {
     await axios
       .get(`/user`, config)
       .then(({ data }) => {
-        dispatch(setUser(data));
+        dispatch(setUser({ data }));
         console.log(data);
       })
       .catch((err) => console.log(err));
