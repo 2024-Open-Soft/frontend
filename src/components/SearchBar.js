@@ -42,8 +42,7 @@ const SearchBar = () => {
         "& fieldset": {
             border: "none"
         },
-        // backgroundColor: "#272828",
-        // borderRadius: "30px",
+        borderRadius: "30px",
         px: 1,
     }
 
@@ -95,11 +94,12 @@ const SearchBar = () => {
                             sx: {
                                 color: "#FFFFFF",
                                 backgroundColor: "#272828",
-                                borderRadius: isActive ? "30px 30px 0 0" : "30px",
+                                borderRadius: "30px",
                             }
                         }}
                         onFocus={() => setIsActive(true)}
                         onBlur={() => setIsActive(false)}
+                        value="&lt;b&gt;Some text&lt;b/&gt;"
                     />
                 }
                 // renderOption={(props, option) => {

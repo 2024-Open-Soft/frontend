@@ -29,17 +29,22 @@
 }
 
 .MuiAutocomplete-listbox{
-  padding: 0 !important;
+  padding: 10px 0 !important;
   color: white;
   background: #272828;
-  border-radius: 0 0 30px 30px;
+  border-radius: 30px;
 }
 
 .MuiAutocomplete-paper{
   background-color: transparent !important;
   box-shadow: none !important;
+  background-image: none !important;
 }
 
 .MuiAutocomplete-root{
   padding: 0 !important;
+}
+
+.MuiAutocomplete-popper{
+  margin-top: 10px !important;
 }
