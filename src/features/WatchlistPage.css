@@ -1,0 +1,51 @@
+/* WatchlistPage.css */
+.watchlist-page {
+    display: flex;
+    height: 100vh;
+    background: rgb(25, 24, 24);
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+ /* MovieLayer.css */
+  .movie-layer {
+    /* height: 100vh; */
+    padding: 20px;
+    padding-top: 5px;
+  }
+  
+  .title {
+    color: white;
+    font-family: arial;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+
+  .title::after {
+    content: ''; /* Add content for the pseudo-element */
+    position: absolute; /* Position the underline relative to the h2 */
+    bottom: 1; /* Position the underline at the bottom */
+    left: 20; /* Align the underline with the start of the text */
+    width: 50px; /* Adjust the width of the underline */
+    height: 2px; /* Adjust the height of the underline */
+    background-color: red; /* Change the color of the underline */
+    display: block; /* Ensure the pseudo-element takes up space */
+  }
+  .movie-list {
+    padding-left: 35px;
+    display: flex;
+    overflow-x: hidden;
+    gap: 20px;
+  }
+
+  /* MovieCard.css */
+  .movie-card {
+    width: 200px;
+  }
+  
+  .movie-card img {
+    width: 200px;
+    border-radius: 5px;
+  }
+  
+  

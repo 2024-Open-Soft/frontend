@@ -1,0 +1,32 @@
+/* MovieLayer.css */
+
+.movie-layer {
+    position: relative;
+  }
+  
+  .movie-list-container {
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+  }
+  
+  .movie-list {
+    display: flex;
+  }
+  
+  .scroll-button {
+    position: absolute;
+    top: 10%;
+    transform: translateY(-50%);
+  }
+  
+  .scroll-button.left {
+    position: absolute;
+    top: 60%;
+    left: -20px; /* Adjust the distance from the left side */
+  }
+  
+  .scroll-button.right {
+    position: absolute;
+    top: 60%;
+    right: 10px; /* Adjust the distance from the right side */
+  }
+  
