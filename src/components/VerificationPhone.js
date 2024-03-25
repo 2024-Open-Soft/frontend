@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import {
   Box,
   Button,
@@ -23,23 +24,56 @@ const countryCodes = [
 ];
 
 const VerificationPhone = ({ setStep }) => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      countryCode: data.get("countryCode"),
-      phone: data.get("phone"),
-      otp: value,
-    });
-    setStep(2);
-  };
+  const [phone, setPhone] = useState("");
+  const [countryCode, setCountryCode] = React.useState("+91");
 
   const [value, setValue] = React.useState("");
 
-  const [countryCode, setCountryCode] = React.useState("+91");
-
   const handleValueChange = (newValue) => {
     setValue(newValue);
+  };
+
+  const handleSendOTP = async (event) => {
+    event.preventDefault();
+
+    console.log(phone, countryCode.code);
+    console.log(countryCode.code + phone);
+
+    try{
+      const response = await axios.post("http://localhost:3001/otp/generate", {
+        phoneNumber: countryCode.code + phone,
+      });
+      console.log(response);
+      localStorage.setItem("token", response.data.data.token);
+    }
+    catch(err){
+      console.log(err);
+    }
+  };
+
+
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try{
+        const response = await axios.post("http://localhost:3001/otp/verify", {
+          otp: value,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token"),
+          },
+        });
+
+      console.log(response);
+      localStorage.setItem("token", response.data.data.token);
+    }
+    catch(err){
+      console.log(err);
+    }
+    
+    setStep(2);
   };
 
   return (
@@ -132,6 +166,8 @@ const VerificationPhone = ({ setStep }) => {
                   py: 2,
                 },
               }}
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
             />
           </Box>
           <Button
@@ -142,6 +178,7 @@ const VerificationPhone = ({ setStep }) => {
               px: 4,
             }}
             variant="contained"
+            onClick={handleSendOTP}
           >
             Send
           </Button>
@@ -180,6 +217,7 @@ const VerificationPhone = ({ setStep }) => {
             size="large"
             color="success"
             variant="contained"
+            onClick={handleSubmit}
           >
             Verify
           </Button>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import {
   Box,
   Button,
@@ -23,22 +24,59 @@ const countryCodes = [
 ];
 
 const VerificationEmail = ({ setStep }) => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      countryCode: data.get("countryCode"),
-      phone: data.get("phone"),
-      otp: value,
-    });
-    setStep(3);
-  };
+
+  const [email, setEmail] = useState("");
 
   const [value, setValue] = React.useState("");
 
   const handleValueChange = (newValue) => {
     setValue(newValue);
   };
+
+  const handleSendOTP = async (event) => {
+    event.preventDefault();
+
+    try{
+      const response = await axios.post("http://localhost:3001/otp/generate", {
+        email
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem("token"),
+        },
+      });
+      console.log(response);
+      localStorage.setItem("token", response.data.data.token);
+    }
+    catch(err){
+      console.log(err);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try{
+      const response = await axios.post("http://localhost:3001/otp/verify", {
+        otp: value,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem("token"),
+        },
+      });
+
+      console.log(response);
+      localStorage.setItem("token", response.data.data.token);
+
+      setStep(3);
+    }
+    catch(err){
+      console.log(err);
+    }
+
+  }
 
   return (
     <Grid
@@ -72,7 +110,7 @@ const VerificationEmail = ({ setStep }) => {
         }}
       >
         <Typography variant="" sx={{ fontSize: "large" }}>
-          Enter Phone Number
+          Enter Email
         </Typography>
         <Box
           sx={{
@@ -111,6 +149,8 @@ const VerificationEmail = ({ setStep }) => {
                   py: 2,
                 },
               }}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </Box>
           <Button
@@ -121,6 +161,7 @@ const VerificationEmail = ({ setStep }) => {
               px: 4,
             }}
             variant="contained"
+            onClick={handleSendOTP}
           >
             Send
           </Button>
@@ -159,6 +200,7 @@ const VerificationEmail = ({ setStep }) => {
             size="large"
             color="success"
             variant="contained"
+            onClick={handleSubmit}
           >
             Verify
           </Button>

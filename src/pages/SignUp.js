@@ -17,7 +17,7 @@ const SignUp = () => {
   const [step, setStep] = useState(1);
   console.log(step);
 
-  const handlStep = () => {};
+  // const handleStep = () => {};
   return (
     <div style={{ paddingTop: "100px" }}>
       <Grid
