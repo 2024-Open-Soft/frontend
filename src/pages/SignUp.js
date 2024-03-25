@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useState } from "react";
 import {
   Box,
   Button,
@@ -15,9 +15,7 @@ import VerificationEmail from "../components/VerificationEmail";
 
 const SignUp = () => {
   const [step, setStep] = useState(1);
-  console.log(step);
 
-  const handlStep = () => {};
   return (
     <div style={{ paddingTop: "100px" }}>
       <Grid

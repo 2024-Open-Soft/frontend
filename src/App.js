@@ -6,6 +6,11 @@ import Navigation from "./pages/Navigation";
 import { ThemeProvider } from "@mui/system";
 import { createTheme } from "@mui/material";
 
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
+
 const theme = createTheme({
   palette: {
     mode: "dark",
@@ -58,6 +63,8 @@ const theme = createTheme({
   },
 });
 
+const queryClient = new QueryClient();
+
 function App() {
   return (
     <>
@@ -65,7 +72,9 @@ function App() {
         <BrowserRouter>
           <Provider store={store}>
             <ThemeProvider theme={theme}>
-              <Navigation />
+              <QueryClientProvider client={queryClient}>
+                <Navigation />
+              </QueryClientProvider>
             </ThemeProvider>
           </Provider>
         </BrowserRouter>
