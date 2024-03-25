@@ -53,7 +53,6 @@ const SearchBar = () => {
         minWidth: "0px"
     }
 
-    const [isActive, setIsActive] = useState(false)
     const [semantic, setSemantic] = useState(false)
 
     return (
@@ -97,22 +96,9 @@ const SearchBar = () => {
                                 borderRadius: "30px",
                             }
                         }}
-                        onFocus={() => setIsActive(true)}
-                        onBlur={() => setIsActive(false)}
-                        value="&lt;b&gt;Some text&lt;b/&gt;"
                     />
                 }
-                // renderOption={(props, option) => {
-                //     const { query } = option;
-                //     return (
-                //         <Typography {...props} style={{ backgroundColor: "#272828", color: "#FFFFFF" }}>
-                //             {query}
-                //         </Typography>
-                //     );
-                // }}
                 sx={autoCompleteStyle}
-            // open={false}
-
             />
         </Box>
     );

@@ -1,9 +1,9 @@
 import React from "react";
 import SearchTags from "../components/SearchTags";
 import { Grid } from "@mui/material";
-import SearchBar from "../components/SearchBar";
 import SearchTopResult from "../components/SearchTopResult";
 import SearchResults from "../components/SearchResults";
+import CustomSearchBar from "../components/CustomSearchBar";
 
 const SearchPage = () => {
   return (
@@ -28,7 +28,7 @@ const SearchPage = () => {
       }}
     >
       <Grid item xs={12} sx={{ p: 0 }}>
-        <SearchBar />
+        <CustomSearchBar />
       </Grid>
       <Grid item xs={12} md={6} sx={{ p: 0, mt: 2 }}>
         <SearchTags />

@@ -28,23 +28,51 @@
   outline: none;
 }
 
-.MuiAutocomplete-listbox{
+.MuiAutocomplete-listbox {
   padding: 10px 0 !important;
   color: white;
   background: #272828;
   border-radius: 30px;
 }
 
-.MuiAutocomplete-paper{
+.MuiAutocomplete-paper {
   background-color: transparent !important;
   box-shadow: none !important;
   background-image: none !important;
 }
 
-.MuiAutocomplete-root{
+.MuiAutocomplete-root {
   padding: 0 !important;
 }
 
-.MuiAutocomplete-popper{
+.MuiAutocomplete-popper {
   margin-top: 10px !important;
+}
+
+
+.search-bar input {
+  font-size: inherit;
+  padding-left: 0.5rem;
+  padding-right: 1rem;
+  height: 2rem;
+  width: 20rem;
+  overflow-wrap: break-word;
+  border: none;
+  position: absolute;
+  border-radius: 50px;
+  word-wrap: break-word;
+  background-color: transparent;
+  z-index: 10;
+}
+
+.search-bar #search-bar2 {
+  z-index: 1;
+  color: rgb(209, 209, 209);
+  cursor: none;
+}
+
+
+.search-bar textarea:focus,
+.search-bar input:focus {
+  outline: none;
 }

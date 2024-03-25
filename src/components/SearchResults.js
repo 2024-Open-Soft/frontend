@@ -67,7 +67,7 @@ const SearchResults = () => {
             <Typography sx={{ ...headingStyle, py: 4 }}>Relevant result</Typography>
             <Grid container spacing={4}>
                 {data.map((movie, index) => (
-                    <Grid item xs={6} sm={4} md={3} key={index} p-3 m-2 minWidth={60} className="flex">
+                    <Grid item xs={6} sm={4} md={3} lg={2} key={index} p-3 m-2 minWidth={60} className="flex">
                         <Link to={`/movie/${movie.id}`} style={{ textDecoration: "none"}}>
                             <Box>
                                 <img src={movie.src} alt={movie.title} style={{ width: "90%" }}></img>
