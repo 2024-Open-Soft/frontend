@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Container, Input } from '@mui/material';
 import SearchBar from "../components/search-components/searchBar";
 import SearchTags from "../components/search-components/searchTags";
@@ -6,12 +6,20 @@ import SearchTopResult from "../components/search-components/searchTopResult";
 import SearchRelevantResult from "../components/search-components/searchRelevantResults";
 
 function SearchPage() {
+    const [isSemantic, setIsSemantic] = useState(false);
+
+    const handleClick = () => {
+      setIsSemantic(!isSemantic);
+    };
+
     return(
-      <Container className="pb-12" >
+      <Container className="p-12" >
+        
         <SearchBar />
-        <SearchTags />
+        
+        {/* {/*<SearchTags /> */}
         <SearchTopResult />
-        <SearchRelevantResult />        
+        <SearchRelevantResult /> 
       </Container>
     );
 }

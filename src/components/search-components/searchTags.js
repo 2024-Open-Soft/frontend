@@ -64,20 +64,20 @@ const SearchTags = () => {
         
     }
 
-    const initialClass = "border border-solid rounded-3xl bg-slate-700/50 hover:bg-slate-300/75 px-16 mx-1 text-gray-100 font-medium";
-    const clickedClass = "border border-solid border-green-500 rounded-full bg-green-500  px-16 mx-1 text-green-100 font-medium";
+    const initialClass = "text-xs md:text-base border border-solid rounded-3xl bg-slate-700/50 hover:bg-slate-300/75 px-10 sm:px-16 mx-1 text-gray-100 font-medium my-1";
+    const clickedClass = "text-xs md:text-base border border-solid border-green-500 rounded-full bg-green-500 px-10 sm:px-16 px-16 mx-1 text-green-100 font-medium my-1";
 
     // const buttonClass = clicked ? clickedClass : initialClass;
 
     return <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2} columns={16}>
+        <Grid container spacing={2} columns={16} className="flex flex-col md:flex-row">
             
-            <Grid item xs={8} className="px-0">
+            <Grid item sm={8} className="px-0 m-2">
                 <Container className="flex flex-col">
                     <Container className="flex justify-center">
                         {/* <Typography className="mx-6 my-4">Genre</Typography> */}
                     </Container>
-                    <Container className="flex flex-row overflow-scroll my-3 pb-2">
+                    <Container className="flex sm:flex-row overflow-scroll sm:my-3 sm:pb-2">
                         
                                 <Button 
                                 // key={genre}
@@ -163,12 +163,12 @@ const SearchTags = () => {
                 </Container>
             </Grid>    
 
-            <Grid item xs={8}>
+            <Grid item sm={8} className="px-0 m-2">
                 <Container className="flex flex-col">
                     <Container className="flex justify-center">
                         {/* <Typography className="mx-6 my-4 ">Language</Typography> */}
                     </Container>
-                    <Container className="flex flex-row overflow-scroll my-3 pb-2">
+                    <Container className="flex flex-row overflow-scroll sm:my-3 sm:pb-2">
                         {/* {languages.map(function(languages)
                         {
                             return(

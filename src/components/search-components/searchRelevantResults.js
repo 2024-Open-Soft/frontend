@@ -40,17 +40,17 @@ const SearchRelevantResult = () => {
     ]
 
     return(
-        <Container className="mx-8 my-4">
-            <Typography className="uppercase font-extrabold text-xl mx-4 my-8"> RElevant result </Typography>
+        <Container className="text-center md:text-start md:mx-8 md:my-4">
+            <Typography className="uppercase font-extrabold text-xl mx-4 my-8"> Relevant result </Typography>
 
-            <Grid container spacing={4}>
+            <Grid container spacing={2} justifyContent="center">
                 {MovieInfo.map((MovieData, index) => (
-                <Grid item xs={2} sm={4} md={2.4} key={index} p-3 m-2 minWidth={60} className="flex">
-                    <Box>
-                        <img src={MovieData.src} alt={MovieData.title}></img>
-                        <Typography className="text-gray-200 font-semibold text-sm mb-2 mx-2">{MovieData.title}</Typography>
-                    </Box>
-                </Grid> 
+                    <Grid item xs={6} sm={4} md={3} key={index}> {/* Adjust column sizes for responsiveness */}
+                        <Box>
+                            <img src={MovieData.src} alt={MovieData.title} style={{ width: "100%", height: "auto" }} />
+                            <Typography className="text-gray-200 font-semibold text-sm mb-2 mx-2">{MovieData.title}</Typography>
+                        </Box>
+                    </Grid>
                 ))}
             </Grid>
         </Container>
