@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import MovieInfo from "../components/MovieInfo";
 import { Box, Grid } from "@mui/material";
-import VerticalCarousel from "../components/VerticalCarousel";
-import HorizontalCarousel from "../components/HorizontalCarousel";
 import CastCarousel from "../components/CastCarousel";
 import PostComment from "../components/PostComment";
-import CommentsBox from "../components/CommentsContainer";
 import CommentsContaier from "../components/CommentsContainer";
 
 const MoviePage = () => {

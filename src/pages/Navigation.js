@@ -14,7 +14,7 @@ const LazyMovie = lazy(() => import("./MoviePage"));
 const LazySearch = lazy(() => import("./SearchPage"));
 const LazySubscriptions = lazy(() => import("./SubscriptionPage"));
 const LazyUser = lazy(() => import("./UserInfo"));
-const LazyWatchlist = lazy(() => import("./WatchList"));
+const LazyWatchlist = lazy(() => import("./WatchListPage"));
 const Navigation = () => {
   const dispatch = useDispatch();
 

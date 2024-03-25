@@ -6,8 +6,9 @@ import "slick-carousel/slick/slick-theme.css";
 import { Box, Button, Typography } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { Link } from "react-router-dom";
 
-const HorizontalCarousel = ({ title }) => {
+const HorizontalCarousel = ({ title, poster, width, top }) => {
   const [data, setData] = useState([
     {
       movieId: 1,
@@ -74,7 +75,7 @@ const HorizontalCarousel = ({ title }) => {
   const ref = useRef(null);
 
   const imageStyle = {
-    width: "180px",
+    width: width + "px",
   };
 
   const buttonStyle = {
@@ -83,7 +84,7 @@ const HorizontalCarousel = ({ title }) => {
     background: "#00000061",
     border: "none",
     borderRadius: 0,
-    top: "35%",
+    top: top+"%",
     borderRadius: "50%",
     height: "50px",
     width: "50px",
@@ -147,7 +148,7 @@ const HorizontalCarousel = ({ title }) => {
     infinite: false,
     speed: 500,
     slidesToScroll: 1,
-    slidesToShow: (window.innerWidth - 190) / 200,
+    slidesToShow: (window.innerWidth - parseInt(width) - 20) / (parseInt(width) + 20),
     arrows: true,
     swipeToSlide: true,
     nextArrow: <CustomNextArrow />,
@@ -161,15 +162,17 @@ const HorizontalCarousel = ({ title }) => {
         <Slider {...settings}>
           {data?.map((item, index) => (
             <div key={index}>
-              <Box sx={boxStyle}>
-                <img
-                  src={item.poster ? item.poster : MoviePoster}
-                  alt="movie-poster"
-                  style={imageStyle}
-                  ref={ref}
-                />
-              </Box>
-              <Typography sx={{ py: 1 }}>{item.title}</Typography>
+              <Link to={`/movie/${item.movieId}`} style={{ textDecoration: "none" }}>
+                <Box sx={boxStyle}>
+                  <img
+                    src={poster ? poster : MoviePoster}
+                    alt="movie-poster"
+                    style={imageStyle}
+                    ref={ref}
+                  />
+                </Box>
+                <Typography sx={{ py: 1 }}>{item.title}</Typography>
+              </Link>
             </div>
           ))}
         </Slider>

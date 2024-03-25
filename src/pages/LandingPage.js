@@ -53,10 +53,10 @@ const LandingPage = () => {
         )}
       </Grid>
       <Grid item xs={12} sx={{ width: "95%", m: 0, mt: 10, p: { xs: "3vw" } }}>
-        <HorizontalCarousel title={"TRENDING"} />
+        <HorizontalCarousel title={"TRENDING"} width='180' top='35' />
       </Grid>
       <Grid item xs={12} sx={{ width: "95%", m: 0, mt: 10 }}>
-        <HorizontalCarousel title={"RECENTLY RELEASED"} />
+        <HorizontalCarousel title={"RECENTLY RELEASED"} width='180' top='35'/>
       </Grid>
     </Grid>
   );
