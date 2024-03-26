@@ -2,7 +2,7 @@ import { useState } from "react";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import Button from "@mui/material/Button";
 
-function SubscriptionPlan({ planDetails }) {
+function SubscriptionPlan({ planDetails, handlePlanChange }) {
   return (
     <div
       className="w-72 h-100 px-4 py-8 text-[#fff] bg-[rgba(0,0,0,0.7)] rounded-[2rem]"
@@ -36,6 +36,7 @@ function SubscriptionPlan({ planDetails }) {
         }}
         className="mt-4 m-auto py-2 block w-52 rounded-[2rem]"
         variant="contained"
+        onClick={() => handlePlanChange(planDetails.id)}
       >
         {planDetails.status}
       </Button>

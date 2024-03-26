@@ -21,7 +21,7 @@ const SearchPage = () => {
         },
         pt: {
           xs: "1vh",
-          md: "15vh",
+          md: "10vh",
         },
         m: 0,
         width: "100%",

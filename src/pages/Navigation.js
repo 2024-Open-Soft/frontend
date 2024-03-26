@@ -112,7 +112,7 @@ const Navigation = () => {
           <LazyUser />
         </Suspense>
       ),
-      protected: false,
+      protected: true,
       errorElement: <Error />,
       isBgVideo: true,
     },
