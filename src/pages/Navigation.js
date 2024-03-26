@@ -9,6 +9,8 @@ import Home from "./Home";
 
 const LazySignUp = lazy(() => import("./SignUp"));
 const LazyLogin = lazy(() => import("./Login"));
+const LazyForgotPassword = lazy(() => import("./ForgotPassword"));
+const LazyResetPassword = lazy(() => import("./ResetPassword"));
 // const LazyHome = lazy(() => import("./LandingPage"));
 const LazyMovie = lazy(() => import("./MoviePage"));
 const LazySearch = lazy(() => import("./SearchPage"));
@@ -35,6 +37,28 @@ const Navigation = () => {
       element: (
         <Suspense fallback={<h1>Loading</h1>}>
           <LazyLogin />
+        </Suspense>
+      ),
+      protected: false,
+      errorElement: <Error />,
+      isBgVideo: true,
+    },
+    {
+      path: "/forgot-password",
+      element: (
+        <Suspense fallback={<h1>Loading</h1>}>
+          <LazyForgotPassword />
+        </Suspense>
+      ),
+      protected: false,
+      errorElement: <Error />,
+      isBgVideo: true,
+    },
+    {
+      path: "/reset-password/:token",
+      element: (
+        <Suspense fallback={<h1>Loading</h1>}>
+          <LazyResetPassword />
         </Suspense>
       ),
       protected: false,
