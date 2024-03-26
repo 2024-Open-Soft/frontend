@@ -13,13 +13,13 @@ import {
 import { LocalGasStationRounded } from "@mui/icons-material";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async () => {
     try {
       const response = await axios.post("/user/login", {
-        email,
+        phoneNumber,
         password,
       });
       console.log(response.data.data);
@@ -66,20 +66,21 @@ const Login = () => {
           }}
         >
           <Typography variant="" sx={{ fontSize: "large" }}>
-            Enter Email
+            Enter Phone Number
           </Typography>
           <TextField
             margin="normal"
             required
             fullWidth
-            id="email"
+            id="phoneNumber"
+            type="text"
             // label="Enter email"
-            name="email"
-            autoComplete="email"
+            name="phoneNumber"
+            autoComplete="phoneNumber"
             autoFocus
             sx={{ mt: 1, mb: 2 }}
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            value={phoneNumber}
           />
           <Typography variant="" sx={{ fontSize: "large" }}>
             Enter Password
