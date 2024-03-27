@@ -19,8 +19,8 @@ const headingStyle = {
   textTransform: "uppercase",
 };
 
-function CommentsContaier() {
-  function handleEditComment() {}
+function CommentsContaier({ posted }) {
+  function handleEditComment() { }
   const [comments, setComments] = useState([
     {
       userId: 1,
@@ -53,33 +53,39 @@ function CommentsContaier() {
       text: "The show is intentionally evasive in regard to Springfield's location. Springfileds geography, and that of its...",
     },
   ]);
+  
   const [commentCount, setCommentCount] = useState(comments?.length || 0);
   useEffect(() => {
     setCommentCount(comments?.length);
   }, [comments]);
   return (
-    <div className="">
-      <Typography sx={headingStyle}>COMMENTS</Typography>
-      <Box
-        sx={{
-          width: "100%",
-          boxSizing: "border-box",
-          display: "flex",
-          flexDirection: "column",
-          gap: "1rem",
-        }}
-      >
-        <Typography sx={{ color: "rbga(225,225,225,0.8)" }}>
-          {commentCount} Comments
-        </Typography>
-        {comments.map((comment, index) => (
-          <Box key={index}>
-            <CommentBox cmnt={comment} />
+    <>
+      {
+        posted &&
+        <div className="">
+          <Typography sx={headingStyle}>COMMENTS</Typography>
+          <Box
+            sx={{
+              width: "100%",
+              boxSizing: "border-box",
+              display: "flex",
+              flexDirection: "column",
+              gap: "1rem",
+            }}
+          >
+            <Typography sx={{ color: "rbga(225,225,225,0.8)" }}>
+              {commentCount} Comments
+            </Typography>
+            {comments.map((comment, index) => (
+              <Box key={index}>
+                <CommentBox cmnt={comment} />
+              </Box>
+            ))}
           </Box>
-        ))}
-      </Box>
-      <Typography sx={{ cursor: "pointer" }}>Read More...</Typography>
-    </div>
+          <Typography sx={{ cursor: "pointer" }}>Read More...</Typography>
+        </div>
+      }
+    </>
   );
 }
 

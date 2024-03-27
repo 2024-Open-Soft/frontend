@@ -7,72 +7,9 @@ import { Box, Button, Typography } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
-const CastCarousel = ({ title }) => {
-  const [data, setData] = useState([
-    {
-      movieId: 1,
-      poster: null,
-      title: "Interstellar",
-    },
-    {
-      movieId: 2,
-      poster: null,
-      title: "Interstellar",
-    },
-    {
-      movieId: 3,
-      poster: null,
-      title: "Interstellar",
-    },
-    {
-      movieId: 4,
-      poster: null,
-      title: "Interstellar",
-    },
-    {
-      movieId: 5,
-      poster: null,
-      title: "Interstellar",
-    },
-    {
-      movieId: 6,
-      poster: null,
-      title: "Interstellar",
-    },
-    {
-      movieId: 7,
-      poster: null,
-      title: "Interstellar",
-    },
-    {
-      movieId: 8,
-      poster: null,
-      title: "Interstellar",
-    },
-    {
-      movieId: 9,
-      poster: null,
-      title: "Interstellar",
-    },
-    {
-      movieId: 10,
-      poster: null,
-      title: "Interstellar",
-    },
-    {
-      movieId: 11,
-      poster: null,
-      title: "Interstellar",
-    },
-    {
-      movieId: 12,
-      poster: null,
-      title: "Interstellar",
-    },
-  ]);
+const CastCarousel = ({ title, data }) => {
 
   const ref = useRef(null);
-
   const imageStyle = {
     width: "140px",
     height: "140px", // You missed the unit "px" here
@@ -196,7 +133,7 @@ const CastCarousel = ({ title }) => {
                   textAlign: "center",
                 }}
               >
-                {item.title}
+                {item}
               </Typography>
             </div>
           ))}

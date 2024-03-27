@@ -1,9 +1,24 @@
 import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
+import { useState } from "react";
+import { postComment } from "../redux/services/Comment";
 
-function handlePost() {}
 
-function PostComment() {
+function PostComment({ data: movieId, handlePosted }) {
+  const [comment, setComment] = useState("");
+  
+  const handlePost = async (e) => {
+    e.preventDefault();
+    const payload = {
+      comment: comment,
+      movieId: movieId,
+    }
+    const res = await postComment(payload);
+
+    handlePosted();
+    setComment("");
+  };
+
   return (
     <div className="">
       <form action="">
@@ -36,14 +51,17 @@ function PostComment() {
           defaultValue=""
           placeholder="Post a comment"
           required
+          onChange={(e) => setComment(e.target.value)}
+          value={comment}
         />
         <Button
-          type="Submit"
+          type="submit"
           className="py-2 block w-44 rounded-[2rem]"
           sx={{
             backgroundColor: "#e60000",
           }}
           variant="contained"
+          onClick={handlePost}
         >
           POST
         </Button>
