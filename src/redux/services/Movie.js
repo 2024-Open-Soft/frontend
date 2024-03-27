@@ -1,4 +1,5 @@
 import axios from 'axios';
+import createToast from '../../utils/createToast';
 
 export const getMovies = async (page) => {
     try {
@@ -7,6 +8,7 @@ export const getMovies = async (page) => {
         console.log("data: ", data)
         return data;
     } catch (error) {
+        createToast("Error in getting movies", "error")
         console.error(error);
     }
 }
@@ -18,6 +20,7 @@ export const getLatestMovies = async (page) => {
         console.log("data: ", data)
         return data;
     } catch (error) {
+        createToast("Error in getting latest movies", "error")
         console.error(error);
     }
 }
@@ -29,6 +32,7 @@ export const getUpcomingMovies = async (page) => {
         console.log("data: ", data)
         return data;
     } catch (error) {
+        createToast("Error in getting upcoming movies", "error")
         console.error(error);
     }
 }
@@ -41,6 +45,7 @@ export const getMovie = async (dispatch, id) => {
         console.log("data: ", data)
         return data;
     } catch (error) {
+        createToast("Error in getting movie", "error")
         console.error(error);
     }
 }

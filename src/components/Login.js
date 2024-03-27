@@ -1,14 +1,12 @@
 import { React, useState } from "react";
-import axios from "axios";
 import {
     Button,
     Grid,
-    Link,
     TextField,
     Typography,
 } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../redux/services/User";
 
 
@@ -100,13 +98,13 @@ const Login = () => {
                     LOGIN
                 </Button>
                 <Typography align="left">
-                    <Link href="#" variant="body2">
+                    <Link to="/signup" variant="body2">
                         {"Don't have an account? Sign Up"}
                     </Link>
                 </Typography>
                 <Typography align="left" sx={{ mt: 2 }}>
                     {"Having trouble logging in? "}
-                    <Link href="#" variant="body1">
+                    <Link to="#" variant="body1">
                         {"Get Help"}
                     </Link>
                 </Typography>

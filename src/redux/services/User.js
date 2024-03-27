@@ -1,5 +1,6 @@
 import axios from "axios";
 import { setUser } from "../reducers/User";
+import createToast from "../../utils/createToast";
 
 export async function fetchUserData(dispatch) {
   try {
@@ -18,6 +19,7 @@ export async function fetchUserData(dispatch) {
     }
   }
   catch (err) {
+    createToast("Error in fetching user data", "error")
     console.log(err);
   }
 }
@@ -40,12 +42,14 @@ export async function editUserData(dispatch, data) {
 
       const response = await axios.put(`/user/profile`, body, config)
       const resData = response.data.data;
+      createToast(response.data.message, "success");
       console.log("data: ", resData)
       dispatch(setUser(resData.user));
       return response;
     }
   }
   catch (err) {
+    createToast("Error in editing user data", "error")
     console.log(err);
   }
 }
@@ -57,9 +61,11 @@ export const login = async (dispatch, payload) => {
     console.log("data: ", data);
     dispatch(setUser(data.user));
     localStorage.setItem("token", response.data.data.token);
+    createToast("Logged in successfully", "success");
     return response;
   }
   catch (err) {
+    createToast("Error in logging in", "error")
     console.log(err);
   }
 }
