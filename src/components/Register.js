@@ -1,33 +1,20 @@
 import { React, useState } from "react";
 import { Box, Button, Grid, Link, TextField, Typography } from "@mui/material";
-
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import { register } from "../redux/services/SignUp";
 
 const Register = ({ setStep }) => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post('http://localhost:3001/user/register', {
-        name,
-        password,
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          "Authorization": `Bearer ${localStorage.getItem('token')}`
-        },
-      });
-      console.log(response.data.data);
-
-      localStorage.setItem('token', response.data.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.data.user));
-    }
-    catch (error) {
-      console.error(error);
-    }
+    await register(dispatch, { name, password });
+    navigate("/")
   }
 
   return (

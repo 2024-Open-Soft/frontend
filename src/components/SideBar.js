@@ -9,10 +9,12 @@ import PersonOutlineRoundedIcon from "@mui/icons-material/PersonOutlineRounded";
 import ShopOutlinedIcon from "@mui/icons-material/ShopOutlined";
 // import PendingOutlinedIcon from "@mui/icons-material/PendingOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export const SideBar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  
   const isMobile = useMediaQuery("(max-width:600px)");
   const boxStyle = {
     display: "flex",
@@ -45,6 +47,12 @@ export const SideBar = () => {
     textDecoration: "none",
     lineHeight: "0px",
   };
+
+  const handleLogOut = () => {
+    console.log("Reached")
+    localStorage.removeItem("token");
+    navigate("/");
+  }
 
   return (
     <>
@@ -125,6 +133,7 @@ export const SideBar = () => {
             ...buttonStyle,
             background: "transparent",
           }}
+          onClick={handleLogOut}
         >
           <LogoutIcon />
         </Button>

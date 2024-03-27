@@ -3,26 +3,45 @@ import {
     Grid, Typography, Box, Link, Autocomplete, TextField, Button
 } from "@mui/material";
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
+import { getPaymentLink } from "../redux/services/Payment";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 
-const SubscriptionForm = () => {
 
-    const handleBuyNow = () => {
-        console.log("handle buy now");
+const SubscriptionForm = ({ plan, handlePlanChange }) => {
+
+    const [data, setData] = useState(
+        {
+            plan: plan.name,
+            duration: 6,
+            startDate: new Date()
+        }
+    )
+
+    const [coupon, setCoupon] = useState("")
+    const [fetching, setFetching] = useState(false)
+    const [link, setLink] = useState(null)
+
+    const handleBuyNow = async () => {
+        setFetching(true)
+        const response = await getPaymentLink({ planID: plan._id, duration: data.duration, startDate: data.startDate });
+        console.log(response);
+        setFetching(false)
+        setLink(response.data.link);
     }
 
     const handleApply = () => {
         console.log("handle apply");
     }
 
-    const plansArray = [
-        "Basic",
-        "Standard",
-        "Premium",
-        "Platinum"
-    ];
+    const handleChange = (name, value) => {
+        setData({ ...data, [name]: value });
+    }
 
 
-    return (
+    const token = localStorage.getItem("token")
+    const location = useLocation();
+
+    return token ? (
         <Grid
             container
             className="flex flex-col-reverse md:flex-row"
@@ -40,24 +59,22 @@ const SubscriptionForm = () => {
                     backgroundColor: "rgba(171, 171, 171, 0.2)",
                     backdropFilter: "blur(15px)"
                 }}>
-                    <Typography className="white text-2xl font-bold text-center md:text-start"> Basic </Typography>
+                    <Typography className="white text-2xl font-bold text-center md:text-start">{plan.name}</Typography>
                     <Typography className="white font-normal my-2 text-center md:text-start">
-                        <span className="text-6xl font-extrabold">$5</span>
+                        <span className="text-6xl font-extrabold">₹{parseInt(plan.price) * (1 - parseInt(plan.discountPercentage) * 0.01)}</span>
                         <span className="text-3xl">/mo</span>
                     </Typography>
                     <div className="p-2">
                         <ul className="list-none">
-                            <div className="flex flex-row items-center font-semibold"> <CheckCircleRoundedIcon /> <Typography className="m-2 ">Max resolution - 480p</Typography> </div>
-                            <div className="flex flex-row items-center"> <CheckCircleRoundedIcon /> <Typography className="m-2 ">Availabe on 3 devices</Typography> </div>
-                            <div className="flex flex-row items-center"> <CheckCircleRoundedIcon /> <Typography className="m-2 ">Video and sound quality</Typography> </div>
-                            <div className="flex flex-row items-center"> <CheckCircleRoundedIcon /> <Typography className="m-2 ">Availabile for 6 months</Typography> </div>
-                            <div className="flex flex-row items-center"> <CheckCircleRoundedIcon /> <Typography className="m-2 ">Starts on 22/11/2025</Typography> </div>
+                            {plan?.features?.map((feature, index) => (
+                                <div className="flex flex-row items-center" key={index}> <CheckCircleRoundedIcon /> <Typography className="m-2 ">{feature.description}</Typography> </div>
+                            ))}
                         </ul>
                     </div>
                     <div className="flex justify-center py-4 px-4">
                         <div className="bg-gray-500 rounded-xl py-2 pr-10 pl-2 w-full" >
                             <Typography className="uppercase font-bold m-2">Total Price</Typography>
-                            <Typography className="uppercase text-5xl font-bold m-4">$30</Typography>
+                            <Typography className="uppercase text-5xl font-bold m-4">₹{parseInt(plan.price) * (1 - parseInt(plan.discountPercentage) * 0.01) * data.duration}</Typography>
                         </div>
                     </div>
                 </div>
@@ -76,118 +93,182 @@ const SubscriptionForm = () => {
                 }}
                 className="md:rounded-r-3xl"
             >
-                <Box
-                    component="form"
-                    // noValidate
-                    display="flex"
-                    flexDirection={"column"}
-                    // onSubmit={handleBuyNow}
-                    className="px-2 flex"
-                    sx={{
-                        my: 1
-                    }}
-                >
-                    <Typography variant="" sx={{ fontSize: "large" }}>
-                        Select Plan
-                    </Typography>
-                    <Autocomplete
-                        id="combo-box-demo"
-                        options={plansArray}
-                        renderInput={(params) => <TextField {...params} required />}
-                        disableClearable
-                        sx={{ mt: 1, mb: 2, mr: 2, }}
-                        defaultValue="Basic"
-                    />
-
-                    <Typography variant="" sx={{ fontSize: "large" }}>
-                        Enter Duration (Months)
-                    </Typography>
-                    <TextField
-                        id="outlined-number"
-                        label=""
-                        type="number"
-                        defaultValue={6}
-                        sx={{ mt: 1, mb: 2, mr: 2, }}
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                    />
-
-                    <Typography variant="" sx={{ fontSize: "large" }} >
-                        Start Date
-                    </Typography>
-                    <TextField
-                        label=""
-                        type="date"
-                        placeholder="DD/MM/YYYY"
-                        sx={{ mt: 1, mb: 2, mr: 2, }}
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                    />
-
-                    <Typography variant="" sx={{ fontSize: "large" }} >
-                        Discount Coupon
-                    </Typography>
-                    <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: { xs: "column", md: "row" },
-                            alignItems: "center",
-                            width: "100%",
-                        }}
-                    >
-                        <TextField
+                {
+                    fetching ?
+                        <Box
+                            component="form"
+                            // noValidate
+                            display="flex"
+                            flexDirection={"column"}
+                            // onSubmit={handleBuyNow}
+                            className="px-2 flex"
                             sx={{
-                                mt: 1,
-                                mb: 2,
-                                mr: 2,
-                                gap: "10px",
-                                borderRadius: "10rem",
-                                height: "auto",
+                                my: 1
                             }}
-                        />
-                        <Button
-                            sx={{
-                                width: "fit-content",
-                                px: 6,
-                            }}
-                            size="large"
-                            color="success"
-                            variant="contained"
-                            onClick={handleApply}
-                            className="bg-green-500"
                         >
-                            Apply
-                        </Button>
-                    </Box>
+                            <Typography variant="h4" sx={{ color: "white" }}>Generating...</Typography>
+                        </Box>
+                        :
+                        link ?
+                            <Box
+                                component="form"
+                                // noValidate
+                                display="flex"
+                                flexDirection={"column"}
+                                // onSubmit={handleBuyNow}
+                                className="px-2 flex"
+                                sx={{
+                                    my: 1
+                                }}
+                            >
+                                <Link href={link} sx={{ color: "white" }} target="_blank">Open the linked URL to Pay</Link>
+                                <Typography sx={{ color: "white", py: 2 }}>After payment, navigate to your Account to verify payment status</Typography>
+                            </Box>
+                            :
+                            <Box
+                                component="form"
+                                // noValidate
+                                display="flex"
+                                flexDirection={"column"}
+                                // onSubmit={handleBuyNow}
+                                className="px-2 flex"
+                                sx={{
+                                    my: 1
+                                }}
+                            >
+                                <Typography variant="" sx={{ fontSize: "large" }}>
+                                    Selected Plan
+                                </Typography>
+                                <TextField
+                                    required
+                                    value={data.plan}
+                                    sx={{ mt: 1, mb: 2, mr: 2, }}
+                                    disabled
+                                />
+                                <Typography variant="" sx={{ fontSize: "large" }}>
+                                    Enter Duration (Months)
+                                </Typography>
+                                <TextField
+                                    id="outlined-number"
+                                    label=""
+                                    type="number"
+                                    defaultValue={6}
+                                    sx={{ mt: 1, mb: 2, mr: 2, }}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    value={data.duration}
+                                    onChange={(e) => handleChange("duration", e.target.value)}
+                                />
 
-                    <Button
-                        sx={{
-                            px: 6,
-                            width: "fit-content"
-                        }}
-                        size="large"
-                        color="success"
-                        variant="contained"
-                        onClick={handleApply}
-                    >
-                        Pay Now
-                    </Button>
+                                <Typography variant="" sx={{ fontSize: "large" }} >
+                                    Start Date
+                                </Typography>
+                                <TextField
+                                    label=""
+                                    type="date"
+                                    placeholder="DD/MM/YYYY"
+                                    sx={{ mt: 1, mb: 2, mr: 2, }}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    value={data.startDate}
+                                    onChange={(e) => handleChange("startDate", e.target.value)}
+                                />
 
-                    <Typography
-                        align="left"
-                        sx={{ mt: 2, fontStyle: "italic", opacity: "80%" }}
-                    >
-                        {"Having trouble in payment? "}
-                        <Link href="#" variant="body1">
-                            {"Get Help"}
-                        </Link>
-                    </Typography>
-                </Box>
+                                <Typography variant="" sx={{ fontSize: "large" }} >
+                                    Discount Coupon
+                                </Typography>
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        flexDirection: { xs: "column", md: "row" },
+                                        alignItems: "center",
+                                        width: "100%",
+                                        mb: 1
+                                    }}
+                                >
+                                    <TextField
+                                        sx={{
+                                            mt: 1,
+                                            mb: 2,
+                                            mr: 2,
+                                            gap: "10px",
+                                            borderRadius: "10rem",
+                                            height: "auto",
+                                        }}
+                                        value={coupon}
+                                        onChange={(e) => setCoupon(e.target.value)}
+                                    />
+                                    <Button
+                                        sx={{
+                                            width: "fit-content",
+                                            px: 6,
+                                        }}
+                                        size="large"
+                                        color="success"
+                                        variant="contained"
+                                        onClick={handleApply}
+                                        className="bg-green-500"
+                                    >
+                                        Apply
+                                    </Button>
+                                </Box>
+
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        flexDirection: { xs: "column", md: "row" },
+                                        alignItems: "center",
+                                        width: "100%",
+                                    }}
+                                >
+                                    <Button
+                                        sx={{
+                                            px: 6,
+                                            width: "fit-content",
+                                            mt: 1
+                                        }}
+                                        size="large"
+                                        color="success"
+                                        variant="contained"
+                                        onClick={handleBuyNow}
+                                    >
+                                        Pay Now
+                                    </Button>
+                                    <Button
+                                        sx={{
+                                            px: 6,
+                                            width: "fit-content",
+                                            backgroundColor: "#487dc8",
+                                            mt: 1,
+                                            ml: 1
+                                        }}
+                                        size="large"
+                                        variant="contained"
+                                        onClick={() => handlePlanChange(null)}
+                                    >
+                                        Back
+                                    </Button>
+                                </Box>
+                                <Typography
+                                    align="left"
+                                    sx={{ mt: 2, fontStyle: "italic", opacity: "80%" }}
+                                >
+                                    {"Having trouble in payment? "}
+                                    <Link href="#" variant="body1">
+                                        {"Get Help"}
+                                    </Link>
+                                </Typography>
+                            </Box>
+                }
             </Grid>
         </Grid>
-    );
+    )
+        :
+        (
+            <Navigate to={"/login"} state={{ from: location }} replace />
+        )
 };
 
 export default SubscriptionForm;

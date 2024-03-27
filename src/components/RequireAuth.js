@@ -1,8 +1,9 @@
 import React from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 //fucntion which strict navigation
+
 const RequireAuth = () => {
-  const token = localStorage.getItem("userToken");
+  const token = localStorage.getItem("token");
   const location = useLocation();
   return token ? (
     <Outlet />

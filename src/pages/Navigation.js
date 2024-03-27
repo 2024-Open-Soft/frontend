@@ -3,12 +3,12 @@ import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import RequireAuth from "../components/RequireAuth";
 import Error from "../components/Error";
-import { fetchUserData } from "../components/fetchUser";
+import { fetchUserData } from "../redux/services/User";
 import LandingPage from "./LandingPage";
 import Home from "./Home";
 
 const LazySignUp = lazy(() => import("./SignUp"));
-const LazyLogin = lazy(() => import("./Login"));
+const LazyLogin = lazy(() => import("./LoginPage"));
 const LazyForgotPassword = lazy(() => import("./ForgotPassword"));
 const LazyResetPassword = lazy(() => import("./ResetPassword"));
 // const LazyHome = lazy(() => import("./LandingPage"));
@@ -17,6 +17,7 @@ const LazySearch = lazy(() => import("./SearchPage"));
 const LazySubscriptions = lazy(() => import("./SubscriptionPage"));
 const LazyUser = lazy(() => import("./UserInfo"));
 const LazyWatchlist = lazy(() => import("./WatchListPage"));
+
 const Navigation = () => {
   const dispatch = useDispatch();
 
@@ -131,7 +132,7 @@ const Navigation = () => {
 
   React.useEffect(() => {
     fetchUserData(dispatch);
-  }, [localStorage.getItem("userToken")]);
+  }, [localStorage.getItem("token")]);
 
   return (
     <Routes>

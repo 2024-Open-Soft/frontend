@@ -14,6 +14,7 @@ import "./style.css";
 import Autocomplete from "@mui/material/Autocomplete";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { MuiOtpInput } from "mui-one-time-password-input";
+import { generateOTP, verifyOTP } from "../redux/services/SignUp";
 
 const countryCodes = [
   { code: "+91", country: "India" },
@@ -26,7 +27,6 @@ const countryCodes = [
 const VerificationPhone = ({ setStep }) => {
   const [phone, setPhone] = useState("");
   const [countryCode, setCountryCode] = React.useState("+91");
-
   const [value, setValue] = React.useState("");
 
   const handleValueChange = (newValue) => {
@@ -39,38 +39,13 @@ const VerificationPhone = ({ setStep }) => {
     console.log(phone, countryCode.code);
     console.log(countryCode.code + phone);
 
-    try {
-      const response = await axios.post("/otp/generate", {
-        phoneNumber: countryCode.code + phone,
-      });
-      console.log(response);
-      localStorage.setItem("token", response.data.data.token);
-    } catch (err) {
-      console.log(err);
-    }
+    await generateOTP({ phoneNumber: countryCode.code + phone })
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const response = await axios.post(
-        "/otp/verify",
-        {
-          otp: value,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        }
-      );
 
-      console.log(response);
-      localStorage.setItem("token", response.data.data.token);
-    } catch (err) {
-      console.log(err);
-    }
+    await verifyOTP({ otp: value });
 
     setStep(2);
   };

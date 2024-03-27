@@ -1,65 +1,43 @@
 import { Grid } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import SubscriptionPlan from "../components/SubscriptionPlan";
 import SubscriptionForm from "../components/SubscriptionForm";
+import { useSelector } from "react-redux";
+import { getSubscriptionPlans } from "../redux/services/Subscription";
 
 const SubscriptionPage = () => {
   const [plans, setPlans] = React.useState([
     {
-      id: "1",
-      name: "Basic",
-      originalPrice: 8,
-      finalPrice: 5,
-      features: [
-        "Max resolution - 480p",
-        "Availabe on 3 devices",
-        "Video and sound quality",
-      ],
-      status: "Already Using",
-    },
-    {
-      id: "2",
+      _id: "2",
       name: "Standard",
-      originalPrice: 8,
-      finalPrice: 5,
+      price: 100,
+      discountPercentage: 5,
       features: [
-        "Max resolution - 480p",
-        "Availabe on 3 devices",
-        "Video and sound quality",
+        { description: "Max resolution - 480p" }
       ],
       status: "Buy Now",
     },
-    {
-      id: "3",
-      name: "Premium",
-      originalPrice: 8,
-      finalPrice: 5,
-      features: [
-        "Max resolution - 480p",
-        "Availabe on 3 devices",
-        "Video and sound quality",
-      ],
-      status: "Buy Now",
-    },
-    {
-      id: "4",
-      name: "Platinum",
-      originalPrice: 8,
-      finalPrice: 5,
-      features: [
-        "Max resolution - 480p",
-        "Availabe on 3 devices",
-        "Video and sound quality",
-      ],
-      status: "Buy Now",
-    },
+
   ]);
 
   const [selectedPlan, setSelectedPlan] = React.useState(null);
 
+  const subscriptions = useSelector((state) => state?.user?.subscriptions)
+  console.log(subscriptions)
+
   const handlePlanChange = (selectedPlan) => {
     setSelectedPlan(selectedPlan);
   }
+
+  const getData = async () => {
+    const response = await getSubscriptionPlans();
+    console.log("response: ", response.data)
+    setPlans(response.data);
+  }
+
+  useEffect(() => {
+    getData()
+  }, []);
 
   return (
     <Grid
@@ -75,7 +53,7 @@ const SubscriptionPage = () => {
         },
       }}
     >
-      {selectedPlan===null && plans?.map((plan, index) => (
+      {selectedPlan === null && plans?.map((plan, index) => (
         <Grid
           item
           key={index}
@@ -97,7 +75,7 @@ const SubscriptionPage = () => {
           item
           xs={12}
         >
-          <SubscriptionForm planDetails={selectedPlan} />
+          <SubscriptionForm plan={selectedPlan} handlePlanChange={handlePlanChange} />
         </Grid>
       )}
     </Grid>
