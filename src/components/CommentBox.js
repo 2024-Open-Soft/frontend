@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
+import axios from "axios";
 
 const inputStyle = {
   border: "3px solid #fff",
@@ -22,9 +23,18 @@ const CommentBox = ({ cmnt }) => {
   };
 
   //   const [commentAuthor, setCommentAuthor] = useState(true);
-  const handleEditComment = () => {
+  const handleEditComment = async () => {
     setCommentInfo({ ...commentInfo, text: inputField });
     setIsEditing(false);
+    try {
+      //write put request to update comment in axios
+      const response = await axios.put("/movie/comments", {
+        commentId: commentInfo.userId,
+        text: commentInfo.text,
+      })
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -70,13 +80,13 @@ const CommentBox = ({ cmnt }) => {
           <div className="italic text-[13px]">2 days ago</div>
         </div>
         {!isEditing ? (
-          <div
-            ref={commentBoxRef}
-            className="flex items-center justify-center absolute top-[10px] right-[15px] p-[5px] bg-[rgba(255,_255,_255,_0.2)] rounded-[50%] [transition:all_0.3s] opacity-1 "
-            onClick={() => handleEdit(true)}
-          >
-            <EditIcon />
-          </div>
+          <>
+            {commentInfo.userId === "66031e36ff219b0ccda9fd68" && <div
+              ref={commentBoxRef}
+              className="flex items-center justify-center absolute top-[10px] right-[15px] p-[5px] bg-[rgba(255,_255,_255,_0.2)] rounded-[50%] [transition:all_0.3s] opacity-0 group-hover:opacity-100 "
+              onClick={() => handleEdit(true)}>
+              <EditIcon />
+            </div>}</>
         ) : (
           <>
             <div
@@ -87,7 +97,10 @@ const CommentBox = ({ cmnt }) => {
             </div>
             <div
               className="flex items-center justify-center absolute top-[10px] right-[60px] p-[5px] bg-[rgba(255,_255,_255,_0.2)] rounded-[50%] [transition:all_0.3s] opacity-1 "
-              onClick={() => handleEdit(false)}
+              onClick={() => {
+                handleEdit(false)
+                setInputField(commentInfo.text)
+              }}
             >
               <CloseIcon />
             </div>
