@@ -10,6 +10,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query';
+import SubscriptionForm from "./pages/SubcriptionForm";
 
 const theme = createTheme({
   palette: {
@@ -72,9 +73,10 @@ function App() {
         <BrowserRouter>
           <Provider store={store}>
             <ThemeProvider theme={theme}>
-              <QueryClientProvider client={queryClient}>
+              {/* <QueryClientProvider client={queryClient}>
                 <Navigation />
-              </QueryClientProvider>
+              </QueryClientProvider> */}
+              <SubscriptionForm />
             </ThemeProvider>
           </Provider>
         </BrowserRouter>
