@@ -5,7 +5,8 @@ export const userSlice = createSlice({
   initialState: { data: null },
   reducers: {
     setUser: (state, action) => {
-      console.log(action.payload)
+      console.log(
+        "d:", action.payload)
       state.data = action.payload;
     },
   },
