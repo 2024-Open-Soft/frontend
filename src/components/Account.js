@@ -1,22 +1,34 @@
 import { Avatar, Grid, TextField, Typography, Button, Box, Divider } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import DoneIcon from '@mui/icons-material/Done';
 import "../components/style.css"
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { editUserData } from "../redux/services/User";
 
 const Account = () => {
-    const user = useSelector((state) => state?.user.data)
+    const user = useSelector((state) => state?.user.data);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [data, setData] = useState({
-        name: user.name,
-        email: user.email,
-        phone: user.phone,
-        countryCode: user.countryCode ? user.countryCode : "+91",
+        name: user ? user.name : "",
+        email: user ? user.email : "",
+        phone: user ? user.phone : "",
+        countryCode: user ? user.countryCode : "+91",
         password: "****************"
     })
+
+    useEffect(() => {
+        setData({
+            name: user ? user.name : "",
+            email: user ? user.email : "",
+            phone: user ? Number(user.phone.substring(3)) : "",
+            countryCode: user ? user.countryCode : "+91",
+            password: "****************"
+        })
+    }, [user]);
 
 
     const [disabled, setDisabled] = useState([true, true, true, true, true])
@@ -24,7 +36,30 @@ const Account = () => {
     const handleClick = (index) => {
         const newArray = [...disabled]
         newArray[index] = !newArray[index]
-        setDisabled(newArray)
+        setDisabled(newArray);
+
+        if(index === 3 && !newArray[3]){
+            console.log("Password Changing")
+            setData({...data, password: ""})
+        }
+
+        if(index === 3 && newArray[3]){
+            console.log("Password Changed")
+            editUserData(dispatch, {
+                genres: user ? user.genres || []: [],
+                languages: user ? user.languages || [] : [],
+                password: data?.password
+            })
+        }
+
+        if(index === 0 && newArray[0]){
+            console.log("Name Changed")
+            editUserData(dispatch, {
+                name: data?.name,
+                genres: user ? user.genres || []: [],
+                languages: user ? user.languages || [] : [],
+            })
+        }
     }
 
     const handleChange = (name, value) => {
@@ -77,8 +112,8 @@ const Account = () => {
                             disabled={disabled[1]}
                             onChange={(e) => handleChange("email", e.target.value)}
                         />
-                        <Button variant="contained" sx={editButtonStyle} onClick={() => handleClick(1)}>
-                            {disabled[1] ? <EditIcon /> : <DoneIcon />}
+                        <Button variant="contained" sx={[editButtonStyle, { background: 'transparent'}]}>
+                            {<DoneIcon />}
                         </Button>
                     </Box>
                     <Box sx={inputBoxStyle}>
@@ -99,13 +134,13 @@ const Account = () => {
                             disabled={disabled[2]}
                             onChange={(e) => handleChange("phone", e.target.value)}
                         />
-                        <Button variant="contained" sx={editButtonStyle} onClick={() => handleClick(2)}>
-                            {disabled[2] ? <EditIcon /> : <DoneIcon />}
+                        <Button variant="contained" sx={[editButtonStyle, { background: 'transparent'}]}>
+                            {<DoneIcon />}
                         </Button>
                     </Box>
                     <Box sx={inputBoxStyle}>
                         <input
-                            type="password"
+                            type={`${disabled[3] ? "password" : "text"}`}
                             style={{ ...inputStyle, width: "90%" }}
                             className='account-field'
                             value={data.password}
