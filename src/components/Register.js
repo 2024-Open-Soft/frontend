@@ -2,7 +2,6 @@ import { React, useState } from "react";
 import { Box, Button, Grid, Link, TextField, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
 import { register } from "../redux/services/SignUp";
 
 const Register = ({ setStep }) => {

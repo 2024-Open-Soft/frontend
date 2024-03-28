@@ -1,44 +1,66 @@
 import axios from "axios";
 import { setUser } from "../reducers/User";
+import createToast from "../../utils/createToast";
 
 export const generateOTP = async (payload) => {
-    const headers = {
-        "Content-Type": "application/json",
-    }
-    if (payload.email) headers["Authorization"] = `Bearer ${localStorage.getItem("token")}`
+    try {
+        const headers = {
+            "Content-Type": "application/json",
+        }
+        if (payload.email) headers["Authorization"] = `Bearer ${localStorage.getItem("token")}`
 
-    const response = await axios.post("/otp/generate", payload, {
-        headers
-    });
-    const data = response.data.data;
-    console.log(data);
-    localStorage.setItem("token", response.data.data.token);
-    return response;
+        const response = await axios.post("/otp/generate", payload, {
+            headers
+        });
+        const data = response.data.data;
+        console.log(data);
+        createToast(response.data.message, "success");
+        localStorage.setItem("token", response.data.data.token);
+        return response;
+    }
+    catch (error) {
+        createToast("Error in generating OTP", "error")
+        console.error(error);
+    }
 }
 
 export const verifyOTP = async (payload) => {
-    const response = await axios.post("/otp/verify", payload, {
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("token")}`,
-        }
-    });
-    const data = response.data.data;
-    console.log(data);
-    localStorage.setItem("token", response.data.data.token);
-    return response;
+    try {
+        const response = await axios.post("/otp/verify", payload, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`,
+            }
+        });
+        const data = response.data.data;
+        console.log(data);
+        createToast(response.data.message, "success");
+        localStorage.setItem("token", response.data.data.token);
+        return response;
+    }
+    catch (error) {
+        createToast("Error in verifying OTP", "error")
+        console.error(error);
+    }
 }
 
 export const register = async (dispatch, payload) => {
-    const response = await axios.post("/user/register", payload, {
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("token")}`,
-        }
-    });
-    const data = response.data.data;
-    console.log(data);
-    localStorage.setItem("token", response.data.data.token);
-    dispatch(setUser(data.user));
-    return response;
+    try {
+        const response = await axios.post("/user/register", payload, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`,
+            }
+        });
+        const data = response.data.data;
+        console.log(data);
+        localStorage.setItem("token", response.data.data.token);
+        dispatch(setUser(data.user));
+        createToast("User registered successfully", "success");
+        return response;
+    }
+    catch (error) {
+        createToast("Error in registering user", "error")
+        console.error(error);
+    }
 }

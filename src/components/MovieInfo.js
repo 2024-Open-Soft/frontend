@@ -22,7 +22,7 @@ const MovieInfo = ({ data }) => {
             </div>
             <div className="font-bold text-[1.063rem]">{data?.released ? (new Date(data.released)).toLocaleDateString() : "12/12/2024"}</div>
             <div className="movie_rating">
-              {[1, 2, 3, 4, 5].map((star) => (<StarIcon key={`colored-${star}`} style={{ color: star < data?.imdb?.rating ? "orange" : "white" }} />))}
+            {[1, 2, 3, 4, 5].map((star) => (<StarIcon key={`colored-${star}`} className={star < data?.imdb?.rating / 2 ? "colored-star": "uncolored-star"}/>))}
             </div>
           </div>
           <div className="flex flex-row items-center gap-[0.75rem] mb-[1rem] lg:text-[1.125rem] text-[1.063rem]">

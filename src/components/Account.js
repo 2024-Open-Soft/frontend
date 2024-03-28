@@ -6,6 +6,7 @@ import "../components/style.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { editUserData } from "../redux/services/User";
+import createToast from '../utils/createToast';
 
 const Account = () => {
     const user = useSelector((state) => state?.user.data);
@@ -69,6 +70,7 @@ const Account = () => {
     const handleLogOut = () => {
         console.log("Reached")
         localStorage.removeItem("token");
+        createToast("Logged Out Successfully", "success")
         navigate("/");
     }
 
