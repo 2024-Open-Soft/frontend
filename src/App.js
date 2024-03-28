@@ -5,6 +5,7 @@ import store from "./redux/store";
 import Navigation from "./pages/Navigation";
 import { ThemeProvider } from "@mui/system";
 import { createTheme } from "@mui/material";
+import { ToastContainer } from "react-toastify";
 
 import {
   QueryClient,
@@ -74,6 +75,7 @@ function App() {
             <ThemeProvider theme={theme}>
               <QueryClientProvider client={queryClient}>
                 <Navigation />
+                <ToastContainer />
               </QueryClientProvider>
             </ThemeProvider>
           </Provider>
