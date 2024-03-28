@@ -42,7 +42,6 @@ export const getMovie = async (dispatch, id) => {
         console.log(id)
         const response = await axios.get(`/movie/${id}`);
         const data = response.data.data;
-        console.log("data: ", data)
         return data;
     } catch (error) {
         createToast("Error in getting movie", "error")

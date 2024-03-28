@@ -18,3 +18,19 @@ export const postComment = async (payload) => {
         console.error(error);
     }
 }
+
+export const getComments = async (movie_id) => {
+    try {
+        const headers = {
+            "Content-type": "application/json",
+        }
+        const response = await axios.get(`/comment?${movie_id}`, { headers });
+        const data = response.data.data;
+        console.log(data);
+        return data;
+    }
+    catch (error) {
+        createToast("Error in getting comments", "error")
+        console.error(error);
+    }
+}

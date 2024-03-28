@@ -13,7 +13,6 @@ export async function fetchUserData(dispatch) {
       };
       const response = await axios.get(`/user/profile`, config)
       const data = response.data.data;
-      console.log("data: ", data)
       dispatch(setUser(data));
       return response;
     }

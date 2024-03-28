@@ -21,7 +21,6 @@ const CommentBox = ({ cmnt }) => {
     setIsEditing(value);
   };
 
-  //   const [commentAuthor, setCommentAuthor] = useState(true);
   const handleEditComment = () => {
     setCommentInfo({ ...commentInfo, text: inputField });
     setIsEditing(false);
@@ -47,12 +46,12 @@ const CommentBox = ({ cmnt }) => {
       <div className="w-full font-[Arial,_Helvetica,_sans-serif] p-[16px] rounded-[20px]  flex flex-row text-[rgb(223,_223,_223)] [transition:all_0.3s] hover:bg-[rgba(255,_255,_255,_0.15)] hover:backdrop-filter  group parent relative hover:opacity-100 hover:cursor-pointer">
         <div className="flex justify-center mr-[20px]">
           <p className="w-[25px] h-[25px] flex items-center justify-center text-[32px] font-bold bg-[rgba(255,_255,_255,_0.2)] p-[25px] rounded-[50%]">
-            {commentInfo?.userName[0]}
+            {commentInfo?.user.name.slice(0,1)}
           </p>
         </div>
         <div className="w-full">
           <div className="text-[17px] font-semibold mb-[15px]">
-            {commentInfo?.userName}
+            {commentInfo?.user.name}
           </div>
           <div className="mb-[15px] w-full text-justify text-[15px]">
             {isEditing ? (
