@@ -10,6 +10,7 @@ import ShopOutlinedIcon from "@mui/icons-material/ShopOutlined";
 // import PendingOutlinedIcon from "@mui/icons-material/PendingOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import createToast from "../utils/createToast";
 
 export const SideBar = () => {
   const location = useLocation();
@@ -51,6 +52,7 @@ export const SideBar = () => {
   const handleLogOut = () => {
     console.log("Reached")
     localStorage.removeItem("token");
+    createToast("Logged out successfully", "success");
     navigate("/");
   }
 
