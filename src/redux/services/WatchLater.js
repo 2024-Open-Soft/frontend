@@ -4,7 +4,7 @@ import { fetchUserData } from './User';
 
 export const addToWatchLater = async (dispatch, id) => {
     try {
-        const response = await axios.post(`/movie/watchlist/`, { movieId: id }, {
+        const response = await axios.post("/movie/watchlist/", { movieId: id }, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
@@ -15,6 +15,25 @@ export const addToWatchLater = async (dispatch, id) => {
         return data;
     } catch (error) {
         createToast("Error in adding to watchlist", "error");
+        createToast(error?.response?.data?.error, "error");
+        console.error(error);
+    }
+}
+
+export const removeFromWatchLater = async (dispatch, id) => {
+    try {
+        const response = await axios.delete("/movie/watchlist/", {
+            data: { movieId: id },
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        });
+        const data = response.data.data;
+
+        fetchUserData(dispatch);
+        return data;
+    } catch (error) {
+        createToast("Error in removing from watchlist", "error");
         createToast(error?.response?.data?.error, "error");
         console.error(error);
     }

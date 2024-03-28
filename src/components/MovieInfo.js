@@ -5,7 +5,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import { Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { addToWatchLater } from "../redux/services/WatchLater";
+import { addToWatchLater, removeFromWatchLater } from "../redux/services/WatchLater";
 
 const MovieInfo = ({ data }) => {
   const dispatch = useDispatch();
@@ -15,9 +15,15 @@ const MovieInfo = ({ data }) => {
 
   const handleAddToWatchlist = () => {
     try {
-      const response = addToWatchLater(dispatch, data?._id);
-      if (response) {
-        setAddedToWatchlist(true);
+      if (!addedToWatchlist) {
+        const response = addToWatchLater(dispatch, data?._id);
+        if (response)
+          setAddedToWatchlist(true);
+      }
+      else {
+        const response = removeFromWatchLater(dispatch, data?._id);
+        if (response)
+          setAddedToWatchlist(false);
       }
     }
     catch (error) {
@@ -28,10 +34,14 @@ const MovieInfo = ({ data }) => {
 
   useEffect(() => {
     if (user) {
-      const watchlist = user?.watchlist;
+      const watchlist = user?.watchLater;
       const movieId = data?._id;
-      if (watchlist && watchlist.includes(movieId))
-        setAddedToWatchlist(true);
+      for (let i in watchlist) {
+        if (watchlist[i]._id === movieId) {
+          setAddedToWatchlist(true);
+          return;
+        }
+      }
     }
     else {
       setAddedToWatchlist(false);
