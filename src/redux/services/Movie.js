@@ -5,7 +5,6 @@ export const getMovies = async (page) => {
     try {
         const response = await axios.get(`/movie/?page=${page}`);
         const data = response.data.data;
-        console.log("data: ", data)
         return data;
     } catch (error) {
         createToast("Error in getting movies", "error")
@@ -17,7 +16,6 @@ export const getLatestMovies = async (page) => {
     try {
         const response = await axios.get(`/movie/latest/?page=${page}`);
         const data = response.data.data;
-        console.log("data: ", data)
         return data;
     } catch (error) {
         createToast("Error in getting latest movies", "error")
@@ -29,7 +27,6 @@ export const getUpcomingMovies = async (page) => {
     try {
         const response = await axios.get(`/movie/upcoming/?page=${page}`);
         const data = response.data.data;
-        console.log("data: ", data)
         return data;
     } catch (error) {
         createToast("Error in getting upcoming movies", "error")

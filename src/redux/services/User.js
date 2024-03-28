@@ -55,6 +55,7 @@ export async function editUserData(dispatch, data) {
 
 export const login = async (dispatch, payload) => {
   try {
+    console.log("payload: ", payload);
     const response = await axios.post("/user/login", payload);
     const data = response.data.data;
     console.log("data: ", data);
@@ -64,7 +65,7 @@ export const login = async (dispatch, payload) => {
     return response;
   }
   catch (err) {
-    createToast("Error in logging in", "error")
+    createToast(err.response.data.error, "error")
     console.log(err);
   }
 }
@@ -85,6 +86,6 @@ export const logout = async (dispatch) => {
   }
   catch (err) {
     createToast("Error in logging out", "error")
-    console.log(err);
+    console.log(err.response.data.error);
   }
 }

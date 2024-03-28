@@ -18,9 +18,14 @@ const SubscriptionPage = () => {
   }
 
   const getData = async () => {
-    const response = await getSubscriptionPlans();
-    console.log("response: ", response.data)
-    setPlans(response.data);
+    try {
+      const response = await getSubscriptionPlans();
+      console.log("response: ", response.data)
+      setPlans(response.data);
+    }
+    catch (error) {
+      console.error(error)
+    }
   }
 
   useEffect(() => {

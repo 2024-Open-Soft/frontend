@@ -38,7 +38,7 @@ const VerificationPhone = ({ setStep }) => {
     console.log(phone, countryCode.code);
     console.log(countryCode.code + phone);
 
-    await generateOTP({ phoneNumber: countryCode.code + phone })
+    await generateOTP({ phoneNumber: countryCode.code + phone, countryCode: countryCode.code })
   };
 
   const handleSubmit = async (event) => {

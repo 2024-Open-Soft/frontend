@@ -1,5 +1,7 @@
 import { React, useState } from "react";
 import {
+    Autocomplete,
+    Box,
     Button,
     Grid,
     TextField,
@@ -9,17 +11,25 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../redux/services/User";
 
+const countryCodes = [
+    { code: "+91", country: "India" },
+    { code: "+1", country: "USA" },
+    { code: "+44", country: "UK" },
+    { code: "+61", country: "Australia" },
+    { code: "+81", country: "Japan" },
+];
 
 const Login = () => {
     const [phoneNumber, setPhoneNumber] = useState("");
+    const [phone, setPhone] = useState("");
+    const [countryCode, setCountryCode] = useState("+91");
     const [password, setPassword] = useState("");
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const handleSubmit = async () => {
-        await login(dispatch, { phoneNumber, password })
-        console.log("Login Successfully Done")
-        navigate("/")
+        await login(dispatch, { phoneNumber: `${countryCode.code}${phone}`, password });
+        navigate("/");
     };
 
     return (
@@ -58,7 +68,7 @@ const Login = () => {
                 <Typography variant="" sx={{ fontSize: "large" }}>
                     Enter Phone Number
                 </Typography>
-                <TextField
+                {/* <TextField
                     margin="normal"
                     required
                     fullWidth
@@ -71,7 +81,60 @@ const Login = () => {
                     sx={{ mt: 1, mb: 2 }}
                     onChange={(e) => setPhoneNumber(e.target.value)}
                     value={phoneNumber}
-                />
+                /> */}
+                <Box
+                    sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        width: "100%",
+                        md: { flexDirection: "column" },
+                    }}
+                >
+                    <Autocomplete
+                        id="combo-box-demo"
+                        options={countryCodes}
+                        getOptionLabel={(option) => option.code}
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                onSubmit={handleSubmit}
+                                id="countryCode"
+                                name="countryCode"
+                                variant="outlined"
+                            />
+                        )}
+                        disableClearable
+                        sx={{ mt: 1, mb: 2, mr: 2, width: "5rem" }}
+                        onChange={(event, newValue) => {
+                            setCountryCode(newValue);
+                        }}
+                    />
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="phone"
+                        name="phone"
+                        autoComplete="phone"
+                        type="number"
+                        placeholder="000 000 0000"
+                        autoFocus
+                        sx={{
+                            mt: 1,
+                            mb: 2,
+                            mr: 2,
+                            p: 0,
+                            "& .MuiOutlinedInput-input": {
+                                borderColor: "#ffffff83",
+                                py: 2,
+                            },
+                        }}
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                    />
+                </Box>
+
                 <Typography variant="" sx={{ fontSize: "large" }}>
                     Enter Password
                 </Typography>
