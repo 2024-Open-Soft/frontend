@@ -30,6 +30,7 @@ export const SideBar = () => {
     left: "2%",
     width: "70px",
     height: "392px",
+    zIndex: 100,
     alignItems: "center",
     justifyContent: "center",
     backdropFilter: "blur(15px)",

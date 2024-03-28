@@ -20,7 +20,7 @@ const Home = ({ isBgVideo }) => {
       <div className={`w-full relative z-[1] ${isBgVideo && "bg-black"}`}>
         {!isMobile && (
           <>
-            <a href="/" className=" fixed mt-3 flex  left-[1%]">
+            <a href="/" className=" fixed mt-3 flex  left-[1%] z-50">
               <img src="/Logo.svg" alt="WHO" className="w-36 " />
             </a>
             <SideBar />
