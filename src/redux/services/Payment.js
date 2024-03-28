@@ -13,9 +13,10 @@ export const getPaymentLink = async (payload) => {
         console.log(data);
         createToast(response.data.message, "success");
         return response
-    } 
+    }
     catch (error) {
-        createToast("Error in getting payment link", "error")
+        createToast(error.response.data.error, "error")
         console.error(error);
+        return { error: error.response.data.error }
     }
 }

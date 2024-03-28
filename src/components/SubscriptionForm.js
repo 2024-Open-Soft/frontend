@@ -26,6 +26,7 @@ const SubscriptionForm = ({ plan, handlePlanChange }) => {
         const response = await getPaymentLink({ planID: plan._id, duration: data.duration, startDate: data.startDate });
         console.log(response);
         setFetching(false)
+        if(response.error) return;
         setLink(response.data.link);
     }
 
