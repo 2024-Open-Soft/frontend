@@ -11,11 +11,14 @@ import ShopOutlinedIcon from "@mui/icons-material/ShopOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import createToast from "../utils/createToast";
+import { logout } from "../redux/services/User";
+import { useDispatch } from "react-redux";
 
 export const SideBar = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  
+  const dispatch = useDispatch();
+
   const isMobile = useMediaQuery("(max-width:600px)");
   const boxStyle = {
     display: "flex",
@@ -49,10 +52,8 @@ export const SideBar = () => {
     lineHeight: "0px",
   };
 
-  const handleLogOut = () => {
-    console.log("Reached")
-    localStorage.removeItem("token");
-    createToast("Logged out successfully", "success");
+  const handleLogOut = async () => {
+    await logout(dispatch);
     navigate("/");
   }
 

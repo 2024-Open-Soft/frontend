@@ -10,43 +10,15 @@ import {
   Typography,
   Box,
 } from "@mui/material";
+import { useSelector } from "react-redux";
 
 const PaymentHistory = () => {
-  const [data, setData] = useState([
-    {
-      id: 1,
-      date: "10/5/2024",
-      amount: "$3",
-      status: "Paid",
-    },
-    {
-      id: 2,
-      date: "10/5/2024",
-      amount: "$3",
-      status: "Paid",
-    },
-    {
-      id: 3,
-      date: "10/5/2024",
-      amount: "$3",
-      status: "Paid",
-    },
-    {
-      id: 4,
-      date: "10/5/2024",
-      amount: "$3",
-      status: "Paid",
-    },
-    {
-      id: 5,
-      date: "10/5/2024",
-      amount: "$3",
-      status: "Paid",
-    },
-  ]);
+  const payments = useSelector((state) => state?.user?.data?.payments);
+
+
   return (
     <>
-      <Box sx={{ py: 2 }}>
+      {payments ? <Box sx={{ py: 2 }}>
         <Typography variant="h5" sx={{ p: 2, pl: 0 }}>
           Payment History
         </Typography>
@@ -64,6 +36,9 @@ const PaymentHistory = () => {
                 Date
               </TableCell>
               <TableCell sx={{ border: "none", color: "#FFFFFF" }}>
+                Plan
+              </TableCell>
+              <TableCell sx={{ border: "none", color: "#FFFFFF" }}>
                 Amount
               </TableCell>
               <TableCell
@@ -79,9 +54,9 @@ const PaymentHistory = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map((payment) => (
+            {payments?.map((payment, index) => (
               <TableRow
-                key={payment.id}
+                key={index}
                 sx={{ "&:hover": { background: "#394A77" } }}
               >
                 <TableCell
@@ -92,7 +67,10 @@ const PaymentHistory = () => {
                     borderBottomLeftRadius: "20px",
                   }}
                 >
-                  {payment.date}
+                  {payment.createdAt.slice(0, 10)}
+                </TableCell>
+                <TableCell sx={{ border: "none", color: "#FFFFFF" }}>
+                  {payment.title}
                 </TableCell>
                 <TableCell sx={{ border: "none", color: "#FFFFFF" }}>
                   {payment.amount}
@@ -112,6 +90,9 @@ const PaymentHistory = () => {
           </TableBody>
         </Table>
       </Box>
+        :
+        <Typography variant="h5">Loading...</Typography>
+      }
     </>
   );
 };

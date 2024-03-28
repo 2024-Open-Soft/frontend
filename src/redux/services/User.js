@@ -14,7 +14,7 @@ export async function fetchUserData(dispatch) {
       const response = await axios.get(`/user/profile`, config)
       const data = response.data.data;
       console.log("data: ", data)
-      dispatch(setUser(data.user));
+      dispatch(setUser(data));
       return response;
     }
   }
@@ -66,6 +66,26 @@ export const login = async (dispatch, payload) => {
   }
   catch (err) {
     createToast("Error in logging in", "error")
+    console.log(err);
+  }
+}
+
+export const logout = async (dispatch) => {
+  try {
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+    const response = await axios.get("/user/logout", config);
+    dispatch(setUser(null));
+    localStorage.removeItem("token");
+    createToast("Logged out successfully", "success");
+    return response;
+  }
+  catch (err) {
+    createToast("Error in logging out", "error")
     console.log(err);
   }
 }

@@ -176,7 +176,7 @@ const SubscriptionForm = ({ plan, handlePlanChange }) => {
                                     onChange={(e) => handleChange("startDate", e.target.value)}
                                 />
 
-                                <Typography variant="" sx={{ fontSize: "large" }} >
+                                {/* <Typography variant="" sx={{ fontSize: "large" }} >
                                     Discount Coupon
                                 </Typography>
                                 <Box
@@ -213,7 +213,7 @@ const SubscriptionForm = ({ plan, handlePlanChange }) => {
                                     >
                                         Apply
                                     </Button>
-                                </Box>
+                                </Box> */}
 
                                 <Box
                                     sx={{
