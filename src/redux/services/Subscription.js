@@ -10,7 +10,7 @@ export const getSubscriptionPlans = async () => {
         });
 
         const data = response.data.data;
-        console.log(data);
+        // console.log(data);
 
         return response;
     }
@@ -30,7 +30,7 @@ export const getSubscriptionPlan = async (id) => {
         });
 
         const data = response.data.data;
-        console.log(data);
+        // console.log(data);
 
         return response;
     }

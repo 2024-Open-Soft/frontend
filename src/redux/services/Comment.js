@@ -7,11 +7,11 @@ export const postComment = async (payload) => {
             "Content-type": "application/json",
             "Authorization": `Bearer ${localStorage.getItem("token")}`,
         }
-        console.log(payload)
+        // console.log(payload)
         const response = await axios.post(`/comment`, payload, { headers });
         const data = response.data.data;
         createToast(response.data.message, "success");
-        console.log("data: ", data)
+        // console.log("data: ", data)
         return data;
     } catch (error) {
         createToast("Error in posting comment", "error");
@@ -27,7 +27,7 @@ export const getComments = async (movie_id) => {
         }
         const response = await axios.get(`/comment?${movie_id}`, { headers });
         const data = response.data.data;
-        console.log(data);
+        // console.log(data);
         return data;
     }
     catch (error) {

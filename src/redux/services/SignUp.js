@@ -13,7 +13,7 @@ export const generateOTP = async (payload) => {
             headers
         });
         const data = response.data.data;
-        console.log(data);
+        // console.log(data);
         createToast(response.data.message, "success");
         localStorage.setItem("temp-token", response.data.data.token);
         return response;
@@ -34,7 +34,7 @@ export const verifyOTP = async (payload) => {
             }
         });
         const data = response.data.data;
-        console.log(data);
+        // console.log(data);
         createToast(response.data.message, "success");
         localStorage.setItem("temp-token", response.data.data.token);
         return response;
@@ -55,7 +55,7 @@ export const register = async (dispatch, payload) => {
             }
         });
         const data = response.data.data;
-        console.log(data);
+        // console.log(data);
         localStorage.setItem("token", response.data.data.token);
         dispatch(setUser(data.user));
         createToast("User registered successfully", "success");

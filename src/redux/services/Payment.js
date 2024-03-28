@@ -10,7 +10,7 @@ export const getPaymentLink = async (payload) => {
             }
         });
         const data = response.data.data;
-        console.log(data);
+        // console.log(data);
         createToast(response.data.message, "success");
         return response
     }

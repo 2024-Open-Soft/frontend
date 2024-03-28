@@ -39,7 +39,7 @@ export const getUpcomingMovies = async (page) => {
 
 export const getMovie = async (dispatch, id) => {
     try {
-        console.log(id)
+        // console.log(id)
         const response = await axios.get(`/movie/${id}`);
         const data = response.data.data;
         return data;
@@ -49,3 +49,4 @@ export const getMovie = async (dispatch, id) => {
         console.error(error);
     }
 }
+

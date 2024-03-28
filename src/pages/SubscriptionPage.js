@@ -20,7 +20,7 @@ const SubscriptionPage = () => {
   const getData = async () => {
     try {
       const response = await getSubscriptionPlans();
-      console.log("response: ", response.data)
+      // console.log("response: ", response.data)
       setPlans(response.data);
     }
     catch (error) {
