@@ -11,6 +11,8 @@ export const addToWatchLater = async (dispatch, id) => {
         });
         const data = response.data.data;
 
+        createToast("Added to watchlist", "success");
+
         fetchUserData(dispatch);
         return data;
     } catch (error) {
@@ -29,6 +31,8 @@ export const removeFromWatchLater = async (dispatch, id) => {
             },
         });
         const data = response.data.data;
+
+        createToast("Removed from watchlist", "success");
 
         fetchUserData(dispatch);
         return data;
