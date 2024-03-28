@@ -14,7 +14,8 @@ export const postComment = async (payload) => {
         console.log("data: ", data)
         return data;
     } catch (error) {
-        createToast("Error in posting comment", "error")
+        createToast("Error in posting comment", "error");
+        createToast(error.response.data.error, "error");
         console.error(error);
     }
 }
@@ -30,7 +31,8 @@ export const getComments = async (movie_id) => {
         return data;
     }
     catch (error) {
-        createToast("Error in getting comments", "error")
+        createToast("Error in getting comments", "error");
+        createToast(error.response.data.error, "error");
         console.error(error);
     }
 }

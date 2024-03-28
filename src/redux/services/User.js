@@ -18,7 +18,8 @@ export async function fetchUserData(dispatch) {
     }
   }
   catch (err) {
-    createToast("Error in fetching user data", "error")
+    createToast("Error in fetching user data", "error");
+    createToast(error.response.data.error, "error");
     console.log(err);
   }
 }
@@ -48,7 +49,8 @@ export async function editUserData(dispatch, data) {
     }
   }
   catch (err) {
-    createToast("Error in editing user data", "error")
+    createToast("Error in editing user data", "error");
+    createToast(error.response.data.error, "error");
     console.log(err);
   }
 }
@@ -65,7 +67,7 @@ export const login = async (dispatch, payload) => {
     return response;
   }
   catch (err) {
-    createToast(err.response.data.error, "error")
+    createToast(err.response.data.error, "error");
     console.log(err);
   }
 }
@@ -85,7 +87,8 @@ export const logout = async (dispatch) => {
     return response;
   }
   catch (err) {
-    createToast("Error in logging out", "error")
+    createToast("Error in logging out", "error");
+    createToast(error.response.data.error, "error");
     console.log(err.response.data.error);
   }
 }
