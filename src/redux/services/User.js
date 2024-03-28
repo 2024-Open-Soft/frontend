@@ -43,6 +43,7 @@ export async function editUserData(dispatch, data) {
       const response = await axios.put(`/user/profile`, body, config)
       const resData = response.data.data;
       createToast(response.data.message, "success");
+      fetchUserData(dispatch);
       // console.log("data: ", resData)
       dispatch(setUser(resData.user));
       return response;
