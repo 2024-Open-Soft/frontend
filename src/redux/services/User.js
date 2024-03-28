@@ -24,3 +24,4 @@ export const login = async (dispatch, payload) => {
   localStorage.setItem("token", response.data.data.token);
   return response;
 }
+

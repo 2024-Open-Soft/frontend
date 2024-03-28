@@ -4,6 +4,8 @@ import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import CommentBox from "./CommentBox";
 
+import axios from "axios";
+
 const headingStyle = {
   pb: 4,
   fontWeight: "bold",
@@ -53,10 +55,29 @@ function CommentsContaier() {
       text: "The show is intentionally evasive in regard to Springfield's location. Springfileds geography, and that of its...",
     },
   ]);
+  // const [comments, setComments] = useState([]);
   const [commentCount, setCommentCount] = useState(comments?.length || 0);
+
+  const fetchComments = async (movieId) => {
+    try {
+      const response = await axios.get("http://localhost:3001/comment/" + movieId);
+
+      console.log(response.data.data.comments);
+      setComments(response.data.data.comments);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     setCommentCount(comments?.length);
   }, [comments]);
+
+  useEffect(() => {
+    const movieId = window.location.pathname.split("/")[2];
+    fetchComments(movieId);
+  }, []);
+
   return (
     <div className="">
       <Typography sx={headingStyle}>COMMENTS</Typography>

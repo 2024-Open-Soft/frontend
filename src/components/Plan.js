@@ -1,19 +1,38 @@
 import { Grid, Typography, Button, Box, Card, CardContent, Link } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "../components/style.css"
+import { getActiveSubscriptionPlan } from '../redux/services/Subscription';
+// import { login } from '../redux/services/Login'; // Import login function
+import { useDispatch } from 'react-redux';
+import { fetchUserData } from '../redux/services/User';
 
 const Plan = () => {
+    const [plan, setPlan] = useState(null); // Initialize plan state as null
+    const dispatch = useDispatch();
+    useEffect(() => {
+        const fetchActivePlan = async () => {
+            try {
+               
+                const response = await fetchUserData(dispatch); 
+                console.log(response.data.data.user._id);
+                const userId = response.data.data.user._id; // Extract user ID from login response
+                // Fetch active subscription plan data from backend using user ID
+                const data = await getActiveSubscriptionPlan(userId);
+                console.log(data);
+                setPlan(data);
+            } catch (error) {
+                console.error('Error fetching active subscription plan:', error);
+            }
+        };
 
-    const [plan, setPlan] = useState({
-        type: 'STANDARD',
-        rate: "3",
-        endDate: "10/5/2024"
-    })
+        fetchActivePlan();
+    }, []); // Empty dependency array ensures useEffect runs only once when component mounts
 
     const handleClick = (index) => {
-    }
+        // Handle click event if needed
+    };
 
-    const linkStyle = { textDecoration: "none", color: "#3D548E" }
+    const linkStyle = { textDecoration: "none", color: "#3D548E" };
 
     return (
         <>
@@ -21,18 +40,20 @@ const Plan = () => {
                 <Grid item xs={12}>
                     <Typography variant="h5">Plan</Typography>
                 </Grid>
-                <Grid item xs={12} md={5}>
-                    <Card sx={{ background: "#3D548E", color: "#FFFFFF" }}>
-                        <CardContent>
-                            <Typography>{plan.type}</Typography>
-                            <Box sx={{ py: 2 }}>
-                                <span style={{ fontSize: "2.5rem" }}>${plan.rate}</span>
-                                <span>/month</span>
-                            </Box>
-                            <Typography sx={{ fontSize: "0.8rem" }}><i>Valid Till - {plan.endDate}</i></Typography>
-                        </CardContent>
-                    </Card>
-                </Grid>
+                {plan && // Render only if plan data is available
+                    <Grid item xs={12} md={5}>
+                        <Card sx={{ background: "#3D548E", color: "#FFFFFF" }}>
+                            <CardContent>
+                                <Typography>{plan.data.plan.name}</Typography>
+                                <Box sx={{ py: 2 }}>
+                                    <span style={{ fontSize: "2.5rem" }}>${plan.data.plan.price}</span>
+                                    <span>/month</span>
+                                </Box>
+                                <Typography sx={{ fontSize: "0.8rem" }}><i>Valid Till - {new Date(plan.data.endDate).toISOString().split('T')[0]}</i></Typography>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                }
                 <Grid item xs={12} md={7}>
                     <Grid container spacing={2} sx={{ pl: 4 }}>
                         <Grid item xs={12} sm={6} md={12}>
@@ -46,7 +67,6 @@ const Plan = () => {
                         </Grid>
                     </Grid>
                 </Grid>
-
             </Grid>
         </>
     );
