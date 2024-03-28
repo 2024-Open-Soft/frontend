@@ -8,7 +8,7 @@ export const getMovies = async (page) => {
         return data;
     } catch (error) {
         createToast("Error in getting movies", "error");
-        createToast(error.response.data.error, "error");
+        createToast(error?.response?.data?.error, "error");
         console.error(error);
     }
 }
@@ -20,7 +20,7 @@ export const getLatestMovies = async (page) => {
         return data;
     } catch (error) {
         createToast("Error in getting latest movies", "error");
-        createToast(error.response.data.error, "error");
+        createToast(error?.response?.data?.error, "error");
         console.error(error);
     }
 }
@@ -32,7 +32,7 @@ export const getUpcomingMovies = async (page) => {
         return data;
     } catch (error) {
         createToast("Error in getting upcoming movies", "error");
-        createToast(error.response.data.error, "error");
+        createToast(error?.response?.data?.error, "error");
         console.error(error);
     }
 }
@@ -45,7 +45,7 @@ export const getMovie = async (dispatch, id) => {
         return data;
     } catch (error) {
         createToast("Error in getting movie", "error");
-        createToast(error.response.data.error, "error");
+        createToast(error?.response?.data?.error, "error");
         console.error(error);
     }
 }

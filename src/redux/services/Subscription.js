@@ -16,7 +16,7 @@ export const getSubscriptionPlans = async () => {
     }
     catch (error) {
         createToast("Error in getting subscription plans", "error");
-        createToast(error.response.data.error, "error");
+        createToast(error?.response?.data?.error, "error");
         console.error(error);
     }
 }
@@ -36,7 +36,7 @@ export const getSubscriptionPlan = async (id) => {
     }
     catch (error) {
         createToast("Error in getting subscription plan", "error");
-        createToast(error.response.data.error, "error");
+        createToast(error?.response?.data?.error, "error");
         console.error(error);
     }
 }

@@ -20,7 +20,7 @@ export const generateOTP = async (payload) => {
     }
     catch (error) {
         createToast("Error in generating OTP", "error");
-        createToast(error.response.data.error, "error");
+        createToast(error?.response?.data?.error, "error");
         console.error(error);
     }
 }
@@ -41,7 +41,7 @@ export const verifyOTP = async (payload) => {
     }
     catch (error) {
         createToast("Error in verifying OTP", "error");
-        createToast(error.response.data.error, "error");
+        createToast(error?.response?.data?.error, "error");
         console.error(error);
     }
 }
@@ -62,11 +62,11 @@ export const register = async (dispatch, payload) => {
         return response;
     }
     catch (error) {
-        if(error.response.data.error === "Token expired") {
+        if(error?.response?.data?.error === "Token expired") {
             localStorage.removeItem("temp-token");
             createToast("OTP expired. Please try again", "error");
         }
-        createToast(error.response.data.error, "error")
+        createToast(error?.response?.data?.error, "error")
         console.error(error);
     }
 }
