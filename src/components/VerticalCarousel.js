@@ -6,12 +6,9 @@ import "./style.css";
 
 function VerticalCarousel() {
   const [suggestedMovies, setSuggestedMovies] = useState([
-    { img: "/frame.png" },
-    { img: "/frame.png" },
-    { img: "/frame.png" },
-    { img: "/frame.png" },
-    { img: "/frame.png" },
-    { img: "/frame.png" },
+    { img: "/images/image1.png" },
+    { img: "/images/image2.png" },
+    { img: "/images/image3.png" },
   ]);
   const settings = {
     dots: true,
@@ -83,7 +80,7 @@ function VerticalCarousel() {
       <Slider className="landing-carousel" {...settings}>
         {suggestedMovies.map((movie, index) => (
           <div className="image-box" key={index}>
-            <img src={movie.img} alt="" />
+            <img src={movie.img} alt="" style={{ width: "90%", height: "auto" }} />
           </div>
         ))}
       </Slider>

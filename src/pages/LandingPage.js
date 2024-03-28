@@ -50,6 +50,8 @@ const LandingPage = () => {
         sx={{ display: "flex", width: "85%", p: { xs: "3vw" } }}
       >
         <MovieInfo data={latestMovies[0]} />
+
+
         {!isMobile && (
           <Box
             sx={{
@@ -65,7 +67,7 @@ const LandingPage = () => {
               justifyContent: "center",
             }}
           >
-            <VerticalCarousel />
+            {latestMovies && latestMovies.length && <VerticalCarousel data={latestMovies.slice(0, 6)} />}
           </Box>
         )}
       </Grid>
