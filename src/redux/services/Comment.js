@@ -34,3 +34,21 @@ export const getComments = async (movie_id) => {
         console.error(error);
     }
 }
+
+export const editComment = async (payload) => {
+    try {
+        const headers = {
+            "Content-type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`,
+        }
+        console.log(payload)
+        const response = await axios.put(`/comment`, payload, { headers });
+        const data = response.data.data;
+        createToast(response.data.message, "success");
+        console.log("data: ", data)
+        return data;
+    } catch (error) {
+        createToast("Error in posting comment", "error")
+        console.error(error);
+    }
+}
