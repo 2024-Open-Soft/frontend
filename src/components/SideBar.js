@@ -7,7 +7,7 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 // import TrendingUpRoundedIcon from "@mui/icons-material/TrendingUpRounded";
 import PersonOutlineRoundedIcon from "@mui/icons-material/PersonOutlineRounded";
 import ShopOutlinedIcon from "@mui/icons-material/ShopOutlined";
-import LoginIcon from '@mui/icons-material/Login';
+import LoginIcon from "@mui/icons-material/Login";
 // import PendingOutlinedIcon from "@mui/icons-material/PendingOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -58,7 +58,7 @@ export const SideBar = () => {
   const handleLogOut = async () => {
     await logout(dispatch);
     navigate("/");
-  }
+  };
 
   return (
     <>
@@ -119,7 +119,7 @@ export const SideBar = () => {
             <ShopOutlinedIcon />
           </Button>
         </Link>
-        {user ?
+        {user ? (
           <>
             <Link to="/profile" style={linkStyle}>
               <Button
@@ -146,7 +146,7 @@ export const SideBar = () => {
               <LogoutIcon />
             </Button>
           </>
-          :
+        ) : (
           <Link to="/login" style={linkStyle}>
             <Button
               variant="contained"
@@ -161,7 +161,7 @@ export const SideBar = () => {
               <LoginIcon />
             </Button>
           </Link>
-        }
+        )}
       </Box>
     </>
   );
