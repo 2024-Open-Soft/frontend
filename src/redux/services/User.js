@@ -78,6 +78,7 @@ export const login = async (dispatch, payload) => {
       localStorage.removeItem("token");
     createToast(error?.response?.data?.error, "error");
     console.log(error);
+    return error;
   }
 }
 
