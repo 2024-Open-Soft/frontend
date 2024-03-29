@@ -10,13 +10,13 @@ export const getPaymentLink = async (payload) => {
             }
         });
         const data = response.data.data;
-        console.log(data);
+        // console.log(data);
         createToast(response.data.message, "success");
         return response
     }
     catch (error) {
-        createToast(error.response.data.error, "error")
+        createToast(error?.response?.data?.error, "error")
         console.error(error);
-        return { error: error.response.data.error }
+        return { error: error?.response?.data?.error }
     }
 }

@@ -13,13 +13,14 @@ export const generateOTP = async (payload) => {
             headers
         });
         const data = response.data.data;
-        console.log(data);
+        // console.log(data);
         createToast(response.data.message, "success");
-        localStorage.setItem("token", response.data.data.token);
+        localStorage.setItem("temp-token", response.data.data.token);
         return response;
     }
     catch (error) {
-        createToast("Error in generating OTP", "error")
+        createToast("Error in generating OTP", "error");
+        createToast(error?.response?.data?.error, "error");
         console.error(error);
     }
 }
@@ -29,17 +30,18 @@ export const verifyOTP = async (payload) => {
         const response = await axios.post("/otp/verify", payload, {
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                "Authorization": `Bearer ${localStorage.getItem("temp-token")}`,
             }
         });
         const data = response.data.data;
-        console.log(data);
+        // console.log(data);
         createToast(response.data.message, "success");
-        localStorage.setItem("token", response.data.data.token);
+        localStorage.setItem("temp-token", response.data.data.token);
         return response;
     }
     catch (error) {
-        createToast("Error in verifying OTP", "error")
+        createToast("Error in verifying OTP", "error");
+        createToast(error?.response?.data?.error, "error");
         console.error(error);
     }
 }
@@ -49,18 +51,22 @@ export const register = async (dispatch, payload) => {
         const response = await axios.post("/user/register", payload, {
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                "Authorization": `Bearer ${localStorage.getItem("temp-token")}`,
             }
         });
         const data = response.data.data;
-        console.log(data);
+        // console.log(data);
         localStorage.setItem("token", response.data.data.token);
         dispatch(setUser(data.user));
         createToast("User registered successfully", "success");
         return response;
     }
     catch (error) {
-        createToast("Error in registering user", "error")
+        if(error?.response?.data?.error === "Token expired") {
+            localStorage.removeItem("temp-token");
+            createToast("OTP expired. Please try again", "error");
+        }
+        createToast(error?.response?.data?.error, "error")
         console.error(error);
     }
 }

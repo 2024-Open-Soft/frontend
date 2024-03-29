@@ -20,7 +20,7 @@ const headingStyle = {
 };
 
 function CommentsContainer({ comments }) {
-  
+
   const [commentCount, setCommentCount] = useState(comments?.length || 0);
 
   return (
@@ -45,7 +45,6 @@ function CommentsContainer({ comments }) {
               </Box>
             ))}
           </Box>
-          {/* <Typography sx={{ cursor: "pointer" }}>Read More...</Typography> */}
         </div>
     </>
   );

@@ -40,12 +40,12 @@ const Account = () => {
         setDisabled(newArray);
 
         if(index === 3 && !newArray[3]){
-            console.log("Password Changing")
+            // console.log("Password Changing")
             setData({...data, password: ""})
         }
 
         if(index === 3 && newArray[3]){
-            console.log("Password Changed")
+            // console.log("Password Changed")
             editUserData(dispatch, {
                 genres: user ? user.genres || []: [],
                 languages: user ? user.languages || [] : [],
@@ -54,7 +54,7 @@ const Account = () => {
         }
 
         if(index === 0 && newArray[0]){
-            console.log("Name Changed")
+            // console.log("Name Changed")
             editUserData(dispatch, {
                 name: data?.name,
                 genres: user ? user.genres || []: [],

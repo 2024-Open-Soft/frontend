@@ -20,7 +20,6 @@ const MoviePage = () => {
   }
 
   useEffect(() => {
-    console.log("Use Effect")
     fetchData(id);
   }, [])
 
