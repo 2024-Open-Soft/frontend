@@ -1,5 +1,6 @@
 import axios from "axios";
 import createToast from "../../utils/createToast";
+import { logout } from "./User";
 
 export const getPaymentLink = async (payload) => {
     try {
@@ -15,6 +16,9 @@ export const getPaymentLink = async (payload) => {
         return response
     }
     catch (error) {
+        if(error?.response?.data?.error?.startsWith("Token expired")){
+            localStorage.removeItem("token");
+        }
         createToast(error?.response?.data?.error, "error")
         console.error(error);
         return { error: error?.response?.data?.error }

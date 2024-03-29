@@ -28,8 +28,10 @@ const Login = () => {
     const navigate = useNavigate()
 
     const handleSubmit = async () => {
-        await login(dispatch, { phoneNumber: `${countryCode.code}${phone}`, password });
-        navigate("/");
+        const res = await login(dispatch, { phoneNumber: `${countryCode.code}${phone}`, password });
+        console.log(res);
+        if(res.status === 200)
+            navigate("/");
     };
 
     return (
