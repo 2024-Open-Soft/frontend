@@ -17,6 +17,7 @@ const LazySearch = lazy(() => import("./SearchPage"));
 const LazySubscriptions = lazy(() => import("./SubscriptionPage"));
 const LazyUser = lazy(() => import("./UserInfo"));
 const LazyWatchlist = lazy(() => import("./WatchListPage"));
+const LazyFilter = lazy(() => import("./FilterPage"));
 
 const Navigation = () => {
   const dispatch = useDispatch();
@@ -128,6 +129,17 @@ const Navigation = () => {
       errorElement: <Error />,
       isBgVideo: false,
     },
+    {
+      path: "/filter",
+      element: (
+        <Suspense fallback={<h1>Loading</h1>}>
+          <LazyFilter />
+        </Suspense>
+      ),
+      protected: false,
+      errorElement: <Error />,
+      isBgVideo: false,
+    }
   ];
 
   React.useEffect(() => {

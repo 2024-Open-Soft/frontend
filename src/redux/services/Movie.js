@@ -1,5 +1,6 @@
 import axios from 'axios';
 import createToast from '../../utils/createToast';
+import { queries } from '@testing-library/react';
 
 export const getMovies = async (page) => {
     try {
@@ -15,6 +16,7 @@ export const getMovies = async (page) => {
 
 export const getLatestMovies = async (page) => {
     try {
+        console.log(axios.defaults.baseURL)
         const response = await axios.get(`/movie/latest/?page=${page}`);
         const data = response.data.data;
         console.log("data: ", data)
@@ -46,6 +48,20 @@ export const getMovie = async (dispatch, id) => {
         return data;
     } catch (error) {
         createToast("Error in getting movie", "error")
+        console.error(error);
+    }
+}
+
+export const filterMovies = async (queries) => {
+    try {
+        const url = `/movie/filter/?genre=${queries.genres.join(",")}&language=${queries.languages.join(",")}&rating=${queries.rating}`
+        console.log(url)
+        const response = await axios.get(`/movie/filter/?genres=${queries.genres.join(",")}&languages=${queries.languages.join(",")}&rating=${queries.rating}`);
+        const data = response.data.data;
+        console.log("response:",response)
+        return data;
+    } catch (error) {
+        createToast("Error in filtering movies", "error")
         console.error(error);
     }
 }
