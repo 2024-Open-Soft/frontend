@@ -2,10 +2,10 @@ import axios from "axios";
 import { setUser } from "../reducers/User";
 import createToast from "../../utils/createToast";
 
-export async function fetchUserData(dispatch) {
+export async function fetchUserData(dispatch, navigate) {
   try {
-    if ( localStorage.getItem("token") &&
-    !(localStorage.getItem("token") === "undefined")) {
+    if (localStorage.getItem("token") &&
+      !(localStorage.getItem("token") === "undefined")) {
       const config = {
         headers: {
           "Content-type": "application/json",
@@ -19,9 +19,11 @@ export async function fetchUserData(dispatch) {
     }
   }
   catch (error) {
-    createToast("Error in fetching user data", "error");
     createToast(error?.response?.data?.error, "error");
+    createToast("Please Re-Login", "error");
+    localStorage.removeItem("token");
     console.log(error);
+    navigate("/login")
   }
 }
 

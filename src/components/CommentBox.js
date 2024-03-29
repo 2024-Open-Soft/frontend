@@ -3,7 +3,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
 import { useSelector } from "react-redux";
-import axios from "axios";
 import { editComment } from "../redux/services/Comment";
 
 const inputStyle = {
@@ -23,7 +22,7 @@ const CommentBox = ({ cmnt }) => {
   const newdate = new Date(commentInfo?.date);
   let newtime = newdate.getTime();
 
-  let diff = (currenttime - newtime ) / 31536000000;
+  let diff = (currenttime - newtime) / 31536000000;
   let _timestamp
   if (diff > 1) {
     _timestamp = `${Math.floor(diff)} years ago`;
@@ -108,7 +107,7 @@ const CommentBox = ({ cmnt }) => {
         </div>
         {!isEditing ? (
           <>
-            {commentInfo.user.user_id === user._id && <div
+            {user && commentInfo.user.user_id === user._id && <div
               ref={commentBoxRef}
               className="flex items-center justify-center absolute top-[10px] right-[15px] p-[5px] bg-[rgba(255,_255,_255,_0.2)] rounded-[50%] [transition:all_0.3s] opacity-0 group-hover:opacity-100 "
               onClick={() => handleEdit(true)}>
