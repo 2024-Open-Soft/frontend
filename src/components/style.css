@@ -80,3 +80,7 @@
 .colored-star path{
   color: orange;
 }
+
+.add-to-watchlist path {
+  color: rgb(255, 63, 63);
+}

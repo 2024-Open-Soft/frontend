@@ -15,12 +15,13 @@ export async function fetchUserData(dispatch) {
       const response = await axios.get(`/user/profile`, config)
       const data = response.data.data;
       dispatch(setUser(data));
-      return response;
+      return data;
     }
   }
-  catch (err) {
-    createToast("Error in fetching user data", "error")
-    console.log(err);
+  catch (error) {
+    createToast("Error in fetching user data", "error");
+    createToast(error?.response?.data?.error, "error");
+    console.log(error);
   }
 }
 
@@ -43,30 +44,33 @@ export async function editUserData(dispatch, data) {
       const response = await axios.put(`/user/profile`, body, config)
       const resData = response.data.data;
       createToast(response.data.message, "success");
-      console.log("data: ", resData)
+      fetchUserData(dispatch);
+      // console.log("data: ", resData)
       dispatch(setUser(resData.user));
       return response;
     }
   }
-  catch (err) {
-    createToast("Error in editing user data", "error")
-    console.log(err);
+  catch (error) {
+    createToast("Error in editing user data", "error");
+    createToast(error?.response?.data?.error, "error");
+    console.log(error);
   }
 }
 
 export const login = async (dispatch, payload) => {
   try {
+    // console.log("payload: ", payload);
     const response = await axios.post("/user/login", payload);
     const data = response.data.data;
-    console.log("data: ", data);
+    // console.log("data: ", data);
     dispatch(setUser(data.user));
     localStorage.setItem("token", response.data.data.token);
     createToast("Logged in successfully", "success");
     return response;
   }
-  catch (err) {
-    createToast("Error in logging in", "error")
-    console.log(err);
+  catch (error) {
+    createToast(error?.response?.data?.error, "error");
+    console.log(error);
   }
 }
 
@@ -85,8 +89,9 @@ export const logout = async (dispatch) => {
     createToast("Logged out successfully", "success");
     return response;
   }
-  catch (err) {
-    createToast("Error in logging out", "error")
-    console.log(err);
+  catch (error) {
+    createToast("Error in logging out", "error");
+    createToast(error?.response?.data?.error, "error");
+    console.log(error?.response?.data?.error);
   }
 }

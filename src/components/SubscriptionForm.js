@@ -24,14 +24,14 @@ const SubscriptionForm = ({ plan, handlePlanChange }) => {
     const handleBuyNow = async () => {
         setFetching(true)
         const response = await getPaymentLink({ planID: plan._id, duration: data.duration, startDate: data.startDate });
-        console.log(response);
+        // console.log(response);
         setFetching(false)
         if(response.error) return;
         setLink(response.data.link);
     }
 
     const handleApply = () => {
-        console.log("handle apply");
+        // console.log("handle apply");
     }
 
     const handleChange = (name, value) => {

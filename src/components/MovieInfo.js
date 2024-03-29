@@ -1,13 +1,55 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import StarIcon from "@mui/icons-material/Star";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 import { Typography } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { addToWatchLater, removeFromWatchLater } from "../redux/services/WatchLater";
 
 const MovieInfo = ({ data }) => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state?.user.data);
+
+  const [addedToWatchlist, setAddedToWatchlist] = useState(false);
+
+  const handleAddToWatchlist = () => {
+    try {
+      if (!addedToWatchlist) {
+        const response = addToWatchLater(dispatch, data?._id);
+        if (response)
+          setAddedToWatchlist(true);
+      }
+      else {
+        const response = removeFromWatchLater(dispatch, data?._id);
+        if (response)
+          setAddedToWatchlist(false);
+      }
+    }
+    catch (error) {
+      console.error(error);
+      setAddedToWatchlist(false);
+    }
+  }
+
+  useEffect(() => {
+    if (user) {
+      const watchlist = user?.watchLater;
+      const movieId = data?._id;
+      for (let i in watchlist) {
+        if (watchlist[i]._id === movieId) {
+          setAddedToWatchlist(true);
+          return;
+        }
+      }
+    }
+    else {
+      setAddedToWatchlist(false);
+    }
+  }, [data]);
 
   return (
     <>
-
       <div className="w-3/4 max-md:w-full">
         <div className="text-[white] flex flex-col font-[Arial,_Helvetica,_sans-serif]  w-full">
           <div className="text-[2rem] lg:text-[3rem] md:text-[2.5rem] font-black lg:mb-[1.5rem] md:mb-[1.1rem] mb-[0.8rem]">
@@ -22,7 +64,7 @@ const MovieInfo = ({ data }) => {
             </div>
             <div className="font-bold text-[1.063rem]">{data?.released ? (new Date(data.released)).toLocaleDateString() : "12/12/2024"}</div>
             <div className="movie_rating">
-            {[1, 2, 3, 4, 5].map((star) => (<StarIcon key={`colored-${star}`} className={star < data?.imdb?.rating / 2 ? "colored-star": "uncolored-star"}/>))}
+              {[1, 2, 3, 4, 5].map((star) => (<StarIcon key={`colored-${star}`} className={star < data?.imdb?.rating / 2 ? "colored-star" : "uncolored-star"} />))}
             </div>
           </div>
           <div className="flex flex-row items-center gap-[0.75rem] mb-[1rem] lg:text-[1.125rem] text-[1.063rem]">
@@ -37,13 +79,20 @@ const MovieInfo = ({ data }) => {
                 Watch
               </a>
             </div>
-            <div className="rounded-[1.563rem] p-[0.625rem] lg:p-[0.75rem] lg:pl-[3%] lg:pr-[3%] pl-[6%] pr-[6%] backdrop-filter backdrop-blur-[10px] bg-[rgba(255,_255,_255,_0.08)] cursor-pointer [transition:0.5s_all] hover:[box-shadow:0.188rem_0.188rem_0.313rem_rgba(0,_0,_0,_0.474)] ">
+            <div className="rounded-[1.563rem] p-[0.625rem] lg:p-[0.75rem] lg:pl-[3%] lg:pr-[3%] pl-[6%] pr-[6%] backdrop-filter backdrop-blur-[10px] bg-[rgba(255,_255,_255,_0.08)] cursor-pointer [transition:0.5s_all] hover:[box-shadow:0.188rem_0.188rem_0.313rem_rgba(0,_0,_0,_0.474)]">
               <a
                 href={"#"}
                 className="no-underline text-[white]"
               >
                 Trailer
               </a>
+            </div>
+            <div className="rounded-[1.563rem] backdrop-filter backdrop-blur-[10px] flex justify-center items-center p-[0.55rem] lg:p-[0.75rem] bg-[rgba(255,_255,_255,_0.08)] cursor-pointer [transition:0.5s_all] hover:[box-shadow:0.188rem_0.188rem_0.313rem_rgba(0,_0,_0,_0.474)]"
+              onClick={handleAddToWatchlist}
+            >
+              {
+                !addedToWatchlist ? <AddCircleOutlineIcon /> : <BookmarkIcon className="add-to-watchlist" />
+              }
             </div>
           </div>
           <div className="flex flex-row items-center mb-[1.75rem] text-[0.813rem] font-bold">

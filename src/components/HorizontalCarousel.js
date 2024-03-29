@@ -3,13 +3,36 @@ import MoviePoster from "../assets/movie-poster.png";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Box, Button, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  LinearProgress,
+  Typography,
+} from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { Link } from "react-router-dom";
 
-const HorizontalCarousel = ({ title, poster, width, top, movies=[] }) => {
-  const [data, setData] = useState(movies.length ? [...movies] : [])
+const HorizontalCarousel = ({ title, poster, width, top, movies = [] }) => {
+  const [data, setData] = useState([...movies]);
+
+  const watchedDurations = movies.map((item) => {
+    if (!item.timeStamp) return 0;
+
+    const [hours, minutes, seconds] = item.timeStamp
+      .split(":")
+      .map((item) => parseInt(item));
+    return hours * 60 + minutes + seconds / 60;
+  });
+
+  const watchedProgresses = movies.map((item, index) => {
+    if (!item.runtime || item.runtime === 0 || !watchedDurations[index])
+      return 0;
+    return (watchedDurations[index] / item.runtime) * 100;
+  });
+
+  console.log(title, movies);
 
   const ref = useRef(null);
 
@@ -32,7 +55,8 @@ const HorizontalCarousel = ({ title, poster, width, top, movies=[] }) => {
 
   const boxStyle = {
     "&:hover": {
-      border: "2px solid #FFFFFF",
+      // border: "2px solid #FFFFFF",
+      transform: "scale(1.05)",
     },
     width: "fit-content",
     transition: "all 0.3s ease-in-out",
@@ -100,21 +124,38 @@ const HorizontalCarousel = ({ title, poster, width, top, movies=[] }) => {
       <Typography sx={headingStyle}>{title}</Typography>
       <div className="slider-container" style={{ position: "relative" }}>
         <Slider {...settings}>
-          {data?.map((item, index) => (
-            <div key={index}>
-              <Link to={`/movie/${item._id}`} style={{ textDecoration: "none" }}>
-                <Box sx={boxStyle}>
-                  <img
-                    src={item.poster ? item.poster : MoviePoster}
-                    alt="movie-poster"
-                    style={imageStyle}
-                    ref={ref}
-                  />
-                </Box>
-                <Typography sx={{ py: 1 }}>{item.title}</Typography>
-              </Link>
-            </div>
-          ))}
+          {movies &&
+            movies?.map((item, index) => (
+              <div key={index}>
+                <Link
+                  to={`/movie/${item._id}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Box sx={boxStyle}>
+                    <img
+                      src={item.poster ? item.poster : MoviePoster}
+                      alt="movie-poster"
+                      style={imageStyle}
+                      ref={ref}
+                    />
+                    {watchedProgresses[index] != 0 && (
+                      <LinearProgress
+                        sx={{
+                          backgroundColor: "rgba(255,255,255,0.38)",
+                          "& .MuiLinearProgress-bar": {
+                            backgroundColor: "rgb(255, 63, 63)",
+                          },
+                        }}
+                        variant="determinate"
+                        value={watchedProgresses[index]}
+                        color="secondary"
+                      />
+                    )}
+                  </Box>
+                  <Typography sx={{ py: 1 }}>{item.title}</Typography>
+                </Link>
+              </div>
+            ))}
         </Slider>
       </div>
     </>
