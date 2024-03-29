@@ -8,7 +8,7 @@ import store from "./redux/store";
 import axios from "axios";
 // axios.defaults.baseURL = "http://13.201.79.63/";
 // axios.defaults.baseURL = process.env.REACT_APP_BACKED_URL;
-axios.defaults.baseURL = "http://localhost:3001/";
+axios.defaults.baseURL = "http://localhost:3002/";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
