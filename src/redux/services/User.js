@@ -2,17 +2,22 @@ import axios from "axios";
 import { setUser } from "../reducers/User";
 
 export async function fetchUserData(dispatch) {
-  if (localStorage.getItem("token")) {
+  if (
+    localStorage.getItem("token") &&
+    !(localStorage.getItem("token") === "undefined")
+  ) {
     const config = {
       headers: {
         "Content-type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     };
-    const response = await axios.get(`/user/profile`, config)
+    const response = await axios.get(`/user/profile`, config).catch((error) => {
+      console.log("error: ", error);
+    });
     const data = response.data.data;
     dispatch(setUser(data.user));
-    return response
+    return response;
   }
 }
 
@@ -23,4 +28,4 @@ export const login = async (dispatch, payload) => {
   dispatch(setUser(data.user));
   localStorage.setItem("token", response.data.data.token);
   return response;
-}
+};

@@ -24,7 +24,7 @@ function CommentsContaier() {
   const [comments, setComments] = useState([
     {
       userId: 1,
-      userName: "Vaibhav Mohite",
+      userName: "Loren Ipsum",
       updatedAt: "2021-10-10",
       text: "The show is intentionally evasive in regard to Springfield's location. Springfileds geography, and that of its...",
     },

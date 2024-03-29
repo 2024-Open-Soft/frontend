@@ -84,7 +84,7 @@ const HorizontalCarousel = ({ title, poster, width, top }) => {
     background: "#00000061",
     border: "none",
     borderRadius: 0,
-    top: top+"%",
+    top: top + "%",
     borderRadius: "50%",
     height: "50px",
     width: "50px",
@@ -148,7 +148,8 @@ const HorizontalCarousel = ({ title, poster, width, top }) => {
     infinite: false,
     speed: 500,
     slidesToScroll: 1,
-    slidesToShow: (window.innerWidth - parseInt(width) - 20) / (parseInt(width) + 20),
+    slidesToShow:
+      (window.innerWidth - parseInt(width) - 20) / (parseInt(width) + 20),
     arrows: true,
     swipeToSlide: true,
     nextArrow: <CustomNextArrow />,
@@ -162,7 +163,10 @@ const HorizontalCarousel = ({ title, poster, width, top }) => {
         <Slider {...settings}>
           {data?.map((item, index) => (
             <div key={index}>
-              <Link to={`/movie/${item.movieId}`} style={{ textDecoration: "none" }}>
+              <Link
+                to={`/movie/${item.movieId}`}
+                style={{ textDecoration: "none" }}
+              >
                 <Box sx={boxStyle}>
                   <img
                     src={poster ? poster : MoviePoster}
