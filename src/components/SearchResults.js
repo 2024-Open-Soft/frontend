@@ -132,15 +132,17 @@ const SearchResults = ({ moviesData, handleLoad, isSemantic, setMovieId }) => {
       className={`${!(data?.count > 0) && "hidden"}`}
     >
       <div
-        style={{
-          maxHeight: "100vh",
-          overflowY: "auto",
-        }}
-        className="my-4 mx-0 px-0"
-        ref={listBoxRef}
       >
         <Typography sx={{ ...headingStyle, py: 4 }}>Relevant result</Typography>
-        <Grid container spacing={4}>
+        <Grid container spacing={4}
+          sx={{
+            maxHeight: "100vh",
+            overflowY: "auto",
+            width: "100%"
+          }}
+          className="my-4 mx-0 px-0 hidden-scrollbar"
+          ref={listBoxRef}
+          >
           {data?.movies?.map((movie, index) => (
             <Grid
               item

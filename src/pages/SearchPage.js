@@ -135,7 +135,6 @@ const SearchPage = () => {
           setMovieId={setMovieId}
         />
       </Grid>
-      <Button onClick={() => fetchSemanticData()}>Paginate</Button>
     </Grid>
   );
 };

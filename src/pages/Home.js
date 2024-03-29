@@ -2,22 +2,28 @@ import React from "react";
 import BackgroundPlayer from "../components/BackgroundPlayer";
 import { SideBar } from "../components/SideBar";
 import Cars from "../assets/Cars.mp4";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { useMediaQuery } from "@mui/system";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Grid, IconButton, Modal } from "@mui/material";
 import Footer from "../components/Footer";
+import { navItems } from "./Navigation";
 
-const Home = ({ isBgVideo }) => {
+const Home = () => {
   const isMobile = useMediaQuery("(max-width:800px)");
   const [drawerOpen, setDrawerOpen] = React.useState(false);
 
+
+  const route = useLocation().pathname;
+
+  const isBgVideo = navItems.filter((item) => item.path === route)[0]?.isBgVideo;
   const handleOpen = () => setDrawerOpen(true);
   const handleClose = () => setDrawerOpen(false);
 
+
   return (
     <div className="bg-black">
-      <div className={`w-full relative z-[1] ${isBgVideo && "bg-black"}`}>
+      <div className={`w-full relative z-[1] ${!isBgVideo && "bg-black"}`}>
         {!isMobile && (
           <>
             <a href="/" className=" fixed mt-3 flex  left-[1%] z-50">
@@ -62,16 +68,20 @@ const Home = ({ isBgVideo }) => {
 
       <div className="absolute top-0 right-0 -z-0 w-full">
         <div className="w-full">
-          <video
+          {isBgVideo && <video
             src={Cars}
             autoPlay
             muted
             loop
             className="w-full object-cover h-screen"
-          />
+          />}
         </div>
-        <div className="sm:bg-gradient-to-t sm:from-black sm:via-transparent to-red-00 absolute top-0 text-3xl flex flex-row justify-center items-center w-full h-screen text-white"></div>
-        <div className="absolute left-0 top-0 h-screen w-full sm:bg-gradient-to-l sm:from-transparent sm:to-black"></div>
+        <div className={isBgVideo ? 
+          "sm:bg-gradient-to-t sm:from-black sm:via-transparent to-red-00 absolute top-0 text-3xl flex flex-row justify-center items-center w-full h-screen text-white"
+          :
+          "sm:bg-black absolute top-0 text-3xl flex flex-row justify-center items-center w-full h-screen text-white"
+        }></div>
+        <div className={"absolute left-0 top-0 h-screen w-full sm:bg-gradient-to-l sm:from-transparent sm:to-black"}></div>
       </div>
     </div>
   );
