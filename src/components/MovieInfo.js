@@ -4,7 +4,6 @@ import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import { Typography } from "@mui/material";
 
 const MovieInfo = ({ data }) => {
-  console.log("Inside Movie Info", data.imdb.rating)
   return (
     <>
 

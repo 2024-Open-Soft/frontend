@@ -3,7 +3,7 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const SearchResults = ({data}) => {
-    
+
     const headingStyle = {
         pb: 4,
         "&::after": {
@@ -17,7 +17,7 @@ const SearchResults = ({data}) => {
         },
         textTransform: "uppercase",
     };
-
+    console.log(data)
     return data && (
         <Container className="my-4 mx-0 px-0">
             <Typography sx={{ ...headingStyle, py: 4 }}>Relevant result</Typography>

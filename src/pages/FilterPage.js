@@ -181,14 +181,8 @@ const imdbRating = [
   ].map((rating, index) => ({ title: rating, value: 9-index }))
 
 const FilterPage = () => {
-  const [data, setData] = React.useState({genres: [], languages: [], rating: []})
-  const [filteredMovies, setFilteredMovies] = React.useState([{
-        title: "12th Fail",
-        trailer: "https://www.youtube.com/watch?v=J8YX5R3QX0k",
-        video: "https://www.youtube.com/watch?v=J8YX5R3QX0k",
-        poster: "/movies.png",
-        plot: "Based on the true story of IPS officer Manoj Kumar Sharma, 12th Fail sheds limelight on fearlessly embracing the idea of restarting the academic journey despite the setbacks and challenges and reclaiming one's destiny at a place where millions of students attempt the world's toughest competitive exam: UPSC.",
-    }])
+  const [data, setData] = React.useState({genres: [], languages: []})
+  const [filteredMovies, setFilteredMovies] = React.useState([])
   const handleChange = (option,title) => {
     console.log(option,title)
     setData((prev) => {
@@ -196,7 +190,6 @@ const FilterPage = () => {
         ...prev,
         [title.toLowerCase()]: option.map((item) => item.value)
       }
-      console.log(next)
       return next
     })
   }
@@ -215,6 +208,7 @@ const FilterPage = () => {
     console.log(data)
     const filteredMovie = await filterMovies(data)
     setFilteredMovies(filteredMovie)
+    console.log(filteredMovie)
   }
   return (
     <Grid
@@ -254,7 +248,7 @@ const FilterPage = () => {
         </Button>
       </Grid>
             <Grid item xs={12} sx={{ p: 0 }}>
-        <SearchResults data={filteredMovies} />
+        {filterMovies && filterMovies.length > 0 && <SearchResults data={filteredMovies} />}
       </Grid>
     </Grid>
   );

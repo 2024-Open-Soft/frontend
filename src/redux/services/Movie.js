@@ -54,9 +54,10 @@ export const getMovie = async (dispatch, id) => {
 
 export const filterMovies = async (queries) => {
     try {
-        const url = `/movie/filter/?genre=${queries.genres.join(",")}&language=${queries.languages.join(",")}&rating=${queries.rating}`
+        console.log("Queries:",queries)
+        const url = `/movie/filter/?genres=${queries.genres.join(",")}&languages=${queries.languages.join(",")}&rating=${queries.rating ? queries.rating : ""}`
         console.log(url)
-        const response = await axios.get(`/movie/filter/?genres=${queries.genres.join(",")}&languages=${queries.languages.join(",")}&rating=${queries.rating}`);
+        const response = await axios.get(url);
         const data = response.data.data;
         console.log("response:",response)
         return data;
