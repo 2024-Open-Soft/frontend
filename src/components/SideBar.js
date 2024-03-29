@@ -9,6 +9,7 @@ import PersonOutlineRoundedIcon from "@mui/icons-material/PersonOutlineRounded";
 import ShopOutlinedIcon from "@mui/icons-material/ShopOutlined";
 // import PendingOutlinedIcon from "@mui/icons-material/PendingOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
+import LoginIcon from "@mui/icons-material/Login";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import createToast from "../utils/createToast";
 import { logout } from "../redux/services/User";
@@ -30,6 +31,7 @@ export const SideBar = () => {
     left: "2%",
     width: "70px",
     height: "392px",
+    zIndex: 100,
     alignItems: "center",
     justifyContent: "center",
     backdropFilter: "blur(15px)",
@@ -130,16 +132,35 @@ export const SideBar = () => {
             <PersonOutlineRoundedIcon />
           </Button>
         </Link>
-        <Button
-          variant="contained"
-          sx={{
-            ...buttonStyle,
-            background: "transparent",
-          }}
-          onClick={handleLogOut}
-        >
-          <LogoutIcon />
-        </Button>
+        {localStorage.getItem("token") === null ? (
+          <Link to="/login" style={linkStyle}>
+            <Button
+              variant="contained"
+              sx={{
+                ...buttonStyle,
+                background:
+                  location?.pathname === "/login"
+                    ? "rgba(255,255,255,0.2)"
+                    : "transparent"
+              }}
+            >
+              <LoginIcon />
+            </Button>
+          </Link>
+        ) : (
+          <Button
+            variant="contained"
+            sx={{
+              ...buttonStyle,
+              background: "transparent",
+            }}
+            onClick={handleLogOut}
+          >
+            <LogoutIcon />
+          </Button>
+        )}
+
+
       </Box>
     </>
   );
