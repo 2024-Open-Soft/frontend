@@ -6,7 +6,8 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import axios from "axios";
-axios.defaults.baseURL = process.env.BACKEND_URL;
+// axios.defaults.baseURL = process.env.BACKEND_URL;
+axios.defaults.baseURL = "http://localhost:3001/";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
