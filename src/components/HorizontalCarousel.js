@@ -8,69 +8,8 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { Link } from "react-router-dom";
 
-const HorizontalCarousel = ({ title, poster, width, top }) => {
-  const [data, setData] = useState([
-    {
-      movieId: 1,
-      poster: null,
-      title: "Interstellar",
-    },
-    {
-      movieId: 2,
-      poster: null,
-      title: "Interstellar",
-    },
-    {
-      movieId: 3,
-      poster: null,
-      title: "Interstellar",
-    },
-    {
-      movieId: 4,
-      poster: null,
-      title: "Interstellar",
-    },
-    {
-      movieId: 5,
-      poster: null,
-      title: "Interstellar",
-    },
-    {
-      movieId: 6,
-      poster: null,
-      title: "Interstellar",
-    },
-    {
-      movieId: 7,
-      poster: null,
-      title: "Interstellar",
-    },
-    {
-      movieId: 8,
-      poster: null,
-      title: "Interstellar",
-    },
-    {
-      movieId: 9,
-      poster: null,
-      title: "Interstellar",
-    },
-    {
-      movieId: 10,
-      poster: null,
-      title: "Interstellar",
-    },
-    {
-      movieId: 11,
-      poster: null,
-      title: "Interstellar",
-    },
-    {
-      movieId: 12,
-      poster: null,
-      title: "Interstellar",
-    },
-  ]);
+const HorizontalCarousel = ({ title, poster, width, top, movies=[] }) => {
+  const [data, setData] = useState(movies.length ? [...movies] : [])
 
   const ref = useRef(null);
 
@@ -163,13 +102,10 @@ const HorizontalCarousel = ({ title, poster, width, top }) => {
         <Slider {...settings}>
           {data?.map((item, index) => (
             <div key={index}>
-              <Link
-                to={`/movie/${item.movieId}`}
-                style={{ textDecoration: "none" }}
-              >
+              <Link to={`/movie/${item._id}`} style={{ textDecoration: "none" }}>
                 <Box sx={boxStyle}>
                   <img
-                    src={poster ? poster : MoviePoster}
+                    src={item.poster ? item.poster : MoviePoster}
                     alt="movie-poster"
                     style={imageStyle}
                     ref={ref}
