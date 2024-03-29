@@ -4,7 +4,8 @@ import createToast from "../../utils/createToast";
 
 export async function fetchUserData(dispatch) {
   try {
-    if (localStorage.getItem("token")) {
+    if ( localStorage.getItem("token") &&
+    !(localStorage.getItem("token") === "undefined")) {
       const config = {
         headers: {
           "Content-type": "application/json",
@@ -77,6 +78,7 @@ export const logout = async (dispatch) => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     };
+
     const response = await axios.get("/user/logout", config);
     dispatch(setUser(null));
     localStorage.removeItem("token");

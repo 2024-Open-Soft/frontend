@@ -87,7 +87,8 @@ const HorizontalCarousel = ({ title, poster, width, top, movies=[] }) => {
     infinite: false,
     speed: 500,
     slidesToScroll: 1,
-    slidesToShow: (window.innerWidth - parseInt(width) - 20) / (parseInt(width) + 20),
+    slidesToShow:
+      (window.innerWidth - parseInt(width) - 20) / (parseInt(width) + 20),
     arrows: true,
     swipeToSlide: true,
     nextArrow: <CustomNextArrow />,
