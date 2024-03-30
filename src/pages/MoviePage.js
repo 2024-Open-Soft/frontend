@@ -22,7 +22,6 @@ const MoviePage = () => {
     const res = await getMovie(dispatch, id);
     setData(res)
   }
-
   useEffect(() => {
     fetchData(id);
   }, [])
@@ -52,7 +51,7 @@ const MoviePage = () => {
 
   return (
     <>
-      { urls && type && urls.length > 0 && <VideoPlayer urls={urls} type={type} id={id} />}
+      { urls && type && urls.length > 0 && <VideoPlayer urls={urls} type={type} id={id} timestamp={user.history.find((item) => item._id === id)?.timeStamp} />}
       <Grid
         container
         spacing={2}

@@ -27,7 +27,7 @@ const Home = () => {
         {!isMobile && (
           <>
             <a href="/" className=" fixed mt-3 flex  left-[1%] z-50">
-              <img src="/Logo.svg" alt="WHO" className="w-36 " />
+              <img src="/Logo_Final.png" alt="WHO" className="w-36 " />
             </a>
             <SideBar />
           </>

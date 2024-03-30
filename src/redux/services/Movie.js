@@ -9,10 +9,10 @@ export const getMovies = async (page) => {
         const data = response.data.data;
         return data;
     } catch (error) {
-        if (error?.response?.data?.error?.startsWith("Token expired")) {
+        if (error?.response?.data?.error || "An error occurred"?.startsWith("Token expired")) {
             localStorage.removeItem("token");
         }
-        createToast(error?.response?.data?.error, "error");
+        createToast(error?.response?.data?.error || "An error occurred", "error");
         console.error(error);
     }
 }
@@ -24,10 +24,10 @@ export const getLatestMovies = async (page) => {
         const data = response.data.data;
         return data;
     } catch (error) {
-        if (error?.response?.data?.error?.startsWith("Token expired")) {
+        if (error?.response?.data?.error || "An error occurred"?.startsWith("Token expired")) {
             localStorage.removeItem("token");
         }
-        createToast(error?.response?.data?.error, "error");
+        createToast(error?.response?.data?.error || "An error occurred", "error");
         console.error(error);
     }
 }
@@ -38,10 +38,10 @@ export const getUpcomingMovies = async (page) => {
         const data = response.data.data;
         return data;
     } catch (error) {
-        if (error?.response?.data?.error?.startsWith("Token expired")) {
+        if (error?.response?.data?.error || "An error occurred"?.startsWith("Token expired")) {
             localStorage.removeItem("token");
         }
-        createToast(error?.response?.data?.error, "error");
+        createToast(error?.response?.data?.error || "An error occurred", "error");
         console.error(error);
     }
 }
@@ -53,10 +53,10 @@ export const getMovie = async (dispatch, id) => {
         const data = response.data.data;
         return data;
     } catch (error) {
-        if (error?.response?.data?.error?.startsWith("Token expired")) {
+        if (error?.response?.data?.error || "An error occurred"?.startsWith("Token expired")) {
             localStorage.removeItem("token");
         }
-        createToast(error?.response?.data?.error, "error");
+        createToast(error?.response?.data?.error || "An error occurred", "error");
         console.error(error);
     }
 }

@@ -163,6 +163,11 @@ const Login = () => {
                     LOGIN
                 </Button>
                 <Typography align="left">
+                    <Link to="/forgot-password" variant="body2">
+                        {"Forgot Password?"}
+                    </Link>
+                </Typography>
+                <Typography align="left" sx={{ mt: 2 }}>
                     <Link to="/signup" variant="body2">
                         {"Don't have an account? Sign Up"}
                     </Link>

@@ -15,13 +15,13 @@ export const postComment = async (dispatch, payload) => {
         // console.log("data: ", data)
         return data;
     } catch (error) {
-        if(error?.response?.data?.error?.startsWith("Token expired")){
+        if(error?.response?.data?.error || "An error occurred"?.startsWith("Token expired")){
             try{
                 logout(dispatch);
             }catch(e){}
             localStorage.removeItem("token");
         }
-        createToast(error?.response?.data?.error, "error");
+        createToast(error?.response?.data?.error || "An error occurred", "error");
         console.error(error);
     }
 }
@@ -37,7 +37,7 @@ export const getComments = async (movie_id) => {
         return data;
     }
     catch (error) {
-        createToast(error?.response?.data?.error, "error");
+        createToast(error?.response?.data?.error || "An error occurred", "error");
         console.error(error);
     }
 }
@@ -55,7 +55,7 @@ export const editComment = async (dispatch, payload) => {
         console.log("data: ", data)
         return data;
     } catch (error) {
-        if(error?.response?.data?.error?.startsWith("Token expired")){
+        if(error?.response?.data?.error || "An error occurred"?.startsWith("Token expired")){
             try{
                 logout();
             } catch(e){}

@@ -43,7 +43,7 @@ function VerticalCarousel({ data, handleChange }) {
             borderRadius: "10px",
             padding: "10px",
             width: "fit-content",
-            right: "0",
+            right: "-25px",
             border: "0",
             boxSizing: "border-box",
             height: "100%",
