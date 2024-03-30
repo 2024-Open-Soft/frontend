@@ -20,6 +20,8 @@ export async function fetchUserData(dispatch, navigate) {
       return data;
     }
   } catch (error) {
+    if (error?.response?.data?.error?.startsWith("Token expired"))
+      localStorage.removeItem("token");
     createToast(error?.response?.data?.error, "error");
     createToast("Please Re-Login", "error");
     localStorage.removeItem("token");
@@ -53,7 +55,8 @@ export async function editUserData(dispatch, data) {
       return response;
     }
   } catch (error) {
-    createToast("Error in editing user data", "error");
+    if (error?.response?.data?.error?.startsWith("Token expired"))
+      localStorage.removeItem("token");
     createToast(error?.response?.data?.error, "error");
     console.log(error);
   }
@@ -70,8 +73,11 @@ export const login = async (dispatch, payload) => {
     createToast("Logged in successfully", "success");
     return response;
   } catch (error) {
+    if (error?.response?.data?.error?.startsWith("Token expired"))
+      localStorage.removeItem("token");
     createToast(error?.response?.data?.error, "error");
     console.log(error);
+    return error;
   }
 };
 
@@ -90,7 +96,8 @@ export const logout = async (dispatch) => {
     createToast("Logged out successfully", "success");
     return response;
   } catch (error) {
-    createToast("Error in logging out", "error");
+    if (error?.response?.data?.error?.startsWith("Token expired"))
+      localStorage.removeItem("token");
     createToast(error?.response?.data?.error, "error");
     console.log(error?.response?.data?.error);
   }
