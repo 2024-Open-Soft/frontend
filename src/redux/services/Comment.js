@@ -1,7 +1,8 @@
 import axios from 'axios';
 import createToast from '../../utils/createToast';
+import { logout } from './User';
 
-export const postComment = async (payload) => {
+export const postComment = async (dispatch, payload) => {
     try {
         const headers = {
             "Content-type": "application/json",
@@ -14,7 +15,12 @@ export const postComment = async (payload) => {
         // console.log("data: ", data)
         return data;
     } catch (error) {
-        createToast("Error in posting comment", "error");
+        if(error?.response?.data?.error?.startsWith("Token expired")){
+            try{
+                logout(dispatch);
+            }catch(e){}
+            localStorage.removeItem("token");
+        }
         createToast(error?.response?.data?.error, "error");
         console.error(error);
     }
@@ -31,13 +37,12 @@ export const getComments = async (movie_id) => {
         return data;
     }
     catch (error) {
-        createToast("Error in getting comments", "error");
         createToast(error?.response?.data?.error, "error");
         console.error(error);
     }
 }
 
-export const editComment = async (payload) => {
+export const editComment = async (dispatch, payload) => {
     try {
         const headers = {
             "Content-type": "application/json",
@@ -50,6 +55,12 @@ export const editComment = async (payload) => {
         console.log("data: ", data)
         return data;
     } catch (error) {
+        if(error?.response?.data?.error?.startsWith("Token expired")){
+            try{
+                logout();
+            } catch(e){}
+            localStorage.removeItem("token");
+        }
         createToast("Error in posting comment", "error")
         console.error(error);
     }

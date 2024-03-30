@@ -1,5 +1,6 @@
 import axios from 'axios';
 import createToast from '../../utils/createToast';
+import { logout } from './User';
 
 export const getMovies = async (page) => {
     try {
@@ -7,7 +8,9 @@ export const getMovies = async (page) => {
         const data = response.data.data;
         return data;
     } catch (error) {
-        createToast("Error in getting movies", "error");
+        if(error?.response?.data?.error?.startsWith("Token expired")){
+            localStorage.removeItem("token");
+        }
         createToast(error?.response?.data?.error, "error");
         console.error(error);
     }
@@ -19,7 +22,9 @@ export const getLatestMovies = async (page) => {
         const data = response.data.data;
         return data;
     } catch (error) {
-        createToast("Error in getting latest movies", "error");
+        if(error?.response?.data?.error?.startsWith("Token expired")){
+            localStorage.removeItem("token");
+        }
         createToast(error?.response?.data?.error, "error");
         console.error(error);
     }
@@ -31,7 +36,9 @@ export const getUpcomingMovies = async (page) => {
         const data = response.data.data;
         return data;
     } catch (error) {
-        createToast("Error in getting upcoming movies", "error");
+        if(error?.response?.data?.error?.startsWith("Token expired")){
+            localStorage.removeItem("token");
+        }
         createToast(error?.response?.data?.error, "error");
         console.error(error);
     }
@@ -44,7 +51,9 @@ export const getMovie = async (dispatch, id) => {
         const data = response.data.data;
         return data;
     } catch (error) {
-        createToast("Error in getting movie", "error");
+        if(error?.response?.data?.error?.startsWith("Token expired")){
+            localStorage.removeItem("token");
+        }
         createToast(error?.response?.data?.error, "error");
         console.error(error);
     }

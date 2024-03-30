@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { editComment } from "../redux/services/Comment";
 
 const inputStyle = {
@@ -13,6 +13,7 @@ const inputStyle = {
 };
 
 const CommentBox = ({ cmnt }) => {
+  const dispatch = useDispatch();
   const [commentInfo, setCommentInfo] = useState(cmnt);
   const [inputField, setInputField] = useState(commentInfo?.text);
   const [isEditing, setIsEditing] = useState(false);
@@ -59,7 +60,7 @@ const CommentBox = ({ cmnt }) => {
       comment: inputField,
     }
     setIsEditing(false);
-    const res = await editComment(payload);
+    const res = await editComment(dispatch, payload);
     setCommentInfo({ ...commentInfo, text: inputField });
   };
 
