@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { VideoPlayer } from "../components/VideoPlayer";
 import { getMovieURLs } from "../redux/services/Movie";
 import createToast from "../utils/createToast";
+
 const MoviePage = () => {
   const dispatch = useDispatch()
   const [data, setData] = useState(null)

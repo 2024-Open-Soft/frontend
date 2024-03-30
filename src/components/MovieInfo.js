@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToWatchLater, removeFromWatchLater } from "../redux/services/WatchLater";
 import { Link } from "react-router-dom";
 
+
 const MovieInfo = ({ data, handleTrailerClick, handleWatchClick }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state?.user.data);

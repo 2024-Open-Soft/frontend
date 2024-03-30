@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const createToast = (text, type, time = 2) => {
 
-    toast.dismiss();
+    // toast.dismiss();
 
     const properties = {
         position: "bottom-right",

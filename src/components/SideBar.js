@@ -7,17 +7,20 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 // import TrendingUpRoundedIcon from "@mui/icons-material/TrendingUpRounded";
 import PersonOutlineRoundedIcon from "@mui/icons-material/PersonOutlineRounded";
 import ShopOutlinedIcon from "@mui/icons-material/ShopOutlined";
+import LoginIcon from "@mui/icons-material/Login";
 // import PendingOutlinedIcon from "@mui/icons-material/PendingOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import createToast from "../utils/createToast";
 import { logout } from "../redux/services/User";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export const SideBar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const user = useSelector((state) => state?.user.data);
 
   const isMobile = useMediaQuery("(max-width:600px)");
   const boxStyle = {
@@ -29,7 +32,7 @@ export const SideBar = () => {
     top: "20%",
     left: "2%",
     width: "70px",
-    height: "392px",
+    height: user ? "372px" : "312px",
     alignItems: "center",
     justifyContent: "center",
     backdropFilter: "blur(15px)",
@@ -55,7 +58,7 @@ export const SideBar = () => {
   const handleLogOut = async () => {
     await logout(dispatch);
     navigate("/");
-  }
+  };
 
   return (
     <>
@@ -116,30 +119,49 @@ export const SideBar = () => {
             <ShopOutlinedIcon />
           </Button>
         </Link>
-        <Link to="/profile" style={linkStyle}>
-          <Button
-            variant="contained"
-            sx={{
-              ...buttonStyle,
-              background:
-                location?.pathname === "/profile"
-                  ? "rgba(255,255,255,0.2)"
-                  : "transparent",
-            }}
-          >
-            <PersonOutlineRoundedIcon />
-          </Button>
-        </Link>
-        <Button
-          variant="contained"
-          sx={{
-            ...buttonStyle,
-            background: "transparent",
-          }}
-          onClick={handleLogOut}
-        >
-          <LogoutIcon />
-        </Button>
+        {user ? (
+          <>
+            <Link to="/profile" style={linkStyle}>
+              <Button
+                variant="contained"
+                sx={{
+                  ...buttonStyle,
+                  background:
+                    location?.pathname === "/profile"
+                      ? "rgba(255,255,255,0.2)"
+                      : "transparent",
+                }}
+              >
+                <PersonOutlineRoundedIcon />
+              </Button>
+            </Link>
+            <Button
+              variant="contained"
+              sx={{
+                ...buttonStyle,
+                background: "transparent",
+              }}
+              onClick={handleLogOut}
+            >
+              <LogoutIcon />
+            </Button>
+          </>
+        ) : (
+          <Link to="/login" style={linkStyle}>
+            <Button
+              variant="contained"
+              sx={{
+                ...buttonStyle,
+                background:
+                  location?.pathname === "/login"
+                    ? "rgba(255,255,255,0.2)"
+                    : "transparent",
+              }}
+            >
+              <LoginIcon />
+            </Button>
+          </Link>
+        )}
       </Box>
     </>
   );

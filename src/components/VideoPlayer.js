@@ -78,12 +78,11 @@ export const VideoPlayer = ({urls,type,timestamp=0,id}) => {
         }
     }
     , [urls,type])
+
     return (
-        <div className="App">
         <div data-vjs-player>
-        <video ref={videoRef} className="video-js vjs-default-skin" controls preload="auto"
-        style = {{height:"100vh",width:"100%"}}/>
-        </div>
+          <video ref={videoRef} className="video-js vjs-default-skin" controls preload="auto"
+          style = {{height:"100vh",width:"100%"}}/>
         </div>
     );
 }
