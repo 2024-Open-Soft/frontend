@@ -54,28 +54,35 @@ const SearchResults = ({ moviesData, handleLoad, isSemantic, setMovieId }) => {
         });
         setData({ count: newCount, movies: newMovies });
         setMovieId(newMovies[0]?._id);
-        queryClient.invalidateQueries({ queryKey: ["semantic"] });
+
+        setTimeout(
+          () => queryClient.invalidateQueries({ queryKey: ["topmovie"] }),
+          800
+        );
       }
     }
   }, [moviesData, moviesData?.pages, isSemantic, queryClient]);
 
   useEffect(() => {
     if (!moviesData) return;
+    console.log("moviesData: ", moviesData);
+    console.log("value: ", paginateVars.value);
     const newData = {
       count:
         moviesData?.count +
         (moviesData.other.value !== paginateVars.value ? 0 : data.count),
       movies: [
-        ...moviesData.movies,
         ...(moviesData.other.value !== paginateVars.value ? [] : data.movies),
+        ...moviesData.movies,
       ],
     };
     setMovieId(newData.movies[0]?._id);
     setData(newData);
-    setTimeout(
-      () => queryClient.invalidateQueries({ queryKey: ["topmovie"] }),
-      800
-    );
+    if (moviesData?.other.value !== paginateVars.value)
+      setTimeout(
+        () => queryClient.invalidateQueries({ queryKey: ["topmovie"] }),
+        800
+      );
     if (moviesData && moviesData.other) {
       setPaginateVars(moviesData?.other);
     }
