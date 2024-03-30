@@ -36,6 +36,8 @@ const SearchTopResult = ({ movieId }) => {
     textTransform: "uppercase",
   };
 
+  const token = localStorage.getItem("token");
+
   return (
     <>
       {data && (
@@ -51,12 +53,14 @@ const SearchTopResult = ({ movieId }) => {
                   {data?.title}
                 </Typography>
                 <Container className="p-2 m-4">
-                  <Button className="bg-red-600 rounded-full px-6 py-3">
-                    <PlayCircleOutlineIcon className="mr-2" />
-                    <Typography className="text-gray-200 font-medium">
-                      Watch
-                    </Typography>
-                  </Button>
+                  {token && token !== "undefied" && (
+                    <Button className="bg-red-600 rounded-full px-6 py-3">
+                      <PlayCircleOutlineIcon className="mr-2" />
+                      <Typography className="text-gray-200 font-medium">
+                        Watch
+                      </Typography>
+                    </Button>
+                  )}
                   <Button className="bg-slate-700/50 rounded-full px-6 py-3 mx-3 hover:bg-slate-300/75">
                     <Typography className="text-gray-200 font-medium">
                       Trailer
