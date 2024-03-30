@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { Box, Button, Grid, Link, TextField, Typography } from "@mui/material";
+import { Button, Grid, Link, TextField, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { register } from "../redux/services/SignUp";
@@ -38,7 +38,6 @@ const Register = ({ setStep }) => {
         required
         fullWidth
         id="name"
-        // label="Enter email"
         name="name"
         autoComplete="text"
         autoFocus
@@ -54,7 +53,6 @@ const Register = ({ setStep }) => {
         required
         fullWidth
         name="password"
-        // label="Password"
         type="password"
         id="password"
         autoComplete="current-password"
@@ -64,7 +62,6 @@ const Register = ({ setStep }) => {
       />
       <Button
         type="submit"
-        // fullWidth
         variant="contained"
         sx={{ mt: 3, mb: 2 }}
         onClick={handleSubmit}

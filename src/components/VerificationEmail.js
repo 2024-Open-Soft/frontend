@@ -2,16 +2,12 @@ import React, { useState } from "react";
 import {
   Box,
   Button,
-  CssBaseline,
   Grid,
   Link,
-  Paper,
   TextField,
   Typography,
 } from "@mui/material";
 import "./style.css";
-import Autocomplete from "@mui/material/Autocomplete";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { MuiOtpInput } from "mui-one-time-password-input";
 import { generateOTP, verifyOTP } from "../redux/services/SignUp";
 
@@ -64,7 +60,6 @@ const VerificationEmail = ({ setStep }) => {
     >
       <Box
         component="form"
-        // noValidate
         display="flex"
         flexDirection={"column"}
         onSubmit={handleSubmit}
@@ -177,7 +172,6 @@ const VerificationEmail = ({ setStep }) => {
         </Box>
         <Button
           type="submit"
-          // fullWidth
           variant="contained"
           sx={{
             mt: 2,

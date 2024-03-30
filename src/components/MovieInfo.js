@@ -3,17 +3,14 @@ import StarIcon from "@mui/icons-material/Star";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
-import { Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { addToWatchLater, removeFromWatchLater } from "../redux/services/WatchLater";
-import { Link } from "react-router-dom";
 
-const MovieInfo = ({ data }) => {
-  
+const MovieInfo = ({ data, handleTrailerClick, handleWatchClick }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state?.user.data);
 
-  const [addedToWatchlist, setAddedToWatchlist] = useState(false);
+  const [addedToWatchlist, setAddedToWatchlist] = useState(user && user?.data?.watchlist.filter((movie) => movie._id === data._id).length ? true : false);
 
   const handleAddToWatchlist = () => {
     try {
@@ -70,31 +67,33 @@ const MovieInfo = ({ data }) => {
             </div>
           </div>
           <div className="flex flex-row items-center gap-[0.75rem] mb-[1rem] lg:text-[1.125rem] text-[1.063rem]">
-            {user && <div className=" bg-[rgb(255,_63,_63)] p-[0.313rem] lg:p-[0.5rem]  pl-[3%] pr-[4%] lg:pl-[2%] lg:pr-[3%] rounded-[1.563rem] cursor-pointer [transition:0.5s_all] hover:[box-shadow:0.188rem_0.188rem_0.313rem_rgba(0,_0,_0,_0.474)]">
-              <Link to={`/movie/${data?._id}`}
+            {
+              user && user.activeSubscription && 
+              <div className=" bg-[rgb(255,_63,_63)] p-[0.313rem] lg:p-[0.5rem]  pl-[3%] pr-[4%] lg:pl-[2%] lg:pr-[3%] rounded-[1.563rem] cursor-pointer [transition:0.5s_all] hover:[box-shadow:0.188rem_0.188rem_0.313rem_rgba(0,_0,_0,_0.474)]">
+              <div onClick={() => handleWatchClick(data._id)}
                 className="no-underline text-[white] flex flex-row items-center justify-between"
               >
                 <div className="relative top-[0.125rem] mr-[0.313rem]">
                   <PlayCircleOutlineIcon />
                 </div>
                 Watch
-              </Link>
+              </div>
             </div>}
             <div className="rounded-[1.563rem] p-[0.625rem] lg:p-[0.75rem] lg:pl-[3%] lg:pr-[3%] pl-[6%] pr-[6%] backdrop-filter backdrop-blur-[10px] bg-[rgba(255,_255,_255,_0.08)] cursor-pointer [transition:0.5s_all] hover:[box-shadow:0.188rem_0.188rem_0.313rem_rgba(0,_0,_0,_0.474)]">
-              <Link to={`/movie/${data?._id}`}
-                href={"#"}
+              <div onClick={() => handleTrailerClick(data._id)}
                 className="no-underline text-[white]"
               >
                 Trailer
-              </Link>
+              </div>
             </div>
-            {user && <div className="rounded-[1.563rem] backdrop-filter backdrop-blur-[10px] flex justify-center items-center p-[0.55rem] lg:p-[0.75rem] bg-[rgba(255,_255,_255,_0.08)] cursor-pointer [transition:0.5s_all] hover:[box-shadow:0.188rem_0.188rem_0.313rem_rgba(0,_0,_0,_0.474)]"
-              onClick={handleAddToWatchlist}
-            >
-              {
-                !addedToWatchlist ? <AddCircleOutlineIcon /> : <BookmarkIcon className="add-to-watchlist" />
-              }
-            </div>
+            {
+              user && <div className="rounded-[1.563rem] backdrop-filter backdrop-blur-[10px] flex justify-center items-center p-[0.55rem] lg:p-[0.75rem] bg-[rgba(255,_255,_255,_0.08)] cursor-pointer [transition:0.5s_all] hover:[box-shadow:0.188rem_0.188rem_0.313rem_rgba(0,_0,_0,_0.474)]"
+                onClick={handleAddToWatchlist}
+              >
+                {
+                  !addedToWatchlist ? <AddCircleOutlineIcon /> : <BookmarkIcon className="add-to-watchlist" />
+                }
+              </div>
             }
           </div>
           <div className="flex flex-row items-center mb-[1.75rem] text-[0.813rem] font-bold">

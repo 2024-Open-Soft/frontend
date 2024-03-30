@@ -6,7 +6,6 @@ import "slick-carousel/slick/slick-theme.css";
 import {
   Box,
   Button,
-  Divider,
   LinearProgress,
   Typography,
 } from "@mui/material";
@@ -21,11 +20,7 @@ const HorizontalCarousel = ({ title, poster, width, top, movies = [], removeFrom
 
   const watchedDurations = movies.map((item) => {
     if (!item.timeStamp) return 0;
-
-    const [hours, minutes, seconds] = item.timeStamp
-      .split(":")
-      .map((item) => parseInt(item));
-    return hours * 60 + minutes + seconds / 60;
+    return item.timeStamp;
   });
 
   const watchedProgresses = movies.map((item, index) => {
@@ -67,10 +62,6 @@ const HorizontalCarousel = ({ title, poster, width, top, movies = [], removeFrom
   };
 
   const boxStyle = {
-    "&:hover": {
-      // border: "2px solid #FFFFFF",
-      // transform: "scale(1.02)",
-    },
     position: "relative",
     width: "fit-content",
     transition: "all 0.3s ease-in-out",
@@ -172,7 +163,7 @@ const HorizontalCarousel = ({ title, poster, width, top, movies = [], removeFrom
                       style={imageStyle}
                       ref={ref}
                     />
-                    {watchedProgresses[index] != 0 && (
+                    {watchedProgresses[index] !== 0 && (
                       <LinearProgress
                         sx={{
                           backgroundColor: "rgba(255,255,255,0.38)",

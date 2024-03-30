@@ -1,17 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Button, useMediaQuery } from "@mui/material";
 
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-// import TrendingUpRoundedIcon from "@mui/icons-material/TrendingUpRounded";
 import PersonOutlineRoundedIcon from "@mui/icons-material/PersonOutlineRounded";
 import ShopOutlinedIcon from "@mui/icons-material/ShopOutlined";
 import LoginIcon from "@mui/icons-material/Login";
-// import PendingOutlinedIcon from "@mui/icons-material/PendingOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
+import TuneIcon from '@mui/icons-material/Tune';
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import createToast from "../utils/createToast";
 import { logout } from "../redux/services/User";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -32,7 +30,7 @@ export const SideBar = () => {
     top: "20%",
     left: "2%",
     width: "70px",
-    height: user ? "372px" : "312px",
+    height: user ? "432px" : "372px",
     alignItems: "center",
     justifyContent: "center",
     backdropFilter: "blur(15px)",
@@ -91,6 +89,21 @@ export const SideBar = () => {
             <SearchIcon />
           </Button>
         </Link>
+        <Link to="/filter" style={linkStyle}>
+          <Button
+            variant="contained"
+            sx={{
+              ...buttonStyle,
+              background:
+                location?.pathname === "/filter"
+                  ? "rgba(255,255,255,0.2)"
+                  : "transparent",
+            }}
+          >
+            <TuneIcon />
+          </Button>
+        </Link>
+
         <Link to="/watchlist" style={linkStyle}>
           <Button
             variant="contained"

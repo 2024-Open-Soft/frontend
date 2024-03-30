@@ -2,16 +2,12 @@ import { Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import SubscriptionPlan from "../components/SubscriptionPlan";
 import SubscriptionForm from "../components/SubscriptionForm";
-import { useSelector } from "react-redux";
 import { getSubscriptionPlans } from "../redux/services/Subscription";
 
 const SubscriptionPage = () => {
   const [plans, setPlans] = useState(null);
 
   const [selectedPlan, setSelectedPlan] = useState(null);
-
-  const subscriptions = useSelector((state) => state?.user?.subscriptions)
-
 
   const handlePlanChange = (selectedPlan) => {
     setSelectedPlan(selectedPlan);
@@ -20,7 +16,6 @@ const SubscriptionPage = () => {
   const getData = async () => {
     try {
       const response = await getSubscriptionPlans();
-      // console.log("response: ", response.data)
       setPlans(response.data);
     }
     catch (error) {

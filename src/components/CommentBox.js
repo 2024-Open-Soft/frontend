@@ -51,7 +51,6 @@ const CommentBox = ({ cmnt }) => {
     setIsEditing(value);
   };
 
-  //   const [commentAuthor, setCommentAuthor] = useState(true);
   const handleEditComment = async (e) => {
     e.preventDefault();
 

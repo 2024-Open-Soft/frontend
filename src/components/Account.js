@@ -1,4 +1,4 @@
-import { Avatar, Grid, TextField, Typography, Button, Box, Divider } from '@mui/material';
+import { Avatar, Grid, Typography, Button, Box } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import DoneIcon from '@mui/icons-material/Done';
@@ -6,7 +6,6 @@ import "../components/style.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { editUserData, logout } from "../redux/services/User";
-import createToast from '../utils/createToast';
 
 const Account = () => {
     const user = useSelector((state) => state?.user.data);
@@ -40,12 +39,10 @@ const Account = () => {
         setDisabled(newArray);
 
         if(index === 3 && !newArray[3]){
-            // console.log("Password Changing")
             setData({...data, password: ""})
         }
 
         if(index === 3 && newArray[3]){
-            // console.log("Password Changed")
             editUserData(dispatch, {
                 genres: user ? user.genres || []: [],
                 languages: user ? user.languages || [] : [],
@@ -54,7 +51,6 @@ const Account = () => {
         }
 
         if(index === 0 && newArray[0]){
-            // console.log("Name Changed")
             editUserData(dispatch, {
                 name: data?.name,
                 genres: user ? user.genres || []: [],

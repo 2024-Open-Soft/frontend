@@ -20,9 +20,9 @@ export async function fetchUserData(dispatch, navigate) {
       return data;
     }
   } catch (error) {
-    if (error?.response?.data?.error?.startsWith("Token expired"))
+    if (error?.response?.data?.error || "An error occurred"?.startsWith("Token expired"))
       localStorage.removeItem("token");
-    createToast(error?.response?.data?.error, "error");
+    createToast(error?.response?.data?.error || "An error occurred", "error");
     createToast("Please Re-Login", "error");
     localStorage.removeItem("token");
     console.log(error);
@@ -50,33 +50,28 @@ export async function editUserData(dispatch, data) {
       const resData = response.data.data;
       createToast(response.data.message, "success");
       fetchUserData(dispatch);
-      // console.log("data: ", resData)
       dispatch(setUser(resData.user));
       return response;
     }
   } catch (error) {
-    if (error?.response?.data?.error?.startsWith("Token expired"))
+    if (error?.response?.data?.error || "An error occurred"?.startsWith("Token expired"))
       localStorage.removeItem("token");
-    createToast(error?.response?.data?.error, "error");
-    console.log(error);
+    createToast(error?.response?.data?.error || "An error occurred", "error");
   }
 }
 
 export const login = async (dispatch, payload) => {
   try {
-    // console.log("payload: ", payload);
     const response = await axios.post("/user/login", payload);
     const data = response.data.data;
-    // console.log("data: ", data);
     dispatch(setUser(data.user));
     localStorage.setItem("token", response.data.data.token);
     createToast("Logged in successfully", "success");
     return response;
   } catch (error) {
-    if (error?.response?.data?.error?.startsWith("Token expired"))
+    if (error?.response?.data?.error || "An error occurred"?.startsWith("Token expired"))
       localStorage.removeItem("token");
-    createToast(error?.response?.data?.error, "error");
-    console.log(error);
+    createToast(error?.response?.data?.error || "An error occurred", "error");
     return error;
   }
 };
@@ -96,9 +91,8 @@ export const logout = async (dispatch) => {
     createToast("Logged out successfully", "success");
     return response;
   } catch (error) {
-    if (error?.response?.data?.error?.startsWith("Token expired"))
+    if (error?.response?.data?.error || "An error occurred"?.startsWith("Token expired"))
       localStorage.removeItem("token");
-    createToast(error?.response?.data?.error, "error");
-    console.log(error?.response?.data?.error);
+    createToast(error?.response?.data?.error || "An error occurred", "error");
   }
 };

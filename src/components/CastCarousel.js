@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import MoviePoster from "../assets/movie-poster.png";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";

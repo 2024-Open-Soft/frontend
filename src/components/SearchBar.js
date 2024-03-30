@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { InputBase, IconButton, Box, Typography, Button } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
+import { Box, Typography, Button } from '@mui/material';
 import MicIcon from '@mui/icons-material/Mic';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';

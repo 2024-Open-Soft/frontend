@@ -8,20 +8,18 @@ export const postComment = async (dispatch, payload) => {
             "Content-type": "application/json",
             "Authorization": `Bearer ${localStorage.getItem("token")}`,
         }
-        // console.log(payload)
         const response = await axios.post(`/comment`, payload, { headers });
         const data = response.data.data;
         createToast(response.data.message, "success");
-        // console.log("data: ", data)
         return data;
     } catch (error) {
-        if(error?.response?.data?.error?.startsWith("Token expired")){
+        if(error?.response?.data?.error || "An error occurred"?.startsWith("Token expired")){
             try{
                 logout(dispatch);
             }catch(e){}
             localStorage.removeItem("token");
         }
-        createToast(error?.response?.data?.error, "error");
+        createToast(error?.response?.data?.error || "An error occurred", "error");
         console.error(error);
     }
 }
@@ -33,11 +31,10 @@ export const getComments = async (movie_id) => {
         }
         const response = await axios.get(`/comment?${movie_id}`, { headers });
         const data = response.data.data;
-        // console.log(data);
         return data;
     }
     catch (error) {
-        createToast(error?.response?.data?.error, "error");
+        createToast(error?.response?.data?.error || "An error occurred", "error");
         console.error(error);
     }
 }
@@ -48,14 +45,12 @@ export const editComment = async (dispatch, payload) => {
             "Content-type": "application/json",
             "Authorization": `Bearer ${localStorage.getItem("token")}`,
         }
-        console.log(payload)
         const response = await axios.put(`/comment`, payload, { headers });
         const data = response.data.data;
         createToast(response.data.message, "success");
-        console.log("data: ", data)
         return data;
     } catch (error) {
-        if(error?.response?.data?.error?.startsWith("Token expired")){
+        if(error?.response?.data?.error || "An error occurred"?.startsWith("Token expired")){
             try{
                 logout();
             } catch(e){}

@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, {  useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -36,14 +36,13 @@ function VerticalCarousel({ data, handleChange }) {
 
     },
     appendDots: (dots) => {
-      // console.log(dots);
       return (
         <div
           style={{
             borderRadius: "10px",
             padding: "10px",
             width: "fit-content",
-            right: "0",
+            right: "-25px",
             border: "0",
             boxSizing: "border-box",
             height: "100%",

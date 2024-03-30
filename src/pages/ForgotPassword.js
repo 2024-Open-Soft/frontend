@@ -1,20 +1,25 @@
 import { React, useState } from "react";
 import {
-  Box,
   Button,
-  CssBaseline,
   Grid,
-  Link,
-  Paper,
   TextField,
   Typography,
 } from "@mui/material";
+import axios from "axios";
+import createToast from "../utils/createToast";
 
-const Login = () => {
+const ForgotPassword = () => {
   const [email, setEmail] = useState("");
 
   const handleSubmit = async () => {
-    
+    try {
+      const response = await axios.post("/password/forgot", { email });
+
+      createToast(response?.data?.message, "success");
+    }
+    catch (error) {
+      createToast(error?.response?.data?.error || "An error occurred", "error");
+    }
   };
 
   return (
@@ -59,7 +64,6 @@ const Login = () => {
             required
             fullWidth
             id="email"
-            // label="Enter email"
             name="email"
             type="email"
             autoComplete="email"
@@ -70,7 +74,6 @@ const Login = () => {
           />
           <Button
             type="submit"
-            // fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
             onClick={handleSubmit}
@@ -83,4 +86,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgotPassword;

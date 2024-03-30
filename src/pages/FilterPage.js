@@ -183,7 +183,6 @@ const FilterPage = () => {
   const [data, setData] = React.useState({genres: [], languages: []})
   const [filteredMovies, setFilteredMovies] = React.useState([])
   const handleChange = (option,title) => {
-    console.log(option,title)
     setData((prev) => {
       const next = {
         ...prev,
@@ -198,16 +197,12 @@ const FilterPage = () => {
         ...prev,
         rating: option.value
       }
-      console.log(next)
       return next
     })
   }
   const handleClick = async(e) => {
-    console.log("Inside Click")
-    console.log(data)
     const filteredMovie = await filterMovies(data)
     setFilteredMovies(filteredMovie)
-    console.log(filteredMovie)
   }
   return (
     <Grid

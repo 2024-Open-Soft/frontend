@@ -5,7 +5,6 @@ import XIcon from "@mui/icons-material/X";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import { Box } from "@mui/system";
-import CopyrightIcon from "@mui/icons-material/Copyright";
 
 const Footer = () => {
   const linkStyle = { textDecoration: "none", color: "#939393" };
