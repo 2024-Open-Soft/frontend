@@ -12,15 +12,25 @@ import {
 } from "@mui/material";
 import { useSelector } from "react-redux";
 
-const PaymentHistory = () => {
-  const payments = useSelector((state) => state?.user?.data?.payments);
+const SubscriptionHistory = () => {
+  const subscriptions = useSelector((state) => state?.user?.data?.subscriptions);
 
+  const getStartDate = (subscription) => {
+    const date = new Date(subscription.startDate);
+    return `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+  }
+  
+  const getEndDate = (subscription) => {
+    const date = new Date(subscription.startDate);
+    date.setMonth(date.getMonth() + subscription.originalDuration);
+    return `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+  }
 
   return (
     <>
-      {payments ? <Box sx={{ py: 2 }}>
+      {subscriptions ? <Box sx={{ py: 2 }}>
         <Typography variant="h5" sx={{ p: 2, pl: 0 }}>
-          Payment History
+          Subscription History
         </Typography>
         <Table>
           <TableHead>
@@ -41,6 +51,9 @@ const PaymentHistory = () => {
               <TableCell sx={{ border: "none", color: "#FFFFFF" }}>
                 Amount
               </TableCell>
+              <TableCell sx={{ border: "none", color: "#FFFFFF" }}>
+                Start Date
+              </TableCell>
               <TableCell
                 sx={{
                   border: "none",
@@ -49,12 +62,12 @@ const PaymentHistory = () => {
                   borderBottomRightRadius: "20px",
                 }}
               >
-                Status
+                End Date
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {payments?.map((payment, index) => (
+            {subscriptions?.map((subscription, index) => (
               <TableRow
                 key={index}
                 sx={{ "&:hover": { background: "#394A77" } }}
@@ -67,13 +80,16 @@ const PaymentHistory = () => {
                     borderBottomLeftRadius: "20px",
                   }}
                 >
-                  {payment.createdAt.slice(0, 10)}
+                  {subscription.createdAt.slice(0, 10)}
                 </TableCell>
                 <TableCell sx={{ border: "none", color: "#FFFFFF" }}>
-                  {payment.title}
+                  {subscription.title}
                 </TableCell>
                 <TableCell sx={{ border: "none", color: "#FFFFFF" }}>
-                  {payment.amount}
+                  {subscription.price}
+                </TableCell>
+                <TableCell sx={{ border: "none", color: "#FFFFFF" }}>
+                  {getStartDate(subscription)}
                 </TableCell>
                 <TableCell
                   sx={{
@@ -83,7 +99,7 @@ const PaymentHistory = () => {
                     borderBottomRightRadius: "20px",
                   }}
                 >
-                  {payment.status}
+                  {getEndDate(subscription)}
                 </TableCell>
               </TableRow>
             ))}
@@ -97,4 +113,4 @@ const PaymentHistory = () => {
   );
 };
 
-export default PaymentHistory;
+export default SubscriptionHistory;

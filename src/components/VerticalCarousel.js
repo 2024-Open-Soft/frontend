@@ -4,14 +4,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./style.css";
 
-function VerticalCarousel() {
+function VerticalCarousel({ data, handleChange }) {
   const [suggestedMovies, setSuggestedMovies] = useState([
-    { img: "/frame.png" },
-    { img: "/frame.png" },
-    { img: "/frame.png" },
-    { img: "/frame.png" },
-    { img: "/frame.png" },
-    { img: "/frame.png" },
+    { img: "/images/image1.png" },
+    { img: "/images/image2.png" },
+    { img: "/images/image3.png" },
   ]);
   const settings = {
     dots: true,
@@ -25,14 +22,18 @@ function VerticalCarousel() {
     pauseOnHover: true,
     touchMove: true,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 4000,
     focusOnSelect: true,
     arrows: false,
     beforeChange: function (currentSlide, nextSlide) {
       // console.log("before change", currentSlide, nextSlide);
+
     },
     afterChange: function (currentSlide) {
-      // console.log("after change", currentSlide);
+      // console.log("after change", suggestedMovies[currentSlide]);
+
+      handleChange(currentSlide);
+
     },
     appendDots: (dots) => {
       // console.log(dots);
@@ -81,9 +82,9 @@ function VerticalCarousel() {
   return (
     <div className="horizontal slider-container w-[85%] flex items-center justify-center">
       <Slider className="landing-carousel" {...settings}>
-        {suggestedMovies.map((movie, index) => (
+        {data.map((movie, index) => (
           <div className="image-box" key={index}>
-            <img src={movie.img} alt="" />
+            <img src={suggestedMovies[index].img} alt="" style={{ width: "90%", height: "auto" }} />
           </div>
         ))}
       </Slider>

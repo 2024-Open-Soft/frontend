@@ -3,6 +3,7 @@ import React from "react";
 import Account from "../components/Account";
 import Plan from "../components/Plan";
 import PaymentHistory from "../components/PaymentHistory";
+import SubscriptionHistory from "../components/SubscriptionHistory";
 
 const UserInfo = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
@@ -36,6 +37,9 @@ const UserInfo = () => {
           </Grid>
           <Grid item xs={12}>
             <Plan />
+          </Grid>
+          <Grid item xs={12}>
+            <SubscriptionHistory />
           </Grid>
           <Grid item xs={12}>
             <PaymentHistory />

@@ -2,10 +2,12 @@ import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 import { postComment } from "../redux/services/Comment";
+import { useDispatch } from "react-redux";
 
 
 function PostComment({ data: movieId, handlePosted }) {
   const [comment, setComment] = useState("");
+  const dispatch = useDispatch();
   
   const handlePost = async (e) => {
     e.preventDefault();
@@ -13,7 +15,7 @@ function PostComment({ data: movieId, handlePosted }) {
       comment: comment,
       movieId: movieId,
     }
-    const res = await postComment(payload);
+    const res = await postComment(dispatch, payload);
 
     handlePosted();
     setComment("");

@@ -76,3 +76,15 @@
 .search-bar input:focus {
   outline: none;
 }
+
+.colored-star path{
+  color: orange;
+}
+
+.add-to-watchlist path {
+  color: rgb(255, 63, 63);
+}
+
+.hidden-scrollbar::-webkit-scrollbar {
+  display: none;
+}
