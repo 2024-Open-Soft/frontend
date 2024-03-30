@@ -123,21 +123,21 @@ const CustomSearchBar = ({ moviesOnEnter, setMovieValue, setIsSemantic }) => {
       if (semantic) {
         console.log("prefix: ", prefix);
         setMovieValue(prefix);
-        setTimeout(() => {
-          // semanticSearchCall(prefix);
-          queryClient.invalidateQueries({ queryKey: ["semantic"] });
-        });
-      }
-      // else moviesOnEnter(prefix);
-      else {
+        // setTimeout(() => {
+        // semanticSearchCall(prefix);
+        queryClient.invalidateQueries({ queryKey: ["topmovie"] });
+        queryClient.invalidateQueries({ queryKey: ["semantic"] });
+        // }, 800);
+      } else {
         setMovieValue(prefix);
         setTimeout(() => {
           moviesOnEnter({ value: prefix });
+          queryClient.invalidateQueries({ queryKey: ["topmovie"] });
           setPrefix("");
           setSuggestions([]);
           setSuggestion("");
           setIsActive(false);
-        }, 400);
+        }, 800);
       }
     }
   };

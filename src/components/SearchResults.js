@@ -43,60 +43,44 @@ const SearchResults = ({ moviesData, handleLoad, isSemantic, setMovieId }) => {
 
   const listBoxRef = useRef(null);
 
-  console.log("moviesData : ", moviesData);
-  console.log("isSemantic : ", isSemantic);
-
   useEffect(() => {
     if (isSemantic) {
       if (moviesData && moviesData.pages) {
-        console.log("entered useEffect2");
         let newMovies = [];
         let newCount = 0;
         moviesData.pages.map((page) => {
-          console.log("page : ", page);
           newMovies = [...newMovies, ...page.movies];
           newCount += page.count;
         });
-        console.log("newMovies : ", newMovies);
-        console.log("newCount : ", newCount);
         setData({ count: newCount, movies: newMovies });
-        console.log("newMovies[0] id : ", newMovies[0]?._id);
         setMovieId(newMovies[0]?._id);
-        queryClient.invalidateQueries({ queryKey: ["topmovie"] });
+        queryClient.invalidateQueries({ queryKey: ["semantic"] });
       }
-      console.log("entered useEffect");
     }
   }, [moviesData, moviesData?.pages, isSemantic, queryClient]);
 
   useEffect(() => {
-    if (
-      moviesData &&
-      moviesData.other.value !== paginateVars.value &&
-      paginateVars.value !== ""
-    ) {
-      const newData = {
-        count: moviesData?.count,
-        movies: [...moviesData.movies],
-      };
-      console.log("moviesData2 : ", moviesData);
-      setData(newData);
-    } else if (moviesData) {
-      const newData = {
-        count: moviesData?.count + data.count,
-        movies: [...data.movies, ...moviesData?.movies],
-      };
-      setMovieId(newData.movies[0]?._id);
-      queryClient.invalidateQueries({ queryKey: ["topmovie"] });
-      console.log("moviesData2 : ", moviesData);
-      setData(newData);
-    }
+    if (!moviesData) return;
+    const newData = {
+      count:
+        moviesData?.count +
+        (moviesData.other.value !== paginateVars.value ? 0 : data.count),
+      movies: [
+        ...moviesData.movies,
+        ...(moviesData.other.value !== paginateVars.value ? [] : data.movies),
+      ],
+    };
+    setMovieId(newData.movies[0]?._id);
+    setData(newData);
+    setTimeout(
+      () => queryClient.invalidateQueries({ queryKey: ["topmovie"] }),
+      800
+    );
     if (moviesData && moviesData.other) {
-      console.log("moviesDataother : ", moviesData?.other);
       setPaginateVars(moviesData?.other);
     }
   }, [moviesData?.movies, moviesData?.other]);
 
-  console.log("paginateVars2 : ", paginateVars);
   useEffect(() => {
     const handleScroll = () => {
       const handleLoadClick = debounce(() => {
@@ -131,18 +115,19 @@ const SearchResults = ({ moviesData, handleLoad, isSemantic, setMovieId }) => {
       style={{ overflowY: "hidden" }}
       className={`${!(data?.count > 0) && "hidden"}`}
     >
-      <div
-      >
+      <div>
         <Typography sx={{ ...headingStyle, py: 4 }}>Relevant result</Typography>
-        <Grid container spacing={4}
+        <Grid
+          container
+          spacing={4}
           sx={{
             maxHeight: "100vh",
             overflowY: "auto",
-            width: "100%"
+            width: "100%",
           }}
           className="my-4 mx-0 px-0 hidden-scrollbar"
           ref={listBoxRef}
-          >
+        >
           {data?.movies?.map((movie, index) => (
             <Grid
               item
