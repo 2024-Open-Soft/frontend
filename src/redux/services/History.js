@@ -11,6 +11,11 @@ export const updateHistory = async data => {
 
         return response;
     } catch (error) {
+        console.error(error);
+        if(error?.response.status === 401){
+            localStorage.removeItem("token");
+            return
+        }
         createToast("Error in updating history", "error");
         createToast(error?.response?.data?.error, "error");
         console.error(error);

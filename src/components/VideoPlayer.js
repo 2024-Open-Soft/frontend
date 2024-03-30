@@ -61,14 +61,18 @@ export const VideoPlayer = ({urls,type,timestamp=0,id}) => {
         }
         const player = videojs(videoRef.current, videoJsOptions, function onPlayerReady() {
             console.log('onPlayerReady', this)
-            player.currentTime(timestamp)
+            console.log(timestamp)
+            player.currentTime(timestamp*60)
         })
         setVideoPlayer(player)
         if(type === 'watch'){
             setInterval(async() => {
+                console.log(player.duration())
+                if(!player.currentTime())
+                    clearInterval()
                 const res = await updateHistory({
                     movieId: id,
-                    timestamp: Math.floor(player.currentTime()/60)
+                    timeStamp: Math.floor(player.currentTime()/60)
                 })
                 if(player.currentTime() === player.duration()){
                     clearInterval()
