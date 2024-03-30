@@ -2,18 +2,15 @@ import React, { useState } from "react";
 import {
   Box,
   Button,
-  CssBaseline,
   Grid,
-  Link,
-  Paper,
   TextField,
   Typography,
 } from "@mui/material";
 import "./style.css";
 import Autocomplete from "@mui/material/Autocomplete";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { MuiOtpInput } from "mui-one-time-password-input";
 import { generateOTP, verifyOTP } from "../redux/services/SignUp";
+import { Link } from "react-router-dom";
 
 const countryCodes = [
   { code: "+91", country: "India" },
@@ -34,10 +31,6 @@ const VerificationPhone = ({ setStep }) => {
 
   const handleSendOTP = async (event) => {
     event.preventDefault();
-
-    // console.log(phone, countryCode.code);
-    // console.log(countryCode.code + phone);
-
     await generateOTP({ phoneNumber: countryCode.code + phone, countryCode: countryCode.code })
   };
 
@@ -65,7 +58,6 @@ const VerificationPhone = ({ setStep }) => {
     >
       <Box
         component="form"
-        // noValidate
         display="flex"
         flexDirection={"column"}
         onSubmit={handleSubmit}
@@ -197,7 +189,6 @@ const VerificationPhone = ({ setStep }) => {
         </Box>
         <Button
           type="submit"
-          // fullWidth
           variant="contained"
           sx={{
             mt: 2,
@@ -206,6 +197,11 @@ const VerificationPhone = ({ setStep }) => {
         >
           Next Step
         </Button>
+        <Typography align="left" sx={{ mt: 2 }}>
+            <Link to="/login" variant="body2">
+                {"Already have an account? Sign in"}
+            </Link>
+        </Typography>
         <Typography
           align="left"
           sx={{ mt: 2, fontStyle: "italic", opacity: "80%" }}

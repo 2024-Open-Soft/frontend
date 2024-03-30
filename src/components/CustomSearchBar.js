@@ -6,22 +6,6 @@ import axios from "axios";
 import qs from "query-string";
 import { useQueryClient } from "@tanstack/react-query";
 
-// const dictionary = {
-//   words: [
-//     "hello",
-//     "helium",
-//     "world",
-//     "car",
-//     "carpet",
-//     "test",
-//     "this",
-//     "that",
-//     "those",
-//     "working",
-//     "is",
-//   ],
-// };
-
 const CustomSearchBar = ({ moviesOnEnter, setMovieValue, setIsSemantic }) => {
   const [prefix, setPrefix] = useState("");
   const [suggestion, setSuggestion] = useState("");
@@ -36,56 +20,16 @@ const CustomSearchBar = ({ moviesOnEnter, setMovieValue, setIsSemantic }) => {
       .get(`/search/autocomplete?${query}`)
       .then((response) => {
         const dictionary = response.data?.data;
-        // console.log("dictionary: ", dictionary);
         setSuggestions(dictionary?.movies);
-        // console.log("type : ", typeof dictionary?.tabComplete);
         if (typeof dictionary?.tabComplete === "string")
           setSuggestion(value + dictionary?.tabComplete?.slice(value.length));
         else setSuggestion("");
       })
       .catch((error) => {
-        console.log("error: ", error);
+
       });
-    // console.log("response: ", response);
   };
 
-  // const moviesOnEnter = async ({ pageParam = 1 }) => {
-  //   if (prefix.length === 0) return;
-  //   const query = qs.stringify({ query: prefix, page: pageParam, flag: 0 });
-  //   const response = await axios
-  //     .get(`/search/searchOnEnter?${query}`)
-  //     .then((response) => {
-  //       const enterMovies = response.data?.data;
-  //       console.log("enterMovies : ", enterMovies);
-  //     })
-  //     .catch((error) => {
-  //       console.log("error: ", error);
-  //     });
-  //   // console.log("response: ", response);
-  // };
-
-  const handleMovieMin = (value) => {
-    setTimeout(() => {}, 800);
-  };
-
-  // const { mutate: moviesOnEnter } = useMutation({
-  //   mutationKey: ["search"],
-  //   mutationFn: (value) =>
-  //     axiosGet("/search/searchOnEnter", {
-  //       query: value,
-  //       page: 1,
-  //       flag: 0,
-  //     }),
-  //   onSuccess: (data) => {
-  //     const enterMovies = data.data;
-  //     console.log("enterMovies : ", enterMovies);
-  //     if (enterMovies?.count > 20) {
-  //       dispatch(setRecomendedMovies(enterMovies));
-  //     } else {
-  //       handleMovieMin(enterMovies);
-  //     }
-  //   },
-  // });
 
   const semanticSearchCall = async (value) => {
     const query = qs.stringify({ query: value });
@@ -93,17 +37,13 @@ const CustomSearchBar = ({ moviesOnEnter, setMovieValue, setIsSemantic }) => {
       .get(`/search/semantic?${query}`)
       .then((response) => {
         const enterMovies = response.data;
-        console.log("enterMovies : ", enterMovies);
       })
       .catch((error) => {
-        console.log("error: ", error);
       });
-    console.log("response: ", response);
   };
 
   const onChange = (e) => {
     var value = e.target.value;
-    // console.log("value: ", value);
     setPrefix(value);
 
     if (value.length === 0 && !semantic) {
@@ -121,17 +61,14 @@ const CustomSearchBar = ({ moviesOnEnter, setMovieValue, setIsSemantic }) => {
     }
     if (e.key === "Enter") {
       if (semantic) {
-        console.log("prefix: ", prefix);
         setMovieValue(prefix);
         setTimeout(() => {
-          // semanticSearchCall(prefix);
           queryClient.invalidateQueries({ queryKey: ["semantic"] });
         }, 800);
       } else {
         setMovieValue(prefix);
         setTimeout(() => {
           moviesOnEnter({ value: prefix });
-          // queryClient.invalidateQueries({ queryKey: ["topmovie"] });
           setSuggestions([]);
           setSuggestion("");
           setIsActive(false);
@@ -167,13 +104,10 @@ const CustomSearchBar = ({ moviesOnEnter, setMovieValue, setIsSemantic }) => {
   };
 
   const listBoxStyle = {
-    // position: "absolute",
-    // top: "55px",
     borderRadius: "30px",
     backgroundColor: "#272828",
     color: "#FFFFFF",
     py: 2,
-    // zIndex: 20,
     width: "100%",
     marginTop: "10px",
     overflow: "auto",
@@ -203,15 +137,12 @@ const CustomSearchBar = ({ moviesOnEnter, setMovieValue, setIsSemantic }) => {
     setPrefix(title);
     setSuggestion("");
     if (semantic) {
-      // semanticSearchCall(title);
       queryClient.invalidateQueries({ queryKey: ["semantic"] });
     }
-    // else moviesOnEnter(prefix);
     else {
       setMovieValue(title);
       setTimeout(() => {
         moviesOnEnter({ value: title });
-        // setPrefix("");
         setSuggestions([]);
         setSuggestion("");
         setIsActive(false);
@@ -229,7 +160,6 @@ const CustomSearchBar = ({ moviesOnEnter, setMovieValue, setIsSemantic }) => {
           htmlFor="search-bar"
           className="search-bar"
           style={inputBoxStyle}
-          // onClick={() => setIsActive(true)}
         >
           <input
             type="text"

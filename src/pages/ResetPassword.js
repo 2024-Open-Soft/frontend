@@ -1,11 +1,7 @@
 import { React, useEffect, useState } from "react";
 import {
-  Box,
   Button,
-  CssBaseline,
   Grid,
-  Link,
-  Paper,
   TextField,
   Typography,
 } from "@mui/material";
@@ -14,7 +10,6 @@ import { useLocation, useNavigate } from "react-router";
 import axios from "axios";
 
 const ResetPassword = () => {
-  // const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [checkEqual, setCheckEqual] = useState(false);
@@ -37,7 +32,6 @@ const ResetPassword = () => {
       const validity = axios.get(`/password/valid-token/${token}`);
 
       if (!validity || validity?.data?.valid === false) {
-        console.log("Invalid Token");
         navigate("/forgot-password");
         return;
       }
@@ -51,16 +45,13 @@ const ResetPassword = () => {
 
         createToast(response?.data?.message, "success");
 
-        console.log("Password Reset");
       }
       else {
         createToast("Passwords do not match", "error");
-        console.log("Passwords do not match");
       }
     }
     catch (error) {
       createToast(error?.response?.data?.error || "An error occurred", "error");
-      console.log(error);
     }
   };
 
@@ -71,7 +62,6 @@ const ResetPassword = () => {
       const validity = axios.get(`/password/valid-token/${token}`);
 
       if (!validity || validity.data.valid === false) {
-        console.log("Invalid Token");
         createToast("Invalid Token", "error");
         navigate("/forgot-password");
         return;
@@ -80,7 +70,6 @@ const ResetPassword = () => {
     catch (error) {
       createToast(error?.response?.data?.error || "An error occurred", "error");
       navigate("/forgot-password");
-      console.log(error);
     }
   }, [location])
 
@@ -126,7 +115,6 @@ const ResetPassword = () => {
             required
             fullWidth
             name="password"
-            // label="Password"
             type="password"
             id="password"
             sx={{ mt: 1, mb: 2 }}
@@ -141,7 +129,6 @@ const ResetPassword = () => {
             required
             fullWidth
             name="password"
-            // label="Password"
             type="password"
             id="password"
             sx={{ mt: 1, mb: 2 }}
@@ -151,7 +138,6 @@ const ResetPassword = () => {
           {!checkEqual && <p className="text-[red]">Passwords do not match</p>}
           <Button
             type="submit"
-            // fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
             onClick={handleSubmit}

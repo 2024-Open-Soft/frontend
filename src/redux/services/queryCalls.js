@@ -20,10 +20,8 @@ export const request = ({ ...options }) => {
 export const axiosGet = async (url, queryObj) => {
   const query = qs.stringify(queryObj);
   const response = await client.get(`${url}?${query}`).catch((err) => {
-    console.log(err);
     throw new Error(err);
   });
-  console.log(response);
   return response.data;
 };
 

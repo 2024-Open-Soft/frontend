@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -9,15 +8,12 @@ const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 export default function FilterTags({data,title,handleChange:change,multiple}) {
-    const [value, setValue] = React.useState([]);
     const handleChange = (e,option) => {
-        console.log("Inside FilterTags", multiple)
         e.persist()
         if(!multiple && option === null){
             change(-1,title)
         }
         if(option){
-            console.log(option)
             change(option,title)
         }
     }

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -66,8 +66,6 @@ const SearchResults = ({ moviesData, handleLoad, isSemantic, setMovieId }) => {
 
   useEffect(() => {
     if (!moviesData) return;
-    console.log("moviesData: ", moviesData);
-    console.log("value: ", paginateVars.value);
     const newData = {
       count:
         moviesData?.count +

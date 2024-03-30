@@ -49,19 +49,9 @@ export const VideoPlayer = ({ urls, type, timestamp = 0, id }) => {
                         selected: selected[index],
                     }
                 })
-                console.log(urls?.map((url, index) => {
-                    return {
-                        src: url.url,
-                        type: 'application/x-mpegURL',
-                        label: labels[index],
-                        selected: selected[index],
-                    }
-                }))
             }
         }
         const player = videojs(videoRef.current, videoJsOptions, function onPlayerReady() {
-            console.log('onPlayerReady', this)
-            console.log(timestamp)
             player.currentTime(timestamp*60)
         })
         setVideoPlayer(player)
@@ -76,7 +66,6 @@ export const VideoPlayer = ({ urls, type, timestamp = 0, id }) => {
                 if (player.currentTime() === player.duration()) {
                     clearInterval()
                 }
-                console.log(res)
             }, 1000 * 60)
         }
     }

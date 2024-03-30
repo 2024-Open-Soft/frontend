@@ -12,7 +12,7 @@ export const updateHistory = async data => {
         return response;
     } catch (error) {
         console.error(error);
-        if(error?.response.status === 401){
+        if(error?.response?.status === 401){
             localStorage.removeItem("token");
             return
         }

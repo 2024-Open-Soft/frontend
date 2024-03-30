@@ -3,11 +3,8 @@ import StarIcon from "@mui/icons-material/Star";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
-import { Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { addToWatchLater, removeFromWatchLater } from "../redux/services/WatchLater";
-import { Link } from "react-router-dom";
-
 
 const MovieInfo = ({ data, handleTrailerClick, handleWatchClick }) => {
   const dispatch = useDispatch();

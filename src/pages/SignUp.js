@@ -1,13 +1,6 @@
 import { React, useState } from "react";
 import {
-  Box,
-  Button,
-  CssBaseline,
   Grid,
-  Link,
-  Paper,
-  TextField,
-  Typography,
 } from "@mui/material";
 import Register from "../components/Register";
 import VerificationPhone from "../components/VerificationPhone";

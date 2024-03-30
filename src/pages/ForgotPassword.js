@@ -1,11 +1,7 @@
 import { React, useState } from "react";
 import {
-  Box,
   Button,
-  CssBaseline,
   Grid,
-  Link,
-  Paper,
   TextField,
   Typography,
 } from "@mui/material";
@@ -23,7 +19,6 @@ const ForgotPassword = () => {
     }
     catch (error) {
       createToast(error?.response?.data?.error || "An error occurred", "error");
-      console.log(error);
     }
   };
 
@@ -69,7 +64,6 @@ const ForgotPassword = () => {
             required
             fullWidth
             id="email"
-            // label="Enter email"
             name="email"
             type="email"
             autoComplete="email"
@@ -80,7 +74,6 @@ const ForgotPassword = () => {
           />
           <Button
             type="submit"
-            // fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
             onClick={handleSubmit}

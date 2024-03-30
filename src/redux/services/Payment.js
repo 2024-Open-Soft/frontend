@@ -1,6 +1,5 @@
 import axios from "axios";
 import createToast from "../../utils/createToast";
-import { logout } from "./User";
 
 export const getPaymentLink = async (payload) => {
     try {
@@ -11,7 +10,6 @@ export const getPaymentLink = async (payload) => {
             }
         });
         const data = response.data.data;
-        // console.log(data);
         createToast(response.data.message, "success");
         return response
     }

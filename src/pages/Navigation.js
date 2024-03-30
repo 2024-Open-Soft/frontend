@@ -11,7 +11,6 @@ const LazySignUp = lazy(() => import("./SignUp"));
 const LazyLogin = lazy(() => import("./LoginPage"));
 const LazyForgotPassword = lazy(() => import("./ForgotPassword"));
 const LazyResetPassword = lazy(() => import("./ResetPassword"));
-// const LazyHome = lazy(() => import("./LandingPage"));
 const LazyMovie = lazy(() => import("./MoviePage"));
 const LazySearch = lazy(() => import("./SearchPage"));
 const LazySubscriptions = lazy(() => import("./SubscriptionPage"));

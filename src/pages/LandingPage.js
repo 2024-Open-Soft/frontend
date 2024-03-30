@@ -36,7 +36,6 @@ const LandingPage = () => {
   }, [])
   const navigate = useNavigate();
   const handleMovieLinks = (id) => {
-    console.log(id);
     navigate(`/movie/${id}`);
   }
 

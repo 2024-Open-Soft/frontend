@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MovieInfo from "../components/MovieInfo";
-import { Box, Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import CastCarousel from "../components/CastCarousel";
 import PostComment from "../components/PostComment";
 import CommentsContainer from "../components/CommentsContainer";
@@ -30,17 +30,13 @@ const MoviePage = () => {
     await fetchData(id)
   }
   const handleWatchClick = async (id) => {
-    console.log(id);
     const URLs = await getMovieURLs(id)
-    console.log(URLs);
     setUrls(URLs)
     setType("watch")
   }
   const handleTrailerClick = (id) => {
-    console.log(id);
     if(!data?.movie.trailer){
       createToast("No trailer available", "error")
-      console.log("No trailer available")
       return
     }
     setUrls([data?.movie.trailer])
@@ -51,7 +47,7 @@ const MoviePage = () => {
 
   return (
     <>
-      { urls && type && urls.length > 0 && <VideoPlayer urls={urls} type={type} id={id} timestamp={user.history.find((item) => item._id === id)?.timeStamp} />}
+      { urls && type && urls.length > 0 && <VideoPlayer urls={urls} type={type} id={id} timestamp={user?.history?.find((item) => item._id === id)?.timeStamp} />}
       <Grid
         container
         spacing={2}

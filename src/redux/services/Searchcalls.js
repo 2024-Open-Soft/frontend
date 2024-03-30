@@ -8,14 +8,12 @@ export const onEnterSearchCall = async ({
   prevData,
   moviesOnEnter,
 }) => {
-  console.log("value: ", value);
   if (value.length === 0) throw new Error("No value entered");
   const data1 = await axiosGet("/search/searchOnEnter", {
     query: value,
     page: page,
     flag: flag,
   });
-  console.log("data1: ", data1);
   const enterMovies = data1.data;
   if (enterMovies.count === 0 && flag === 1) throw new Error("No movies found");
   let currData = enterMovies;

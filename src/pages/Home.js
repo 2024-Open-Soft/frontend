@@ -1,5 +1,4 @@
 import React from "react";
-import BackgroundPlayer from "../components/BackgroundPlayer";
 import { SideBar } from "../components/SideBar";
 import Cars from "../assets/Cars.mp4";
 import { Outlet, useLocation } from "react-router-dom";

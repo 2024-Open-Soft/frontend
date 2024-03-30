@@ -1,6 +1,5 @@
 import axios from "axios";
 import createToast from "../../utils/createToast";
-import { logout } from "./User";
 
 export const getSubscriptionPlans = async () => {
     try {
@@ -9,10 +8,6 @@ export const getSubscriptionPlans = async () => {
                 "Content-Type": "application/json",
             }
         });
-
-        const data = response.data.data;
-        // console.log(data);
-
         return response;
     }
     catch (error) {
@@ -28,10 +23,6 @@ export const getSubscriptionPlan = async (id) => {
                 "Content-Type": "application/json",
             }
         });
-
-        const data = response.data.data;
-        // console.log(data);
-
         return response;
     }
     catch (error) {

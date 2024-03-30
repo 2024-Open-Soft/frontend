@@ -1,7 +1,6 @@
 import axios from "axios";
 import { setUser } from "../reducers/User";
 import createToast from "../../utils/createToast";
-import { logout } from "./User";
 
 export const generateOTP = async (payload) => {
     try {
@@ -14,9 +13,8 @@ export const generateOTP = async (payload) => {
             headers
         });
         const data = response.data.data;
-        // console.log(data);
         createToast(response.data.message, "success");
-        localStorage.setItem("temp-token", response.data.data.token);
+        localStorage.setItem("temp-token", data.token);
         return response;
     }
     catch (error) {
@@ -67,7 +65,6 @@ export const register = async (dispatch, payload) => {
             }
         });
         const data = response.data.data;
-        // console.log(data);
         localStorage.setItem("token", response.data.data.token);
         dispatch(setUser(data.user));
         createToast("User registered successfully", "success");

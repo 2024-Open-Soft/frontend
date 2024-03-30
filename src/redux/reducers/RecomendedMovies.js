@@ -5,7 +5,6 @@ export const RecomendedMovies = createSlice({
   initialState: { data: null },
   reducers: {
     setRecomendedMovies: (state, action) => {
-      console.log("recomededmovies payload : ", action.payload);
       state.data = action.payload;
     },
   },
