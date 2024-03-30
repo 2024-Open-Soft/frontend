@@ -20,9 +20,9 @@ export async function fetchUserData(dispatch, navigate) {
       return data;
     }
   } catch (error) {
-    if (error?.response?.data?.error?.startsWith("Token expired"))
+    if (error?.response?.data?.error || "An error occurred"?.startsWith("Token expired"))
       localStorage.removeItem("token");
-    createToast(error?.response?.data?.error, "error");
+    createToast(error?.response?.data?.error || "An error occurred", "error");
     createToast("Please Re-Login", "error");
     localStorage.removeItem("token");
     console.log(error);
@@ -55,9 +55,9 @@ export async function editUserData(dispatch, data) {
       return response;
     }
   } catch (error) {
-    if (error?.response?.data?.error?.startsWith("Token expired"))
+    if (error?.response?.data?.error || "An error occurred"?.startsWith("Token expired"))
       localStorage.removeItem("token");
-    createToast(error?.response?.data?.error, "error");
+    createToast(error?.response?.data?.error || "An error occurred", "error");
     console.log(error);
   }
 }
@@ -73,9 +73,9 @@ export const login = async (dispatch, payload) => {
     createToast("Logged in successfully", "success");
     return response;
   } catch (error) {
-    if (error?.response?.data?.error?.startsWith("Token expired"))
+    if (error?.response?.data?.error || "An error occurred"?.startsWith("Token expired"))
       localStorage.removeItem("token");
-    createToast(error?.response?.data?.error, "error");
+    createToast(error?.response?.data?.error || "An error occurred", "error");
     console.log(error);
     return error;
   }
@@ -96,9 +96,9 @@ export const logout = async (dispatch) => {
     createToast("Logged out successfully", "success");
     return response;
   } catch (error) {
-    if (error?.response?.data?.error?.startsWith("Token expired"))
+    if (error?.response?.data?.error || "An error occurred"?.startsWith("Token expired"))
       localStorage.removeItem("token");
-    createToast(error?.response?.data?.error, "error");
-    console.log(error?.response?.data?.error);
+    createToast(error?.response?.data?.error || "An error occurred", "error");
+    console.log(error?.response?.data?.error || "An error occurred");
   }
 };

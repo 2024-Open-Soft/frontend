@@ -9,12 +9,18 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import createToast from "../utils/createToast";
+import { useLocation, useNavigate } from "react-router";
+import axios from "axios";
 
-const Login = () => {
+const ResetPassword = () => {
   // const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [checkEqual, setCheckEqual] = useState(false);
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     if (password === confirmPassword) {
@@ -26,8 +32,57 @@ const Login = () => {
   }, [password, confirmPassword])
 
   const handleSubmit = async () => {
-    
+    try {
+      const token = window.location.pathname.split("/")[2];
+      const validity = axios.get(`/password/valid-token/${token}`);
+
+      if (!validity || validity?.data?.valid === false) {
+        console.log("Invalid Token");
+        navigate("/forgot-password");
+        return;
+      }
+
+      if (password === confirmPassword) {
+        const response = await axios.post(`/password/reset`, { password }, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        createToast(response?.data?.message, "success");
+
+        console.log("Password Reset");
+      }
+      else {
+        createToast("Passwords do not match", "error");
+        console.log("Passwords do not match");
+      }
+    }
+    catch (error) {
+      createToast(error?.response?.data?.error || "An error occurred", "error");
+      console.log(error);
+    }
   };
+
+  useEffect(() => {
+
+    try {
+      const token = window.location.pathname.split("/")[2];
+      const validity = axios.get(`/password/valid-token/${token}`);
+
+      if (!validity || validity.data.valid === false) {
+        console.log("Invalid Token");
+        createToast("Invalid Token", "error");
+        navigate("/forgot-password");
+        return;
+      }
+    }
+    catch (error) {
+      createToast(error?.response?.data?.error || "An error occurred", "error");
+      navigate("/forgot-password");
+      console.log(error);
+    }
+  }, [location])
 
   return (
     <div style={{ paddingTop: "100px" }}>
@@ -110,4 +165,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ResetPassword;

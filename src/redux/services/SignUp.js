@@ -20,14 +20,14 @@ export const generateOTP = async (payload) => {
         return response;
     }
     catch (error) {
-        if(error?.response?.data?.error === "Token expired") {
+        if(error?.response?.data?.error || "An error occurred" === "Token expired") {
             localStorage.removeItem("temp-token");
             createToast("OTP expired. Please try again", "error");
         }
-        if(error?.response?.data?.error?.startsWith("Token expired")){
+        if(error?.response?.data?.error || "An error occurred"?.startsWith("Token expired")){
             localStorage.removeItem("token");
         }
-        createToast(error?.response?.data?.error, "error");
+        createToast(error?.response?.data?.error || "An error occurred", "error");
         console.error(error);
     }
 }
@@ -46,14 +46,14 @@ export const verifyOTP = async (payload) => {
         return response;
     }
     catch (error) {
-        if(error?.response?.data?.error === "Token expired") {
+        if(error?.response?.data?.error || "An error occurred" === "Token expired") {
             localStorage.removeItem("temp-token");
             createToast("OTP expired. Please try again", "error");
         }
-        if(error?.response?.data?.error?.startsWith("Token expired")){
+        if(error?.response?.data?.error || "An error occurred"?.startsWith("Token expired")){
             localStorage.removeItem("token");
         }
-        createToast(error?.response?.data?.error, "error");
+        createToast(error?.response?.data?.error || "An error occurred", "error");
         console.error(error);
     }
 }
@@ -74,14 +74,14 @@ export const register = async (dispatch, payload) => {
         return response;
     }
     catch (error) {
-        if(error?.response?.data?.error === "Token expired") {
+        if(error?.response?.data?.error || "An error occurred" === "Token expired") {
             localStorage.removeItem("temp-token");
             createToast("OTP expired. Please try again", "error");
         }
-        if(error?.response?.data?.error?.startsWith("Token expired")){
+        if(error?.response?.data?.error || "An error occurred"?.startsWith("Token expired")){
             localStorage.removeItem("token");
         }
-        createToast(error?.response?.data?.error, "error")
+        createToast(error?.response?.data?.error || "An error occurred", "error")
         console.error(error);
     }
 }
