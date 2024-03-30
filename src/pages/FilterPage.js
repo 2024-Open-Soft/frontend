@@ -1,10 +1,9 @@
 import React from "react";
-import SearchTags from "../components/SearchTags";
 import { Grid, Button, Typography } from "@mui/material";
-import SearchTopResult from "../components/SearchTopResult";
-import SearchResults from "../components/SearchResults";
 import FilterTags from "../components/FilterTags";
 import { filterMovies } from "../redux/services/Movie";
+import FilterResults from "../components/FilterResults";
+
 const genres = [
   'Action',      'Adventure', 'Animation',
   'Biography',   'Comedy',    'Crime',
@@ -248,7 +247,7 @@ const FilterPage = () => {
         </Button>
       </Grid>
             <Grid item xs={12} sx={{ p: 0 }}>
-        {filterMovies && filterMovies.length > 0 && <SearchResults data={filteredMovies} />}
+        {filterMovies && filterMovies.length > 0 && <FilterResults data={filteredMovies} />}
       </Grid>
     </Grid>
   );

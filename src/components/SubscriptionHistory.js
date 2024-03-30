@@ -39,8 +39,6 @@ const SubscriptionHistory = () => {
                 sx={{
                   border: "none",
                   color: "#FFFFFF",
-                  borderTopLeftRadius: "20px",
-                  borderBottomLeftRadius: "20px",
                 }}
               >
                 Date
@@ -58,8 +56,6 @@ const SubscriptionHistory = () => {
                 sx={{
                   border: "none",
                   color: "#FFFFFF",
-                  borderTopRightRadius: "20px",
-                  borderBottomRightRadius: "20px",
                 }}
               >
                 End Date
@@ -76,8 +72,6 @@ const SubscriptionHistory = () => {
                   sx={{
                     border: "none",
                     color: "#FFFFFF",
-                    borderTopLeftRadius: "20px",
-                    borderBottomLeftRadius: "20px",
                   }}
                 >
                   {subscription.createdAt.slice(0, 10)}
@@ -95,8 +89,6 @@ const SubscriptionHistory = () => {
                   sx={{
                     border: "none",
                     color: "#FFFFFF",
-                    borderTopRightRadius: "20px",
-                    borderBottomRightRadius: "20px",
                   }}
                 >
                   {getEndDate(subscription)}

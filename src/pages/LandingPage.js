@@ -3,7 +3,7 @@ import MovieInfo from "../components/MovieInfo";
 import { Box, Grid, Typography, useMediaQuery } from "@mui/material";
 import VerticalCarousel from "../components/VerticalCarousel";
 import HorizontalCarousel from "../components/HorizontalCarousel";
-import { getLatestMovies, getUpcomingMovies, getfeaturedmovies } from "../redux/services/Movie";
+import { getLatestMovies, getUpcomingMovies, getFeaturedMovies } from "../redux/services/Movie";
 
 const LandingPage = () => {
   const isMobile = useMediaQuery("(max-width:800px)");
@@ -13,7 +13,7 @@ const LandingPage = () => {
   const [upcomingMovies, setUpcomingMovies] = useState(null);
 
 
-  const [featuredMovies, setFeaturedmovies] = useState([]);
+  const [featuredMovies, setFeaturedMovies] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleChange = (index) => {

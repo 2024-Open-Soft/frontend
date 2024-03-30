@@ -1,7 +1,6 @@
 import { Button, Typography } from "@mui/material";
-import TextField from "@mui/material/TextField";
 import { Box } from "@mui/system";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CommentBox from "./CommentBox";
 
 const headingStyle = {
@@ -25,27 +24,27 @@ function CommentsContainer({ comments }) {
 
   return (
     <>
-        <div className="">
-          <Typography sx={headingStyle}>COMMENTS</Typography>
-          <Box
-            sx={{
-              width: "100%",
-              boxSizing: "border-box",
-              display: "flex",
-              flexDirection: "column",
-              gap: "1rem",
-            }}
-          >
-            <Typography sx={{ color: "rbga(225,225,225,0.8)" }}>
-              {commentCount} Comments
-            </Typography>
-            {comments?.map((comment, index) => (
-              <Box key={index}>
-                <CommentBox cmnt={comment} />
-              </Box>
-            ))}
-          </Box>
-        </div>
+      <div className="">
+        <Typography sx={headingStyle}>COMMENTS</Typography>
+        <Box
+          sx={{
+            width: "100%",
+            boxSizing: "border-box",
+            display: "flex",
+            flexDirection: "column",
+            gap: "1rem",
+          }}
+        >
+          <Typography sx={{ color: "rbga(225,225,225,0.8)" }}>
+            {commentCount} Comments
+          </Typography>
+          {comments && comments.length && comments?.map((comment, index) => (
+            <Box key={index}>
+              <CommentBox cmnt={comment} />
+            </Box>
+          ))}
+        </Box>
+      </div>
     </>
   );
 }

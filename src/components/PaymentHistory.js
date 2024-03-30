@@ -29,8 +29,6 @@ const PaymentHistory = () => {
                 sx={{
                   border: "none",
                   color: "#FFFFFF",
-                  borderTopLeftRadius: "20px",
-                  borderBottomLeftRadius: "20px",
                 }}
               >
                 Date
@@ -45,8 +43,6 @@ const PaymentHistory = () => {
                 sx={{
                   border: "none",
                   color: "#FFFFFF",
-                  borderTopRightRadius: "20px",
-                  borderBottomRightRadius: "20px",
                 }}
               >
                 Status
@@ -63,8 +59,6 @@ const PaymentHistory = () => {
                   sx={{
                     border: "none",
                     color: "#FFFFFF",
-                    borderTopLeftRadius: "20px",
-                    borderBottomLeftRadius: "20px",
                   }}
                 >
                   {payment.createdAt.slice(0, 10)}
@@ -79,8 +73,6 @@ const PaymentHistory = () => {
                   sx={{
                     border: "none",
                     color: "#FFFFFF",
-                    borderTopRightRadius: "20px",
-                    borderBottomRightRadius: "20px",
                   }}
                 >
                   {payment.status}
