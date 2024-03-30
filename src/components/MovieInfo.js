@@ -9,6 +9,7 @@ import { addToWatchLater, removeFromWatchLater } from "../redux/services/WatchLa
 import { Link } from "react-router-dom";
 
 const MovieInfo = ({ data }) => {
+  
   const dispatch = useDispatch();
   const user = useSelector((state) => state?.user.data);
 
@@ -69,7 +70,7 @@ const MovieInfo = ({ data }) => {
             </div>
           </div>
           <div className="flex flex-row items-center gap-[0.75rem] mb-[1rem] lg:text-[1.125rem] text-[1.063rem]">
-            {(localStorage.getItem("token")) && (<div className=" bg-[rgb(255,_63,_63)] p-[0.313rem] lg:p-[0.5rem]  pl-[3%] pr-[4%] lg:pl-[2%] lg:pr-[3%] rounded-[1.563rem] cursor-pointer [transition:0.5s_all] hover:[box-shadow:0.188rem_0.188rem_0.313rem_rgba(0,_0,_0,_0.474)]">
+            {user && <div className=" bg-[rgb(255,_63,_63)] p-[0.313rem] lg:p-[0.5rem]  pl-[3%] pr-[4%] lg:pl-[2%] lg:pr-[3%] rounded-[1.563rem] cursor-pointer [transition:0.5s_all] hover:[box-shadow:0.188rem_0.188rem_0.313rem_rgba(0,_0,_0,_0.474)]">
               <Link to={`/movie/${data?._id}`}
                 className="no-underline text-[white] flex flex-row items-center justify-between"
               >
@@ -78,7 +79,7 @@ const MovieInfo = ({ data }) => {
                 </div>
                 Watch
               </Link>
-            </div>)}
+            </div>}
             <div className="rounded-[1.563rem] p-[0.625rem] lg:p-[0.75rem] lg:pl-[3%] lg:pr-[3%] pl-[6%] pr-[6%] backdrop-filter backdrop-blur-[10px] bg-[rgba(255,_255,_255,_0.08)] cursor-pointer [transition:0.5s_all] hover:[box-shadow:0.188rem_0.188rem_0.313rem_rgba(0,_0,_0,_0.474)]">
               <Link to={`/movie/${data?._id}`}
                 href={"#"}

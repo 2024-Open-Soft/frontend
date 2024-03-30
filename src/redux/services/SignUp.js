@@ -1,6 +1,7 @@
 import axios from "axios";
 import { setUser } from "../reducers/User";
 import createToast from "../../utils/createToast";
+import { logout } from "./User";
 
 export const generateOTP = async (payload) => {
     try {
@@ -19,7 +20,13 @@ export const generateOTP = async (payload) => {
         return response;
     }
     catch (error) {
-        createToast("Error in generating OTP", "error");
+        if(error?.response?.data?.error === "Token expired") {
+            localStorage.removeItem("temp-token");
+            createToast("OTP expired. Please try again", "error");
+        }
+        if(error?.response?.data?.error?.startsWith("Token expired")){
+            localStorage.removeItem("token");
+        }
         createToast(error?.response?.data?.error, "error");
         console.error(error);
     }
@@ -34,13 +41,18 @@ export const verifyOTP = async (payload) => {
             }
         });
         const data = response.data.data;
-        // console.log(data);
         createToast(response.data.message, "success");
         localStorage.setItem("temp-token", response.data.data.token);
         return response;
     }
     catch (error) {
-        createToast("Error in verifying OTP", "error");
+        if(error?.response?.data?.error === "Token expired") {
+            localStorage.removeItem("temp-token");
+            createToast("OTP expired. Please try again", "error");
+        }
+        if(error?.response?.data?.error?.startsWith("Token expired")){
+            localStorage.removeItem("token");
+        }
         createToast(error?.response?.data?.error, "error");
         console.error(error);
     }
@@ -65,6 +77,9 @@ export const register = async (dispatch, payload) => {
         if(error?.response?.data?.error === "Token expired") {
             localStorage.removeItem("temp-token");
             createToast("OTP expired. Please try again", "error");
+        }
+        if(error?.response?.data?.error?.startsWith("Token expired")){
+            localStorage.removeItem("token");
         }
         createToast(error?.response?.data?.error, "error")
         console.error(error);

@@ -4,6 +4,8 @@ import HorizontalCarousel from "../components/HorizontalCarousel";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserData } from "../redux/services/User";
 
+import { removeFromWatchLater, removeFromHistory } from "../redux/services/WatchLater";
+
 const WatchListPage = () => {
   const dispatch = useDispatch();
   const [watchLater, setWatchLater] = useState([]);
@@ -14,12 +16,11 @@ const WatchListPage = () => {
 
     setWatchLater(data ? data.watchLater : []);
     setRecentlyWatched(data ? data.history : []);
-  }
+  };
 
   useEffect(() => {
     fetchData();
   }, []);
-
 
   return (
     <Grid
@@ -49,6 +50,7 @@ const WatchListPage = () => {
           width="210"
           top="22"
           movies={watchLater}
+          removeFromList={(id) => removeFromWatchLater(dispatch, id)}
         />
       </Grid>
       <Grid item xs={12}>
@@ -58,6 +60,7 @@ const WatchListPage = () => {
           width="210"
           top="22"
           movies={recentlyWatched}
+          removeFromList={(id) => removeFromHistory(dispatch, id)}
         />
       </Grid>
       {/* <Grid item xs={12}>

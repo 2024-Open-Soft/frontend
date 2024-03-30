@@ -67,7 +67,7 @@ const SearchPage = () => {
 
   const { data: semanticData, fetchNextPage: fetchSemanticData } =
     useInfiniteQuery({
-      queryKey: ["semantic", movieValue],
+      queryKey: ["semantic"],
       queryFn: async ({ pageParam = 1 }) => {
         if (!isSemantic) throw new Error("Not a semantic search");
         if (movieValue.length === 0) throw new Error("No value entered");

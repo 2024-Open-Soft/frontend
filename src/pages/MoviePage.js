@@ -64,7 +64,7 @@ const MoviePage = () => {
             <PostComment data={data?.movie._id} handlePosted={handlePosted} />
           </Grid>
           <Grid item xs={12} sx={{ width: "95%", m: 0, mt: 10, p: { xs: "3vw" } }}>
-            {data.comments && <CommentsContainer comments={data?.comments} />}
+            {data && data.comments && <CommentsContainer comments={data?.comments} />}
           </Grid>
         </>
         : <Typography variant="h4">Loading...</Typography>

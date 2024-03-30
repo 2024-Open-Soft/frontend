@@ -2,7 +2,7 @@ import axios from "axios";
 import qs from "query-string";
 
 export const client = axios.create({
-  baseURL: "http://localhost:3001/",
+  baseURL: process.env.REACT_APP_BACKEND_URL,
 });
 
 // don't use request function directly, use axiosGet, axiosPostRequest, axiosPutRequest, axiosDelete
