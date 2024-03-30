@@ -14,12 +14,11 @@ const WatchListPage = () => {
 
     setWatchLater(data ? data.watchLater : []);
     setRecentlyWatched(data ? data.history : []);
-  }
+  };
 
   useEffect(() => {
     fetchData();
   }, []);
-
 
   return (
     <Grid
