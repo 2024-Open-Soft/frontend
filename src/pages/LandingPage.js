@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MovieInfo from "../components/MovieInfo";
-import { Box, Grid, useMediaQuery } from "@mui/material";
+import { Box, Grid, Typography, useMediaQuery } from "@mui/material";
 import VerticalCarousel from "../components/VerticalCarousel";
 import HorizontalCarousel from "../components/HorizontalCarousel";
 import { getLatestMovies, getUpcomingMovies, getfeaturedmovies } from "../redux/services/Movie";
@@ -9,10 +9,11 @@ const LandingPage = () => {
   const isMobile = useMediaQuery("(max-width:800px)");
 
 
-  const [latestMovies, setLatestMovies] = useState([]);
-  const [upcomingMovies, setUpcomingMovies] = useState([]);
+  const [latestMovies, setLatestMovies] = useState(null);
+  const [upcomingMovies, setUpcomingMovies] = useState(null);
 
-  const [featuredmovies, setfeaturedmovies] = useState([]);
+
+  const [featuredMovies, setFeaturedmovies] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleChange = (index) => {
@@ -24,8 +25,8 @@ const LandingPage = () => {
     setLatestMovies(data);
     data = await getUpcomingMovies(1);
     setUpcomingMovies(data);
-    data = await getfeaturedmovies(0);
-    setfeaturedmovies(data);
+    data = await getFeaturedMovies(0);
+    setFeaturedMovies(data);
   }
 
   useEffect(() => {
@@ -61,12 +62,9 @@ const LandingPage = () => {
         xs={12}
         sx={{ display: "flex", width: "85%", p: { xs: "3vw" } }}
       >
-        {featuredmovies.length > 0 && (
-          <MovieInfo data={featuredmovies[currentIndex]} />
-        )}
 
-
-        {!isMobile && (
+        {featuredMovies && featuredMovies.length ? <MovieInfo data={featuredMovies[currentIndex]} /> : <Typography variant="h4">Loading...</Typography>}
+        {!isMobile && latestMovies && latestMovies.length && (
           <Box
             sx={{
               height: {
@@ -81,15 +79,15 @@ const LandingPage = () => {
               justifyContent: "center",
             }}
           >
-            {latestMovies && latestMovies.length && <VerticalCarousel data={latestMovies.slice(0, 3)} handleChange={handleChange} />}
+            {featuredMovies && featuredMovies.length && <VerticalCarousel data={featuredMovies.slice(0, 3)} handleChange={handleChange} />}
           </Box>
         )}
       </Grid>
       <Grid item xs={12} sx={{ width: "95%", m: 0, mt: 10, p: { xs: "3vw" } }}>
-        {latestMovies.length && <HorizontalCarousel title={"RECENTLY RELEASED"} width='180' top='35' movies={latestMovies} />}
+        {latestMovies ? <HorizontalCarousel title={"RECENTLY RELEASED"} width='180' top='35' movies={latestMovies} /> : <Typography variant="h4">Loading...</Typography>}
       </Grid>
       <Grid item xs={12} sx={{ width: "95%", m: 0, mt: 10 }}>
-        {upcomingMovies.length && <HorizontalCarousel title={"UPCOMING MOVIES"} width='180' top='35' movies={upcomingMovies} />}
+        {upcomingMovies ? <HorizontalCarousel title={"UPCOMING MOVIES"} width='180' top='35' movies={upcomingMovies} /> : <Typography variant="h4">Loading...</Typography>}
       </Grid>
     </Grid>
   );

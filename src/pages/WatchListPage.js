@@ -1,8 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Grid } from "@mui/material";
 import HorizontalCarousel from "../components/HorizontalCarousel";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserData } from "../redux/services/User";
+
+import { removeFromWatchLater, removeFromHistory } from "../redux/services/WatchLater";
 
 const WatchListPage = () => {
+  const dispatch = useDispatch();
+  const [watchLater, setWatchLater] = useState([]);
+  const [recentlyWatched, setRecentlyWatched] = useState([]);
+
+  const fetchData = async () => {
+    const data = await fetchUserData(dispatch);
+
+    setWatchLater(data ? data.watchLater : []);
+    setRecentlyWatched(data ? data.history : []);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <Grid
       container
@@ -24,24 +43,34 @@ const WatchListPage = () => {
         width: "100%",
       }}
     >
-      <Grid
-        item
-        xs={12}
-      >
-        <HorizontalCarousel title="Watch List" poster="/video_onhover.png" width='210' top='22' />
+      <Grid item xs={12}>
+        <HorizontalCarousel
+          title="Watch List"
+          poster="/video_onhover.png"
+          width="210"
+          top="22"
+          movies={watchLater}
+          removeFromList={(id) => removeFromWatchLater(dispatch, id)}
+        />
       </Grid>
-      <Grid
-        item
-        xs={12}
-      >
-        <HorizontalCarousel title="Recently Watched" poster="/video_onhover.png" width='210' top='22' />
+      <Grid item xs={12}>
+        <HorizontalCarousel
+          title="Recently Watched"
+          poster="/video_onhover.png"
+          width="210"
+          top="22"
+          movies={recentlyWatched}
+          removeFromList={(id) => removeFromHistory(dispatch, id)}
+        />
       </Grid>
-      <Grid
-        item
-        xs={12}
-      >
-        <HorizontalCarousel title="You May Like" poster="/video_onhover.png" width='210' top='22' />
-      </Grid>
+      {/* <Grid item xs={12}>
+        <HorizontalCarousel
+          title="You May Like"
+          poster="/video_onhover.png"
+          width="210"
+          top="22"
+        />
+      </Grid> */}
     </Grid>
   );
 };

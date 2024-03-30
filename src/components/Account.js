@@ -5,7 +5,7 @@ import DoneIcon from '@mui/icons-material/Done';
 import "../components/style.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { editUserData } from "../redux/services/User";
+import { editUserData, logout } from "../redux/services/User";
 import createToast from '../utils/createToast';
 
 const Account = () => {
@@ -40,12 +40,12 @@ const Account = () => {
         setDisabled(newArray);
 
         if(index === 3 && !newArray[3]){
-            console.log("Password Changing")
+            // console.log("Password Changing")
             setData({...data, password: ""})
         }
 
         if(index === 3 && newArray[3]){
-            console.log("Password Changed")
+            // console.log("Password Changed")
             editUserData(dispatch, {
                 genres: user ? user.genres || []: [],
                 languages: user ? user.languages || [] : [],
@@ -54,7 +54,7 @@ const Account = () => {
         }
 
         if(index === 0 && newArray[0]){
-            console.log("Name Changed")
+            // console.log("Name Changed")
             editUserData(dispatch, {
                 name: data?.name,
                 genres: user ? user.genres || []: [],
@@ -67,10 +67,8 @@ const Account = () => {
         setData({ ...data, [name]: value })
     }
 
-    const handleLogOut = () => {
-        console.log("Reached")
-        localStorage.removeItem("token");
-        createToast("Logged Out Successfully", "success")
+    const handleLogOut = async () => {
+        await logout(dispatch);
         navigate("/");
     }
 

@@ -3,7 +3,7 @@ import MovieInfo from "../components/MovieInfo";
 import { Box, Grid, Typography } from "@mui/material";
 import CastCarousel from "../components/CastCarousel";
 import PostComment from "../components/PostComment";
-import CommentsContaier from "../components/CommentsContainer";
+import CommentsContainer from "../components/CommentsContainer";
 import { getMovie } from "../redux/services/Movie";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -13,23 +13,19 @@ const MoviePage = () => {
   const [data, setData] = useState(null)
   const { id } = useParams()
 
-  const [posted, setPosted] = useState(false);
-
-  const handlePosted = () => {
-    setPosted((prev) => !prev);
-  }
 
   const fetchData = async (id) => {
-    console.log("fetching data")
     const res = await getMovie(dispatch, id);
-    console.log(res)
     setData(res)
   }
 
   useEffect(() => {
-    console.log("Use Effect")
     fetchData(id);
   }, [])
+
+  const handlePosted = async () => {
+    await fetchData(id)
+  }
 
   return (
     <Grid
@@ -68,7 +64,7 @@ const MoviePage = () => {
             <PostComment data={data?.movie._id} handlePosted={handlePosted} />
           </Grid>
           <Grid item xs={12} sx={{ width: "95%", m: 0, mt: 10, p: { xs: "3vw" } }}>
-            <CommentsContaier data={data?.movie?.comments} posted={posted}/>
+            {data.comments && <CommentsContainer comments={data?.comments} />}
           </Grid>
         </>
         : <Typography variant="h4">Loading...</Typography>
