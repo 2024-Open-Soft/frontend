@@ -89,7 +89,7 @@ const Footer = () => {
         }}
       >
         <Grid item xs={12}>
-          <Typography sx={{ p: 0 }}>&#169; WIIO All Rights Reserved</Typography>
+          <Typography sx={{ p: 0 }}>&#169; MFLIX All Rights Reserved</Typography>
         </Grid>
         <Grid item xs={12}>
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>

@@ -34,6 +34,7 @@ export const SideBar = () => {
     alignItems: "center",
     justifyContent: "center",
     backdropFilter: "blur(15px)",
+    zIndex: "1000",
   };
 
   const buttonStyle = {
