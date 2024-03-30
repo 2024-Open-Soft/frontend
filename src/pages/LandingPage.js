@@ -4,6 +4,7 @@ import { Box, Grid, Typography, useMediaQuery } from "@mui/material";
 import VerticalCarousel from "../components/VerticalCarousel";
 import HorizontalCarousel from "../components/HorizontalCarousel";
 import { getLatestMovies, getUpcomingMovies } from "../redux/services/Movie";
+import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
   const isMobile = useMediaQuery("(max-width:800px)");
@@ -21,7 +22,11 @@ const LandingPage = () => {
   useEffect(() => {
     fetchData();
   }, [])
-
+  const navigate = useNavigate();
+  const handleMovieLinks = (id) => {
+    console.log(id);
+    navigate(`/movie/${id}`);
+  }
 
   return (
     <Grid
@@ -49,7 +54,7 @@ const LandingPage = () => {
         xs={12}
         sx={{ display: "flex", width: "85%", p: { xs: "3vw" } }}
       >
-        {latestMovies && latestMovies.length ? <MovieInfo data={latestMovies[0]} /> : <Typography variant="h4">Loading...</Typography>}
+        {latestMovies && latestMovies.length ? <MovieInfo data={latestMovies[0]} handleTrailerClick={handleMovieLinks} handleWatchClick={handleMovieLinks} /> : <Typography variant="h4">Loading...</Typography>}
         {!isMobile && latestMovies && latestMovies.length && (
           <Box
             sx={{
