@@ -1,6 +1,6 @@
 # Frontend
 
-Frondend for WIIO
+Frondend for MFLIX
 
 ## Table of Contents
 
@@ -35,11 +35,9 @@ Frondend for WIIO
 
 ## Defining environment variables
 
-
 ```bash
-REACT_APP_BACKEND_URL = '<your localhost url for backend>'
+REACT_APP_BACKEND_URL='<backend url>'
 ```
-
 
 ## Run the project
 
