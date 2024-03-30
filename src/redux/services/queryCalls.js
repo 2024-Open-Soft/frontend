@@ -2,7 +2,7 @@ import axios from "axios";
 import qs from "query-string";
 
 export const client = axios.create({
-  baseURL: "http://localhost:3001/",
+  baseURL: process.env.REACT_APP_BACKEND_URL,
 });
 
 // don't use request function directly, use axiosGet, axiosPostRequest, axiosPutRequest, axiosDelete
@@ -20,10 +20,8 @@ export const request = ({ ...options }) => {
 export const axiosGet = async (url, queryObj) => {
   const query = qs.stringify(queryObj);
   const response = await client.get(`${url}?${query}`).catch((err) => {
-    console.log(err);
     throw new Error(err);
   });
-  console.log(response);
   return response.data;
 };
 

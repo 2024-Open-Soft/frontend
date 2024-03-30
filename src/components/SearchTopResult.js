@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Button,
   Container,
   Grid,
-  ImageListItem,
   Typography,
 } from "@mui/material";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
@@ -11,27 +10,16 @@ import { useQuery } from "@tanstack/react-query";
 import { axiosGet } from "../redux/services/queryCalls";
 
 const SearchTopResult = ({ movieId }) => {
-  //   const [data, setData] = useState({
-  //     title: "12th Fail",
-  //     trailer: "https://www.youtube.com/watch?v=J8YX5R3QX0k",
-  //     video: "https://www.youtube.com/watch?v=J8YX5R3QX0k",
-  //     poster: "/movies.png",
-  //     plot: "Based on the true story of IPS officer Manoj Kumar Sharma, 12th Fail sheds limelight on fearlessly embracing the idea of restarting the academic journey despite the setbacks and challenges and reclaiming one's destiny at a place where millions of students attempt the world's toughest competitive exam: UPSC.",
-  //   });
-
-  console.log("movieId: ", movieId);
-
   const { data } = useQuery({
-    queryKey: ["topmovie", movieId],
+    queryKey: ["topmovie"],
     queryFn: async () => {
+      if (!movieId) throw new Error("No movieId provided");
       const res = await axiosGet(`movie/${movieId}`, {});
       return res.data?.movie;
     },
     refetchOnWindowFocus: false,
     refetchOnMount: false,
   });
-
-  //   console.log("topmovieData: ", movieData);
 
   const headingStyle = {
     pb: 4,
@@ -46,6 +34,8 @@ const SearchTopResult = ({ movieId }) => {
     },
     textTransform: "uppercase",
   };
+
+  const token = localStorage.getItem("token");
 
   return (
     <>
@@ -62,12 +52,14 @@ const SearchTopResult = ({ movieId }) => {
                   {data?.title}
                 </Typography>
                 <Container className="p-2 m-4">
-                  <Button className="bg-red-600 rounded-full px-6 py-3">
-                    <PlayCircleOutlineIcon className="mr-2" />
-                    <Typography className="text-gray-200 font-medium">
-                      Watch
-                    </Typography>
-                  </Button>
+                  {token && token !== "undefied" && (
+                    <Button className="bg-red-600 rounded-full px-6 py-3">
+                      <PlayCircleOutlineIcon className="mr-2" />
+                      <Typography className="text-gray-200 font-medium">
+                        Watch
+                      </Typography>
+                    </Button>
+                  )}
                   <Button className="bg-slate-700/50 rounded-full px-6 py-3 mx-3 hover:bg-slate-300/75">
                     <Typography className="text-gray-200 font-medium">
                       Trailer

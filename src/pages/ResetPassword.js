@@ -1,20 +1,21 @@
 import { React, useEffect, useState } from "react";
 import {
-  Box,
   Button,
-  CssBaseline,
   Grid,
-  Link,
-  Paper,
   TextField,
   Typography,
 } from "@mui/material";
+import createToast from "../utils/createToast";
+import { useLocation, useNavigate } from "react-router";
+import axios from "axios";
 
-const Login = () => {
-  // const [email, setEmail] = useState("");
+const ResetPassword = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [checkEqual, setCheckEqual] = useState(false);
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     if (password === confirmPassword) {
@@ -26,8 +27,51 @@ const Login = () => {
   }, [password, confirmPassword])
 
   const handleSubmit = async () => {
-    
+    try {
+      const token = window.location.pathname.split("/")[2];
+      const validity = axios.get(`/password/valid-token/${token}`);
+
+      if (!validity || validity?.data?.valid === false) {
+        navigate("/forgot-password");
+        return;
+      }
+
+      if (password === confirmPassword) {
+        const response = await axios.post(`/password/reset`, { password }, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        createToast(response?.data?.message, "success");
+
+      }
+      else {
+        createToast("Passwords do not match", "error");
+      }
+    }
+    catch (error) {
+      createToast(error?.response?.data?.error || "An error occurred", "error");
+    }
   };
+
+  useEffect(() => {
+
+    try {
+      const token = window.location.pathname.split("/")[2];
+      const validity = axios.get(`/password/valid-token/${token}`);
+
+      if (!validity || validity.data.valid === false) {
+        createToast("Invalid Token", "error");
+        navigate("/forgot-password");
+        return;
+      }
+    }
+    catch (error) {
+      createToast(error?.response?.data?.error || "An error occurred", "error");
+      navigate("/forgot-password");
+    }
+  }, [location])
 
   return (
     <div style={{ paddingTop: "100px" }}>
@@ -71,7 +115,6 @@ const Login = () => {
             required
             fullWidth
             name="password"
-            // label="Password"
             type="password"
             id="password"
             sx={{ mt: 1, mb: 2 }}
@@ -86,7 +129,6 @@ const Login = () => {
             required
             fullWidth
             name="password"
-            // label="Password"
             type="password"
             id="password"
             sx={{ mt: 1, mb: 2 }}
@@ -96,7 +138,6 @@ const Login = () => {
           {!checkEqual && <p className="text-[red]">Passwords do not match</p>}
           <Button
             type="submit"
-            // fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
             onClick={handleSubmit}
@@ -110,4 +151,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ResetPassword;

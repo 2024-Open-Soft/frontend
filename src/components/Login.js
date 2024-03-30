@@ -20,7 +20,6 @@ const countryCodes = [
 ];
 
 const Login = () => {
-    const [phoneNumber, setPhoneNumber] = useState("");
     const [phone, setPhone] = useState("");
     const [countryCode, setCountryCode] = useState("+91");
     const [password, setPassword] = useState("");
@@ -29,7 +28,6 @@ const Login = () => {
 
     const handleSubmit = async () => {
         const res = await login(dispatch, { phoneNumber: `${countryCode.code}${phone}`, password });
-        console.log(res);
         if(res.status === 200)
             navigate("/");
     };
@@ -70,20 +68,6 @@ const Login = () => {
                 <Typography variant="" sx={{ fontSize: "large" }}>
                     Enter Phone Number
                 </Typography>
-                {/* <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="phoneNumber"
-                    type="text"
-                    // label="Enter email"
-                    name="phoneNumber"
-                    autoComplete="phoneNumber"
-                    autoFocus
-                    sx={{ mt: 1, mb: 2 }}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                    value={phoneNumber}
-                /> */}
                 <Box
                     sx={{
                         display: "flex",
@@ -145,7 +129,6 @@ const Login = () => {
                     required
                     fullWidth
                     name="password"
-                    // label="Password"
                     type="password"
                     id="password"
                     autoComplete="current-password"
@@ -155,7 +138,6 @@ const Login = () => {
                 />
                 <Button
                     type="submit"
-                    // fullWidth
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                     onClick={handleSubmit}
@@ -163,6 +145,11 @@ const Login = () => {
                     LOGIN
                 </Button>
                 <Typography align="left">
+                    <Link to="/forgot-password" variant="body2">
+                        {"Forgot Password?"}
+                    </Link>
+                </Typography>
+                <Typography align="left" sx={{ mt: 2 }}>
                     <Link to="/signup" variant="body2">
                         {"Don't have an account? Sign Up"}
                     </Link>

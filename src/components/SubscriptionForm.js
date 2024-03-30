@@ -1,10 +1,10 @@
 import { React, useState } from "react";
 import {
-    Grid, Typography, Box, Link, Autocomplete, TextField, Button
+    Grid, Typography, Box, Link, TextField, Button
 } from "@mui/material";
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 import { getPaymentLink } from "../redux/services/Payment";
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 
 
 const SubscriptionForm = ({ plan, handlePlanChange }) => {
@@ -17,21 +17,15 @@ const SubscriptionForm = ({ plan, handlePlanChange }) => {
         }
     )
 
-    const [coupon, setCoupon] = useState("")
     const [fetching, setFetching] = useState(false)
     const [link, setLink] = useState(null)
 
     const handleBuyNow = async () => {
         setFetching(true)
         const response = await getPaymentLink({ planID: plan._id, duration: data.duration, startDate: data.startDate });
-        // console.log(response);
         setFetching(false)
         if(response.error) return;
         setLink(response.data.link);
-    }
-
-    const handleApply = () => {
-        // console.log("handle apply");
     }
 
     const handleChange = (name, value) => {
@@ -98,10 +92,8 @@ const SubscriptionForm = ({ plan, handlePlanChange }) => {
                     fetching ?
                         <Box
                             component="form"
-                            // noValidate
                             display="flex"
                             flexDirection={"column"}
-                            // onSubmit={handleBuyNow}
                             className="px-2 flex"
                             sx={{
                                 my: 1
@@ -113,10 +105,8 @@ const SubscriptionForm = ({ plan, handlePlanChange }) => {
                         link ?
                             <Box
                                 component="form"
-                                // noValidate
                                 display="flex"
                                 flexDirection={"column"}
-                                // onSubmit={handleBuyNow}
                                 className="px-2 flex"
                                 sx={{
                                     my: 1
@@ -128,10 +118,8 @@ const SubscriptionForm = ({ plan, handlePlanChange }) => {
                             :
                             <Box
                                 component="form"
-                                // noValidate
                                 display="flex"
                                 flexDirection={"column"}
-                                // onSubmit={handleBuyNow}
                                 className="px-2 flex"
                                 sx={{
                                     my: 1
@@ -176,45 +164,6 @@ const SubscriptionForm = ({ plan, handlePlanChange }) => {
                                     value={data.startDate}
                                     onChange={(e) => handleChange("startDate", e.target.value)}
                                 />
-
-                                {/* <Typography variant="" sx={{ fontSize: "large" }} >
-                                    Discount Coupon
-                                </Typography>
-                                <Box
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: { xs: "column", md: "row" },
-                                        alignItems: "center",
-                                        width: "100%",
-                                        mb: 1
-                                    }}
-                                >
-                                    <TextField
-                                        sx={{
-                                            mt: 1,
-                                            mb: 2,
-                                            mr: 2,
-                                            gap: "10px",
-                                            borderRadius: "10rem",
-                                            height: "auto",
-                                        }}
-                                        value={coupon}
-                                        onChange={(e) => setCoupon(e.target.value)}
-                                    />
-                                    <Button
-                                        sx={{
-                                            width: "fit-content",
-                                            px: 6,
-                                        }}
-                                        size="large"
-                                        color="success"
-                                        variant="contained"
-                                        onClick={handleApply}
-                                        className="bg-green-500"
-                                    >
-                                        Apply
-                                    </Button>
-                                </Box> */}
 
                                 <Box
                                     sx={{

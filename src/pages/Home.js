@@ -1,5 +1,4 @@
 import React from "react";
-import BackgroundPlayer from "../components/BackgroundPlayer";
 import { SideBar } from "../components/SideBar";
 import Cars from "../assets/Cars.mp4";
 import { Outlet, useLocation } from "react-router-dom";
@@ -26,8 +25,8 @@ const Home = () => {
       <div className={`w-full relative z-[1] ${!isBgVideo && "bg-black"}`}>
         {!isMobile && (
           <>
-            <a href="/" className=" fixed mt-3 flex  left-[1%]">
-              <img src="/Logo.svg" alt="WHO" className="w-36 " />
+            <a href="/" className=" fixed mt-3 flex  left-[1%] z-50">
+              <img src="/Logo_Final.png" alt="WHO" className="w-36 " />
             </a>
             <SideBar />
           </>

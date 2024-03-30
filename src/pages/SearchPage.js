@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import SearchTags from "../components/SearchTags";
-import { Button, Grid } from "@mui/material";
+import React, { useState } from "react";
+import { Grid } from "@mui/material";
 import SearchTopResult from "../components/SearchTopResult";
 import SearchResults from "../components/SearchResults";
 import CustomSearchBar from "../components/CustomSearchBar";
@@ -8,7 +7,6 @@ import { axiosGet } from "../redux/services/queryCalls";
 import {
   useInfiniteQuery,
   useMutation,
-  useQueryClient,
 } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
 import { setRecomendedMovies } from "../redux/reducers/RecomendedMovies";
@@ -28,14 +26,12 @@ const SearchPage = () => {
   } = useMutation({
     mutationKey: ["search"],
     mutationFn: async ({ value, flag = 0, length = 0, page = 1, prevData }) => {
-      console.log("value: ", value);
       if (value.length === 0) throw new Error("No value entered");
       const data1 = await axiosGet("/search/searchOnEnter", {
         query: value,
         page: page,
         flag: flag,
       });
-      console.log("data1: ", data1);
       const enterMovies = data1.data;
       if (enterMovies.count === 0 && flag === 1)
         throw new Error("No movies found");
@@ -59,7 +55,6 @@ const SearchPage = () => {
       }
     },
     onSuccess: async (data) => {
-      console.log("dataklsdf: ", data);
       dispatch(setRecomendedMovies(data));
       return data;
     },
@@ -67,7 +62,7 @@ const SearchPage = () => {
 
   const { data: semanticData, fetchNextPage: fetchSemanticData } =
     useInfiniteQuery({
-      queryKey: ["semantic", movieValue],
+      queryKey: ["semantic"],
       queryFn: async ({ pageParam = 1 }) => {
         if (!isSemantic) throw new Error("Not a semantic search");
         if (movieValue.length === 0) throw new Error("No value entered");
@@ -77,12 +72,9 @@ const SearchPage = () => {
         });
         const semanticMovies = response.data;
         if (semanticMovies.count === 0) throw new Error("No movies found");
-        console.log("semanticMovies : ", semanticMovies);
         return response.data;
       },
       getNextPageParam: (lastPage, pages) => {
-        console.log("lastPage: ", lastPage);
-        console.log("pages : ", pages);
         if (lastPage.length < 20) return false;
         return pages.length + 1;
       },
