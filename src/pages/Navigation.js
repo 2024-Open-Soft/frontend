@@ -17,6 +17,7 @@ const LazySearch = lazy(() => import("./SearchPage"));
 const LazySubscriptions = lazy(() => import("./SubscriptionPage"));
 const LazyUser = lazy(() => import("./UserInfo"));
 const LazyWatchlist = lazy(() => import("./WatchListPage"));
+const LazyFilter = lazy(() => import("./FilterPage"));
 
 export const navItems = [
   {
@@ -124,7 +125,18 @@ export const navItems = [
     protected: true,
     errorElement: <Error />,
     isBgVideo: false,
-  },
+  }, 
+  {
+      path: "/filter",
+      element: (
+        <Suspense fallback={<h1>Loading</h1>}>
+          <LazyFilter />
+        </Suspense>
+      ),
+      protected: false,
+      errorElement: <Error />,
+      isBgVideo: false,
+    }
 ];
 
 const Navigation = () => {
@@ -144,7 +156,6 @@ const Navigation = () => {
     background: "black",
     color: "white",
   }
-
 
   React.useEffect(() => {
     fetchUserData(dispatch, navigate);

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import createToast from '../../utils/createToast';
+import { queries } from '@testing-library/react';
 import { logout } from './User';
 
 export const getMovies = async (page) => {
@@ -18,6 +19,7 @@ export const getMovies = async (page) => {
 
 export const getLatestMovies = async (page) => {
     try {
+        console.log(axios.defaults.baseURL)
         const response = await axios.get(`/movie/latest/?page=${page}`);
         const data = response.data.data;
         return data;
@@ -67,6 +69,22 @@ export const getFeaturedMovies = async () => {
         return data;
     } catch (error) {
         createToast("Error in getting featured movies", "error")
+        console.error(error);
+    }
+}
+
+
+export const filterMovies = async (queries) => {
+    try {
+        console.log("Queries:",queries)
+        const url = `/movie/filter/?genres=${queries.genres.join(",")}&languages=${queries.languages.join(",")}&rating=${queries.rating ? queries.rating : ""}`
+        console.log(url)
+        const response = await axios.get(url);
+        const data = response.data.data;
+        console.log("response:",response)
+        return data;
+    } catch (error) {
+        createToast("Error in filtering movies", "error")
         console.error(error);
     }
 }

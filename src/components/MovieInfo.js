@@ -9,6 +9,7 @@ import { addToWatchLater, removeFromWatchLater } from "../redux/services/WatchLa
 import { Link } from "react-router-dom";
 
 const MovieInfo = ({ data }) => {
+  
   const dispatch = useDispatch();
   const user = useSelector((state) => state?.user.data);
 

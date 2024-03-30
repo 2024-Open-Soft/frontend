@@ -3,6 +3,7 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 
+
 const debounce = (func, timeout = 1000) => {
   let timer;
   return (...args) => {
@@ -108,6 +109,7 @@ const SearchResults = ({ moviesData, handleLoad, isSemantic, setMovieId }) => {
     return () => {
       currentListBoxRef?.removeEventListener("scroll", handleScroll);
     };
+
   }, [handleLoad, paginateVars]); // Include paginateVars here
 
   return (
@@ -116,7 +118,7 @@ const SearchResults = ({ moviesData, handleLoad, isSemantic, setMovieId }) => {
       className={`${!(data?.count > 0) && "hidden"}`}
     >
       <div>
-        <Typography sx={{ ...headingStyle, py: 4 }}>Relevant result</Typography>
+        <Typography sx={{ ...headingStyle, py: 4 }}>Relevant Results</Typography>
         <Grid
           container
           spacing={4}
