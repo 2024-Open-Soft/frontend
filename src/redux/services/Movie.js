@@ -59,3 +59,14 @@ export const getMovie = async (dispatch, id) => {
     }
 }
 
+export const getFeaturedMovies = async () => {
+    try {
+        const response = await axios.get(`/movie/featured`);
+        const data = response.data.data;
+        console.log("data: ", data)
+        return data;
+    } catch (error) {
+        createToast("Error in getting featured movies", "error")
+        console.error(error);
+    }
+}
