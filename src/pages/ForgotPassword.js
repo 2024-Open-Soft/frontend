@@ -9,12 +9,22 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import axios from "axios";
+import createToast from "../utils/createToast";
 
-const Login = () => {
+const ForgotPassword = () => {
   const [email, setEmail] = useState("");
 
   const handleSubmit = async () => {
-    
+    try {
+      const response = await axios.post("/password/forgot", { email });
+
+      createToast(response?.data?.message, "success");
+    }
+    catch (error) {
+      createToast(error?.response?.data?.error || "An error occurred", "error");
+      console.log(error);
+    }
   };
 
   return (
@@ -83,4 +93,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgotPassword;

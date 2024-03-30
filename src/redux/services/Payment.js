@@ -16,11 +16,11 @@ export const getPaymentLink = async (payload) => {
         return response
     }
     catch (error) {
-        if(error?.response?.data?.error?.startsWith("Token expired")){
+        if(error?.response?.data?.error || "An error occurred"?.startsWith("Token expired")){
             localStorage.removeItem("token");
         }
-        createToast(error?.response?.data?.error, "error")
+        createToast(error?.response?.data?.error || "An error occurred", "error")
         console.error(error);
-        return { error: error?.response?.data?.error }
+        return { error: error?.response?.data?.error || "An error occurred" }
     }
 }
