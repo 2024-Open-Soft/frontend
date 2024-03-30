@@ -13,7 +13,7 @@ const MovieInfo = ({ data, handleTrailerClick, handleWatchClick }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state?.user.data);
 
-  const [addedToWatchlist, setAddedToWatchlist] = useState(false);
+  const [addedToWatchlist, setAddedToWatchlist] = useState(user && user?.data?.watchlist.filter((movie) => movie._id === data._id).length ? true : false);
 
   const handleAddToWatchlist = () => {
     try {
