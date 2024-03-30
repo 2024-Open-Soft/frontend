@@ -21,11 +21,7 @@ const HorizontalCarousel = ({ title, poster, width, top, movies = [], removeFrom
 
   const watchedDurations = movies.map((item) => {
     if (!item.timeStamp) return 0;
-
-    const [hours, minutes, seconds] = item.timeStamp
-      .split(":")
-      .map((item) => parseInt(item));
-    return hours * 60 + minutes + seconds / 60;
+    return item.timeStamp;
   });
 
   const watchedProgresses = movies.map((item, index) => {

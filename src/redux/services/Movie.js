@@ -61,6 +61,32 @@ export const getMovie = async (dispatch, id) => {
     }
 }
 
+
+export const getMovieURLs = async (id, type) => {
+    try {
+        const headers = {
+            "Content-type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`,
+        }
+        const body = {
+            movieId: id,
+        }
+        const response = await axios.post(`/movie/watch`, body, { headers })
+        const data = response.data.urls;
+        console.log(response);
+        return data;
+    } catch (error) {
+        if (error.response.status === 401) {
+            createToast("Please login to watch", "error");
+            return
+        }
+        createToast("Error in getting movie URLs", "error");
+        // createToast(error?.response?.data?.error, "error");
+        console.error(error);
+    }
+}
+
+
 export const getFeaturedMovies = async () => {
     try {
         const response = await axios.get(`/movie/featured`);
