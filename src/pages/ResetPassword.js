@@ -29,7 +29,7 @@ const ResetPassword = () => {
   const handleSubmit = async () => {
     try {
       const token = window.location.pathname.split("/")[2];
-      const validity = axios.get(`/password/valid-token/${token}`);
+      const validity = await axios.get(`/password/valid-token/`, { headers: { 'Accept': 'application/json', 'Authorization': 'Bearer ' + token } });
 
       if (!validity || validity?.data?.valid === false) {
         navigate("/forgot-password");
@@ -55,23 +55,25 @@ const ResetPassword = () => {
     }
   };
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    try {
-      const token = window.location.pathname.split("/")[2];
-      const validity = axios.get(`/password/valid-token/${token}`);
-
-      if (!validity || validity.data.valid === false) {
-        createToast("Invalid Token", "error");
-        navigate("/forgot-password");
-        return;
-      }
-    }
-    catch (error) {
-      createToast(error?.response?.data?.error || "An error occurred", "error");
-      navigate("/forgot-password");
-    }
-  }, [location])
+  //   try {
+  //     const token = window.location.pathname.split("/")[2];
+  //     async function isValidToken() {
+  //       const validity = await axios.get(`/password/valid-token/${token}`);
+  //       if (!validity || validity.data.valid === false) {
+  //         createToast("Invalid Token", "error");
+  //         navigate("/forgot-password");
+  //         return;
+  //       }
+  //     }
+  //     isValidToken();
+  //   }
+  //   catch (error) {
+  //     createToast(error?.response?.data?.error || "An error occurred", "error");
+  //     navigate("/forgot-password");
+  //   }
+  // }, [location])
 
   return (
     <div style={{ paddingTop: "100px" }}>
