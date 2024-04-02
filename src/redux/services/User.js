@@ -25,7 +25,7 @@ export async function fetchUserData(dispatch, navigate) {
     createToast(error?.response?.data?.error || "An error occurred", "error");
     createToast("Please Re-Login", "error");
     localStorage.removeItem("token");
-    console.log(error);
+    // console.log(error);
     navigate("/login");
   }
 }

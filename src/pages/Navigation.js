@@ -22,7 +22,7 @@ export const navItems = [
   {
     path: "/signup",
     element: (
-      <Suspense fallback={<h1>Loading</h1>}>
+      <Suspense fallback={<h1></h1>}>
         <LazySignUp />
       </Suspense>
     ),
@@ -33,7 +33,7 @@ export const navItems = [
   {
     path: "/login",
     element: (
-      <Suspense fallback={<h1>Loading</h1>}>
+      <Suspense fallback={<h1></h1>}>
         <LazyLogin />
       </Suspense>
     ),
@@ -44,7 +44,7 @@ export const navItems = [
   {
     path: "/forgot-password",
     element: (
-      <Suspense fallback={<h1>Loading</h1>}>
+      <Suspense fallback={<h1></h1>}>
         <LazyForgotPassword />
       </Suspense>
     ),
@@ -55,7 +55,7 @@ export const navItems = [
   {
     path: "/reset-password/:token",
     element: (
-      <Suspense fallback={<h1>Loading</h1>}>
+      <Suspense fallback={<h1></h1>}>
         <LazyResetPassword />
       </Suspense>
     ),
@@ -73,7 +73,7 @@ export const navItems = [
   {
     path: "/movie/:id",
     element: (
-      <Suspense fallback={<h1>Loading</h1>}>
+      <Suspense fallback={<h1></h1>}>
         <LazyMovie />
       </Suspense>
     ),
@@ -84,7 +84,7 @@ export const navItems = [
   {
     path: "/search",
     element: (
-      <Suspense fallback={<h1>Loading</h1>}>
+      <Suspense fallback={<h1></h1>}>
         <LazySearch />
       </Suspense>
     ),
@@ -95,7 +95,7 @@ export const navItems = [
   {
     path: "/subscriptions",
     element: (
-      <Suspense fallback={<h1>Loading</h1>}>
+      <Suspense fallback={<h1></h1>}>
         <LazySubscriptions />
       </Suspense>
     ),
@@ -106,7 +106,7 @@ export const navItems = [
   {
     path: "/profile",
     element: (
-      <Suspense fallback={<h1>Loading</h1>}>
+      <Suspense fallback={<h1></h1>}>
         <LazyUser />
       </Suspense>
     ),
@@ -117,25 +117,25 @@ export const navItems = [
   {
     path: "/watchlist",
     element: (
-      <Suspense fallback={<h1>Loading</h1>}>
+      <Suspense fallback={<h1></h1>}>
         <LazyWatchlist />
       </Suspense>
     ),
     protected: true,
     errorElement: <Error />,
     isBgVideo: false,
-  }, 
+  },
   {
-      path: "/filter",
-      element: (
-        <Suspense fallback={<h1>Loading</h1>}>
-          <LazyFilter />
-        </Suspense>
-      ),
-      protected: false,
-      errorElement: <Error />,
-      isBgVideo: false,
-    }
+    path: "/filter",
+    element: (
+      <Suspense fallback={<h1></h1>}>
+        <LazyFilter />
+      </Suspense>
+    ),
+    protected: false,
+    errorElement: <Error />,
+    isBgVideo: false,
+  }
 ];
 
 const Navigation = () => {

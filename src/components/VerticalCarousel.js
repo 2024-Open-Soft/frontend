@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -26,11 +26,11 @@ function VerticalCarousel({ data, handleChange }) {
     focusOnSelect: true,
     arrows: false,
     beforeChange: function (currentSlide, nextSlide) {
-      // console.log("before change", currentSlide, nextSlide);
+      // // console.log("before change", currentSlide, nextSlide);
 
     },
     afterChange: function (currentSlide) {
-      // console.log("after change", suggestedMovies[currentSlide]);
+      // // console.log("after change", suggestedMovies[currentSlide]);
 
       handleChange(currentSlide);
 
