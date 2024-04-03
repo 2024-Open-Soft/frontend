@@ -7,6 +7,7 @@ Frondend for MFLIX
 - [Installation](#installation)
 - [Defining environment variables](#defining-environment-variables)
 - [Run the project](#run-the-project)
+- [Video Demonstration](#video-demonstration)
 
 ## Installation
 
@@ -43,3 +44,6 @@ Use the following command to run:
 npm start
 ```
 
+## Video Demonstration
+
+Uploaded in the repository with file-name: Team-433-MFLIX-Video-Demonstration-OpenSoft-2024
